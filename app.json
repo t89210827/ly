@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/travelDetails/travelDetails",
+    "pages/travelList/travelList",
+    "pages/travel/travel",
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/buyTickets/buyTickets",
+    "pages/templates/travelListTpl/travelListTpl"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0c0c0c",
+    "navigationBarTitleText": "旅游小程序",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#8A8A8A",
+    "borderStyle": "white",
+    "selectedColor": "#ffcc00",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/buyTickets/buyTickets",
+        "text": "抢票",
+        "iconPath": "images/home_n.png",
+        "selectedIconPath": "images/home_r.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "旅游",
+        "iconPath": "images/banli_n.png",
+        "selectedIconPath": "images/banli_r.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/user_n.png",
+        "selectedIconPath": "images/user_r.png"
+      }
+    ]
+  },
+  "debug": true
+}

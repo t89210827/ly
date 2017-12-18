@@ -1,0 +1,27 @@
+/* pages/mine/mine.wxss */
+page{
+  background-color: #e6e6e6;
+}
+
+.userinfo-order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300rpx;
+}
+
+.userinfo-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: black;
+}
+
+.font-mydata{
+  font-size: 34rpx;
+  /* font-family: ; */
+}

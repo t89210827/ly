@@ -1,0 +1,15 @@
+/* pages/templates/travelListTpl/travelListTpl.wxss */
+
+.travel-title{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.travel-price{
+  font-size: 40rpx;
+  color: red;
+}
+
+.page{
+  background-color: #e6e6e6;
+}

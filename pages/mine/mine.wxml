@@ -1,0 +1,44 @@
+<!--pages/mine/mine.wxml-->
+<view class="userinfo-order" style='background-image:url({{bg.img}})'>
+  <view style='height:35rpx'></view>
+  <image class="userinfo-avatar" src="/images/dsyy.png" background-size="cover"></image>
+  <text class="userinfo-nickname">Acker</text>
+</view>
+<view style='height:1rpx;background-color:#e6e6e6;width:100%;'></view>
+
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>我的资料</view>
+  <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
+</view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>收藏夹</view>
+  <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
+</view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>我的线路</view>
+  <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
+</view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>我的邀请</view>
+  <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
+</view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>会员俱乐部</view>
+  <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
+</view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>关于我们</view>
+  <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
+</view>
