@@ -1,0 +1,51 @@
+<!--pages/specialTravel/specialTravel.wxml-->
+
+<view class='bar-10'></view>
+
+<view class='flex-row center-style' style='height:160rpx;font-size:35rpx;background-color:white;padding-left:30rpx;'>
+  <view style='width:70%'>
+    <view style=''>酒店</view>
+    <view>未选择</view>
+  </view>
+  <view style=''>点击查看</view>
+  <image src="/images/right.png" background-size="cover" style='width:40rpx;height:40rpx;margin-left:10rpx;'></image>
+</view>
+
+<view class='bar-10'></view>
+
+<view class='flex-row center-style' style='height:160rpx;font-size:35rpx;background-color:white;padding-left:30rpx;'>
+  <view style='width:70%'>
+    <view style=''>机票</view>
+    <view>未选择</view>
+  </view>
+  <view style=''>点击查看</view>
+  <image src="/images/right.png" background-size="cover" style='width:40rpx;height:40rpx;margin-left:10rpx;'></image>
+</view>
+
+<view class='bar-10'></view>
+
+<view class='flex-row center-style' style='height:160rpx;font-size:35rpx;background-color:white;padding-left:30rpx;'>
+  <view style='width:70%'>
+    <view style=''>套餐</view>
+    <view>未选择</view>
+  </view>
+  <view style=''>点击查看</view>
+  <image src="/images/right.png" background-size="cover" style='width:40rpx;height:40rpx;margin-left:10rpx;'></image>
+</view>
+
+<view class='bar-10'></view>
+
+<view class='flex-row center-style' style='height:160rpx;font-size:35rpx;background-color:white;padding-left:30rpx;'>
+  <view style='width:70%'>
+    <view style=''>车导</view>
+    <view>未选择</view>
+  </view>
+  <view style=''>点击查看</view>
+  <image src="/images/right.png" background-size="cover" style='width:40rpx;height:40rpx;margin-left:10rpx;'></image>
+</view>
+
+<view class="way-add flex-row" style='background-color:#f9f9f9'>
+  <view class='way-share1'>总价格</view>
+  <view class='way-share2' catchtap="gotobuy">加入我的线路</view>
+
+</view>

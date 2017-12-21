@@ -461,6 +461,10 @@
   margin:5rpx 5rpx;
 }
 
+.margin-10{
+  margin:10rpx;
+}
+
 .width-100{
   width: 100%;
 }
@@ -471,6 +475,12 @@
 
 .bar-10{
  height: 10rpx;
+ background-color: #e6e6e6;
+ width: 100%;
+}
+
+.bar-2{
+ height: 2rpx;
  background-color: #e6e6e6;
  width: 100%;
 }

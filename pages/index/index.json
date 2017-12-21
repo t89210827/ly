@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "旅游小程序"
+  "navigationBarTitleText": "旅游小程序",
+  "enablePullDownRefresh": true
 }

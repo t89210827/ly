@@ -1,17 +1,27 @@
-// pages/mine/mine.js
+// pages/myMaterial/mymaterial.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bg: { img: "http://ozhs589fk.bkt.clouddn.com/bg.png?imageView2/1/w/375/h/150/interlace/1" },
+
   },
 
-  jumpmyMaterial:function(){
-    wx.navigateTo({
-      url: '/pages/myMaterial/mymaterial',
-    })
+  open: function () {
+    wx.showActionSheet({
+      itemList: ['男', '女'],
+      success: function (res) {
+        // console.log("11111" + JSON.stringify(res))
+        if (!res.cancel) {
+          console.log(res.tapIndex)
+          vm.setData({
+            'userInfo.gender': res.tapIndex + 1
+          })
+          // console.log("11111" + JSON.stringify(vm.data.userInfo.gender))
+        }
+      }
+    });
   },
 
   /**

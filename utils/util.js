@@ -131,75 +131,7 @@ function getQnToken(param, successCallback, errorCallback) {
 function getAds(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/home', param, "GET", successCallback, errorCallback);
 }
-//获取办公类、办理类商品列表
-function getProductList(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/good/list', param, "GET", successCallback, errorCallback);
-}
-//获取资讯政策列表
-function getMessageList(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/zx/list', param, "GET", successCallback, errorCallback);
-}
-//根据id获取资讯政策简介信息
-function getMessagegetById(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/zx/getById', param, "GET", successCallback, errorCallback);
-}
-//根据code获取用户openid
-function getOpenId(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/user/getXCXOpenId', param, "GET", successCallback, errorCallback);
-}
-//用户登录
-function login(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/user/login', param, "POST", successCallback, errorCallback);
-}
-//更新用户信息
-function updateUserInfo(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/user/updateById', param, "POST", successCallback, errorCallback);
-}
-//根据id获取商品
-function getOfficePageByOfficeId(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/good/getById', param, "GET", successCallback, errorCallback);
-}
-//获取用户录入的企业列表
-function getListByUserId(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/enter/getListByUserId', param, "GET", successCallback, errorCallback);
-}
-//更新用户录入的企业信息
-function updateEnterprise(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/enter/edit', param, "POST", successCallback, errorCallback);
-}
 
-//根据id获取企业信息详情
-function getEnterpriseById(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/enter/getById', param, "GET", successCallback, errorCallback);
-}
-//删除企业信息
-function deleteEnterpriseById(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/enter/del', param, "POST", successCallback, errorCallback);
-}
-// 根据id获取用户信息（带token）
-function getByIdWithToken(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/user/getByIdWithToken', param, "GET", successCallback, errorCallback);
-}
-// 根据id获取用户信息（不带token）
-function getById(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/user/getById', param, "GET", successCallback, errorCallback);
-}
-// 临时下单接口
-function postTemPrepay(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/wxpay/temPrepay', param, "POST", successCallback, errorCallback);
-}
-// 下单接口
-function prepay(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/wxpay/prepay', param, "POST", successCallback, errorCallback);
-}
-// 获取用户订单
-function getPayListByUserId(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/wxpay/getListByUserId', param, "GET", successCallback, errorCallback);
-}
-// 根据id获取用户订单
-function getPayById(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/wxpay/getById', param, "GET", successCallback, errorCallback);
-}
 //返回
 function navigateBack(delta) {
   wx.navigateBack({
@@ -358,5 +290,5 @@ function imageUtil(e) {
 
 module.exports = {
   INDEX_PAGE: "/pages/index/index",
- 
+  judgeIsAnyNullStr: judgeIsAnyNullStr,
 }

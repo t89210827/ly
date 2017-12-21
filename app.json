@@ -1,9 +1,12 @@
 {
   "pages": [
-    "pages/travelDetails/travelDetails",
-    "pages/travelList/travelList",
-    "pages/travel/travel",
     "pages/index/index",
+    "pages/myMaterial/mymaterial",
+    "pages/travelDetails/travelDetails",
+    "pages/specialTravel/specialTravel",
+    "pages/rili/rili",
+    "pages/travel/travel",
+    "pages/travelList/travelList",
     "pages/mine/mine",
     "pages/buyTickets/buyTickets",
     "pages/templates/travelListTpl/travelListTpl"
@@ -12,8 +15,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0c0c0c",
     "navigationBarTitleText": "旅游小程序",
-    "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#8A8A8A",
