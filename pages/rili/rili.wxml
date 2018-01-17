@@ -1,7 +1,7 @@
 <!--pages/rili/rili.wxml-->
 <view class="flex box box-tb box-align-center">
   <view class="calendar pink-color box box-tb">
-    <view class="top-handle fs28 box box-lr box-align-center box-pack-center">
+    <view class="top-handle fs34 box box-lr box-align-center box-pack-center">
       <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
         <view class="prev-handle box box-lr box-align-center box-pack-center">《</view>
       </view>

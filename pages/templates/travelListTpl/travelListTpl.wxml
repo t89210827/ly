@@ -1,19 +1,40 @@
 <!--pages/templates/travelListTpl/traveListTpl.wxml-->
 <!--该模板用于旅游列表页展示-->
 <template name="traveListTpl">
-  <view class='margin-5 flex-row'>
-    <!-- <image src='http://ozhs589fk.bkt.clouddn.com/bg.png?imageView2/1/w/375/h/150/interlace/1' style='width:200rpx;height:200rpx;'></image> -->
-    <view style='width:200rpx;height:200rpx;background-color:yellow;'></view>
+
+  <view class='margin-5 flex-row' catchtap='jumpTravelDetails' data-travelId='{{id}}'>
+    <view style='width:200rpx;'>
+      <image src='{{image}}' style='width:200rpx;height:200rpx;'></image>
+    </view>
     <view class='margin-left-20 text-oneline'>
-      <view class='travel-title margin-top-10'>苏州+上海+乌镇双飞五日跟团游</view>
+      <view class='travel-title margin-top-10 text-oneline'>{{title}}</view>
       <view class='margin-top-20'>
         <text class='travel-price'>￥1965</text> 起</view>
       <view class='flex-row margin-top-20'>
-        <text>1318条点评</text>
+        <text style='font-size:24rpx;'>1318条点评</text>
+        <text style='margin-left:250rpx;font-size:24rpx;font-weight:100;'>沈阳出发</text>
+      </view>
+    </view>
+
+  </view>
+
+  <view style='height:40rpx;'></view>
+</template>
+<!--该模板用于搜索展示-->
+<template name="searchTpl">
+  <view class='margin-5 flex-row' bindtap='jumpTravelDetails' data-travelId='{{id}}'>
+    <view style='width:200rpx;'>
+      <image src='{{goods_id.image}}' style='width:200rpx;height:200rpx;'></image>
+    </view>
+    <view class='margin-left-20 text-oneline'>
+      <view class='travel-title margin-top-10 text-oneline'>{{goods_id.title}}</view>
+      <view class='margin-top-20'>
+        <text class='travel-price'>￥1965</text> 起</view>
+      <view class='flex-row margin-top-20'>
+        <text style='font-size:24rpx;'>1318条点评</text>
         <text style='margin-left:250rpx;'>沈阳出发</text>
       </view>
     </view>
   </view>
-
   <view class='bar-10'></view>
 </template>

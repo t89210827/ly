@@ -1,0 +1,29 @@
+<!--pages/templates/integralTpl/integralTpl.wxml-->
+<!-- 积分商品模板 -->
+<template name="goodslist">
+
+  <view style='width:350rpx;background-color:white;float:left;margin-left:25rpx;margin-top:25rpx;'>
+    <view style='width:100%;text-align:center;'>奖品A</view>
+    <image src="{{image}}" style='width:350rpx;height:300rpx;' mode="aspectFill"></image>
+    <view class='flex-row' style='width:300rpx;'>
+      <view style='width:180rpx;font-size:25rpx;line-height:46rpx;text-align:center;'>30000积分</view>
+      <!-- <text style='background-color:red;width:150rpx;'>按钮</text>  -->
+      <button class="mini-btn" style='width:120rpx;font-size:20rpx;margin-left:30rpx;' type="warn" size="mini">兑换</button>
+    </view>
+  </view>
+
+  <!-- <view class="goods-info" style="width:40%;height:160px;float:left;padding-left:20px; border:5px #f5f5f5 solid;  ">
+    <view style="margin-left:10px;margin-top:20px;">
+      <image src="{{image}}" class="office1-img-sml" mode="aspectFill" style="margin-top:24px;"></image>
+    </view>
+    <view style='margin-left:30px;margin-top:-110px;'>({{level}})</view>
+    <view style='margin-left:20px;margin-top:-3px;'>{{goodsname}}</view>
+
+    <view style='color:red;margin-left:-16px;margin-top:83px;'>{{jifen}}积分</view>
+    <view style="margin-left:43px;margin-top:-21px;">
+      <button bindtap='jumpDuihuan' data-officeid="{{officeid}}" style="width:80px;height:25px;font-size:12px; background:red; color:white;">立即兑换</button>
+    </view>
+  </view>
+  <view class='product-down-line'></view> -->
+
+</template>

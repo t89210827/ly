@@ -1,55 +1,70 @@
 <!--pages/mine/mine.wxml-->
-<view style='height:410rpx;'>
-  <view style='height:300rpx;background-image:url({{bg.img}})'>
+<view style='height:510rpx;'>
+  <view style='width:750rpx;height:400rpx;background-image:url({{bg.img}}); background-repeat: none;background-size:100% 100%;'>
+
     <view class="userinfo-order">
-    <view style='height:80rpx;margin-right:600rpx;font-size:30rpx;line-height:80rpx;'>签到</view>
-      <view style='font-size:35rpx;'>当前积分</view>
-      <view style='font-size:50rpx;'>0</view>
+      <view class='flex-row'>
+        <image src='/images/pen.png' style='width:50rpx;height:100rpx;margin-right:20rpx;'></image>
+        <view style='height:80rpx;margin-right:580rpx;font-size:30rpx;line-height:80rpx;color:white;'>签到</view>
+      </view>
+      <view style='font-size:40rpx;color:white;font-weight:500'>当前积分</view>
+      <view style='font-size:70rpx;color:white;font-weight:700'>{{userInfo.integral}}</view>
     </view>
+
     <view class='flex-row'>
       <view style='width:80%;'>
-        <image class="userinfo-avatar" src="/images/dsyy.png" background-size="cover"></image>
-        <view class="userinfo-nickname">@戏子入画</view>
+        <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
+        <view class="userinfo-nickname">{{userInfo.nick_name}}</view>
       </view>
-      <view class='userinfo-collect'>收藏夹</view>
+      <view class='userinfo-collect' bindtap='jumpcollect'>收藏夹</view>
     </view>
+
   </view>
 </view>
 
-<view class='bar-10'></view>
+<view class='bar-30'></view>
 
-<view bindtap='jumpmyMaterial' class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
-  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+
+<view bindtap='jumpmyMaterial' class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
+  <image src='/images/me.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>我的资料</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>
 
-<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
-  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
-  <view class='font-mydata' style='width:600rpx;'>收藏夹</view>
+<view class='bar-30'></view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
+  <image src='/images/collect.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+  <view class='font-mydata' style='width:600rpx;'>我的订单</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>
 
-<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
-  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+<view style='width:90%;height:2rpx;margin-left:10%;background-color:#f6f6f6;'></view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
+  <image src='/images/circuit.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>我的线路</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>
 
-<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
+<view class='bar-30'></view>
+
+<view hidden='{{userType}}' class='width-100 flex-row white-bg' style="margin:10rpx auto;align-items:center;height:80rpx;">
   <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>我的邀请</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>
 
-<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
-  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+<view bindtap='jumpIntegral' class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
+  <image src='/images/member.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>会员俱乐部</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>
 
-<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:100rpx;'>
-  <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
+<view style='width:90%;height:2rpx;margin-left:10%;background-color:#f6f6f6;'></view>
+
+<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
+  <image src='/images/guanyu.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>关于我们</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>

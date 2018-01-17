@@ -1,0 +1,76 @@
+<!--pages/writeComment/writeComment.wxml-->
+<textarea bindblur='writeComment' value='千山万水总是情，写点评论行不行？' style='background-color:white;width:100%;height:300rpx;'>
+</textarea>
+
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">图片上传</view>
+              <view class="weui-uploader__info">{{files.length}}/2</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:key="*this">
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view style='height:20rpx;'></view>
+
+<!-- <view class="page">
+  <view class="page__bd">
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">视频上传</view>
+              <view class="weui-uploader__info">{{files1.length}}/2</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files1}}" wx:key="*this">
+                  <view class="weui-uploader__file" id="{{item}}">
+                    <video class="weui-uploader__img" src="{{item}}" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="bindButtonTap"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> -->
+
+<view class="container">
+  <video style='width:100%;height:400rpx;' src="{{src}}"></video>
+  <button bindtap="bindButtonTap" class="weui-btn" type="primary">上传视频</button>
+</view>
+<view style='height:150rpx;'></view>
+
+<!-- <view style='margin-left:290rpx;margin-top:30rpx;'> -->
+<cover-view class='travel-add-comment' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>
+  写点评
+</cover-view>
+<!-- <button bindtap='addComment' class="weui-btn mini-btn" style='width:200rpx;background-color:yellow;' type="warn" size="mini">发布</button> -->
+<!-- </view> -->

@@ -1,0 +1,59 @@
+<!--pages/templates/orderTpl/orderTpl.wxml-->
+<!--该模板用于订单车导酒店展示-->
+<template name="orderTpl">
+  <view>
+    <view class='flex-row center-style' style='height:80rpx;'>
+      <view style='width:80%;font-size:34rpx;'>车导</view>
+      <image src='/images/delete.png' style='width:50rpx;height:50rpx;'></image>
+    </view>
+
+    <view class='bar-2'></view>
+
+    <view class='flex-row'>
+      <view style='margin:20rpx 30rpx;'>
+        <!-- <image src='/images/delete.png' style='width:200rpx;height:200rpx;'></image> -->
+        <view style='background-color:pink;width:200rpx;height:200rpx;'></view>
+      </view>
+
+      <view style='margin-top:25rpx;'>
+        <view>丰田威驰(5座)</view>
+        <view style='height:30rpx;'></view>
+        <view style='font-size:30rpx;'>距辽宁省沈阳市东陵区天坛474米</view>
+        <view style='font-size:40rpx;color:red;'>￥49/天</view>
+      </view>
+1
+    </view>
+  </view>
+  <view class='bar-10'></view>
+</template>
+
+<!--该模板用于机票展示-->
+<template name="planeTpl">
+  <view>
+    <view class='flex-row center-style' style='height:80rpx;'>
+      <view style='width:80%;font-size:34rpx;'>机票</view>
+      <image src='/images/delete.png' style='width:50rpx;height:50rpx;'></image>
+    </view>
+
+    <view class='bar-2'></view>
+
+    <view class='flex-row' style='width:100%;height:200rpx;padding-top:20rpx;'>
+      <view style='margin-left:40rpx;'>
+        <view style='font-size:40rpx;'>21:30</view>
+        <view>首都机场</view>
+        <view>深圳航空zh1858</view>
+      </view>
+      <view style='margin-top:40rpx;margin-left:20rpx;'>
+        <image src='/images/my2.png' style='width:50rpx;height:50rpx;'></image>
+      </view>
+      <view style='margin-left:40rpx;'>
+        <view style='font-size:40rpx;'>21:30</view>
+        <view>首都机场</view>
+        <view>深圳航空zh1858</view>
+      </view>
+      <view style='font-size:40rpx;color:red;'>￥346</view>
+    </view>
+
+  </view>
+  <view class='bar-10'></view>
+</template>

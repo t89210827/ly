@@ -1,39 +1,34 @@
 /* pages/mine/mine.wxss */
-page{
+page {
   background-color: white;
 }
-
 .userinfo-order {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 230rpx;
+  height: 300rpx;
 }
-
 .userinfo-avatar {
-  width: 110rpx;
-  height: 110rpx;
-  margin: 0rpx 20rpx;
+  width: 140rpx;
+  height: 140rpx;
+  margin: 0rpx 30rpx;
   border-radius: 50%;
 }
-
 .userinfo-nickname {
   color: #770900;
-  font-size: 30rpx;
-  margin-left: 20rpx;
-  font-weight: bold;
-}
-
-.userinfo-collect {
-  width:20%;
-  margin-top:115rpx;
-  color: #770900;
   font-size: 32rpx;
+  margin-left: 20rpx;
+  font-weight: 500;
+}
+.userinfo-collect {
+  width: 20%;
+  margin-top: 150rpx;
+  color: #770900;
+  font-size: 30rpx;
+  font-weight: 400;
   /* text-align: center; */
 }
-
-.font-mydata{
+.font-mydata {
   font-size: 34rpx;
   /* font-family: ; */
 }
-

@@ -1,24 +1,48 @@
 // pages/mine/mine.js
+var app = getApp()
+var vm = null
+var util = require('../../utils/util.js')
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    bg: { img: "http://ozhs589fk.bkt.clouddn.com/bg.png?imageView2/1/w/375/h/150/interlace/1" },
+    userInfo: [],
+    userType: true,
+    bg: { img: "http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.d029e2f8f631332fc66f31747082f4c1.jpg?imageView2/2/w/750/h/500/interlace/1" }
   },
-
-  jumpmyMaterial:function(){
+  onLoad: function (options) {
+    vm = this
+    var userInfo = app.globalData.userInfo
+    if (userInfo.type == 1) {
+      vm.setData({
+        userType: false
+      })
+    }
+    vm.getUserInfo()
+  },
+  //跳转收藏页
+  jumpcollect: function () {
+    wx.navigateTo({
+      url: '/pages/collect/collect',
+    })
+  },
+  //从全局变量获取userinfo
+  getUserInfo: function () {
+    var userInfo = app.globalData.userInfo
+    console.log('userInfo' + JSON.stringify(userInfo))
+    vm.setData({
+      userInfo: userInfo
+    })
+  },
+  //跳转我的资料
+  jumpmyMaterial: function () {
     wx.navigateTo({
       url: '/pages/myMaterial/mymaterial',
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  //跳转到积分兑换页面
+  jumpIntegral: function () {
+    wx.navigateTo({
+      url: '/pages/integral/integral',
+    })
   },
 
   /**

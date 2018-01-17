@@ -1,0 +1,54 @@
+<!--pages/templates/commentTpl/commentTpl.wxml-->
+<!-- 评论模板 -->
+<template name="commentTpl">
+  <view style='margin-bottom:50rpx;'>
+    <view class='flex-row ' style='min-height:150rpx;padding-top:20rpx;'>
+      <image class="userinfo-avatar" src="{{user_id.avatar}}" background-size="cover"></image>
+      <view>
+        <view class='flex-row '>
+          <view style='width:470rpx;color:#877AAC'>{{user_id.nick_name}}</view>
+          <view class='font-size-15' style='width:40rpx;line-height:54rpx;'>{{consent_count}}</view>
+          <view class='center-style' style='margin-bottom:8rpx;' bindtap='addConsent' data-commentId='{{id}}'>
+            <block wx:if="{{consent_status==0}}">
+              <image src="/images/praise.png" background-size="cover" style='width:40rpx;height:40rpx; '></image>
+            </block>
+            <block wx:if="{{consent_status==1}}">
+              <image src="/images/praise_n.png" background-size="cover" style='width:40rpx;height:40rpx; '></image>
+            </block>
+          </view>
+        </view>
+
+        <view style='width:500rpx;font-size:30rpx; '>{{content}}</view>
+        <view style='height:20rpx;'></view>
+
+        <block wx:for="{{media}}">
+          <block wx:if="{{item.type == 1}}">
+            <image src='{{item.content}}' bindtap='previewImage' data-src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;'></image>
+          </block>
+          <block wx:if="{{item.type == 2}}">
+            <video src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;margin-bottom:20rpx;'></video>
+          </block>
+        </block>
+
+        <!-- <view bindtap='reply' style='margin-top:100rpx;text-align:right;'>回复</view> -->
+      </view>
+    </view>
+
+    <view class='flex-row'>
+      <view class='font-size-13' style='margin-left:130rpx;line-height:50rpx;'>{{created_at}}</view>
+      <view class='font-size-13' style='margin-left:250rpx;line-height:50rpx;'>回复</view>
+    </view>
+
+    <view style='margin-left:120rpx;'>
+      <block wx:for="{{replies}}">
+        <view style='background-color:#f4f4f4;width:560rpx;'>
+          <view class='font-size-14'>{{item.user_id.nick_name}}:</view>
+          <view class='font-size-13' style='font-weight:200;'>{{item.content}}</view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+  <view style='width:100%;height:2rpx;background-color:#f6f6f6;'></view>
+  <!-- <view class='bar-10'></view> -->
+</template>

@@ -1,0 +1,11 @@
+<!--pages/templates/newestTravelTpl/newestTravelTpl.wxml-->
+<!--该模板用于首页最新旅游产品展示-->
+<template name="newestTravelTpl">
+  <view style='text-align:center;height:350rpx;'>
+    <image src='{{image}}' bindtap='jumpTravelDetails' data-travelId='{{id}}' style='height:350rpx;border-radius: 10rpx;width:97%;'></image>
+  </view>
+  <view class='flex-row'>
+    <view class='text-oneline text-title'>{{title}}</view>
+    <view class='text-oneline text-price text-right'>{{price}}{{unit}}</view>
+  </view>
+</template>

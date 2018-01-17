@@ -1,2 +1,3 @@
 <!--pages/buyTickets/buyTickets.wxml-->
-<text>pages/buyTickets/buyTickets.wxml</text>
+<!-- 指向微信公众平台首页的web-view -->
+<web-view src="https://mp.weixin.qq.com/"></web-view>

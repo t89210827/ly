@@ -1,14 +1,18 @@
 /**index.wxss**/
-.searchbar-result{
-    margin-top: 0;
-    font-size: 14px;
+
+.searchbar-result {
+  margin-top: 0;
+  font-size: 14px;
 }
-.searchbar-result:before{
-    display: none;
+
+.searchbar-result:before {
+  display: none;
 }
-.weui-cell{
-    padding: 12px 15px 12px 35px;
+
+.weui-cell {
+  padding: 12px 15px 12px 35px;
 }
+
 .slide-image {
   width: 100%;
   height: 100%;
@@ -16,23 +20,72 @@
 
 .line-text {
   font-size: 30rpx;
-  border-left: 2px solid #e75110;
+  border-left: 5px solid #e75110;
   padding-left: 20rpx;
-  margin: 20rpx 30rpx;
-  font-weight: bold;
+  margin: 20rpx 0rpx;
+  /* font-weight: bold; */
 }
 
 .text-title {
-  font-size: 30rpx;
-  margin-left: 40rpx;
-  font-weight: bold;
-  width: 50%;
+  font-size: 26rpx;
+  margin-left: 20rpx;
+  /* font-weight: bold; */
+  width: 70%;
+  line-height: 48rpx;
 }
 
 .text-price {
   font-size: 30rpx;
   margin-right: 40rpx;
   font-weight: bold;
-  width: 50%;
+  width: 30%;
   color: red;
+  line-height: 48rpx;
+}
+
+.tr-title {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  color: #fff;
+  font-size: 30rpx;
+  /* max-width: 340px; */
+}
+
+.recommend_scroll_x_box {
+  height: 180rpx;
+  white-space: nowrap;
+  display: flex;
+   /* margin-left: 18rpx;  */
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.recommend_hot_box {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 30rpx;
+  margin-top: 20rpx;
+  display: inline-block;
+}
+
+.recommend_hot_image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 10rpx;
+}
+
+.recommend_absolute {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -65%);
+  color: white;
+  font-size: 35rpx;
 }

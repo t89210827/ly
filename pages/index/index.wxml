@@ -1,107 +1,85 @@
 <!--index.wxml-->
+<import src="../templates/newestTravelTpl/newestTravelTpl.wxml" />
+<import src="../templates/travelListTpl/travelListTpl.wxml" />
+<!-- 搜索栏 -->
+<view style='width:750rpx;'>
 
-<!-- <view hidden='{{hidden?false:true}}'>松开即刷新</view> -->
-
-<view class="page">
-  <view class="page__bd">
-    <view class="weui-search-bar">
-      <view class="weui-search-bar__form">
-        <view class="weui-search-bar__box">
-          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-            <icon type="clear" size="14"></icon>
+  <view class="page">
+    <view class="page__bd">
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="complete" />
+            <!-- <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+            </view> -->
           </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索旅行地/酒店/景点</view>
+          </label>
         </view>
-        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-          <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">搜索旅行地/酒店/景点</view>
-        </label>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
       </view>
-      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
-    </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
     </view>
   </view>
-</view>
 
-<swiper indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#FFFFFF" autoplay="true" interval="4000" duration="600" style="height:187px">
-  <block wx:for="{{swipers}}">
-    <swiper-item>
-      <image src="{{item.img}}" class="slide-image" width="750rpx" />
-    </swiper-item>
+  <!-- 轮播图 -->
+  <swiper indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#FFFFFF" autoplay="true" interval="4000" duration="600" style="height:187px">
+    <block wx:for="{{Ads}}" wx:key="*this">
+      <swiper-item>
+        <image bindtap='jumpDetails' data-bannerId='{{item.id}}' src="{{item.image}}" class="slide-image" width="750rpx" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class='bar-10'></view>
+
+  <!-- <view style='width:750rpx;'> -->
+  <scroll-view class="recommend_scroll_x_box" scroll-x="true" style="">
+    <view style='margin-left:20rpx;'>
+      <view class="recommend_hot_box" wx:for="{{menus}}" wx:key="*this">
+        <view style='position:relative;' bindtap='jumpTravelList' data-scrollLeft='{{item.id}}'>
+          <image src="{{item.image}}" class="recommend_hot_image"></image>
+          <text class='recommend_absolute'>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- </view> -->
+
+  <!-- <view class='bar-10'></view> -->
+  <view style='width:100%;background-color:#f4f4f4;height:30rpx;'></view>
+
+  <view class="line-text font-size-14" style='line-height:30rpx;'>
+    最新产品
+  </view>
+
+  <view style='height:30rpx;'></view>
+
+  <block wx:for="{{travel}}" wx:key="*this">
+    <template is="traveListTpl" data="{{...item}}"></template>
   </block>
-</swiper>
 
-<view class='bar-10'></view>
-
-<view class="line-text font-size-14" style='line-height:30rpx;'>
-  为您推荐
-</view>
-
-<view class='flex-row' bindtap='jumpTravelList'>
-  <view class='margin-5'>
-    <!-- <image src='../../images/myTop.png' style='width:200rpx;height:200rpx;'></image> -->
-    <view style='height:300rpx;width:300rpx;background-color:yellow;border-radius: 10rpx;'></view>
-  </view>
-  <view>
-    <view class='flex-row'>
-      <view class='margin-5' style='height:140rpx;width:210rpx;background-color:#41f960;border-radius: 10rpx;'></view>
-      <view class='margin-5' style='height:140rpx;width:210rpx;background-color:#f94fd5;border-radius: 10rpx;'></view>
+  <view class='flex-row' style='align-items:center'>
+    <view class="line-text font-size-14" style='line-height:30rpx;width:72%;'>
+      特价优惠
     </view>
-    <view class='margin-5' style='height:150rpx;width:430rpx;background-color:green;border-radius: 10rpx;'></view>
+    <image src='/images/refresh.png' style='width:40rpx;height:40rpx;margin-right:10rpx;'></image>
+    <view bindtap='getSpecialGoods'>换一换</view>
   </view>
-</view>
 
-<view class='flex-row width-100'>
-  <view bindtap='jumpSpecial' class='margin-5 width-50' style='height:200rpx;background-color:#f94fd5;border-radius: 10rpx;'></view>
-  <view class='margin-5 width-50' style='height:200rpx;background-color:#41f960;border-radius: 10rpx;'></view>
-</view>
+  <view style='height:20rpx;'></view>
 
-<view class="line-text" style='line-height:30rpx;'>
-  最新产品
-</view>
+  <view class='flex-row' style='height:300rpx;float:left;width:100%;'>
+    <block wx:for="{{SpecialGoods}}" wx:key="*this">
+      <view style='width:33%;text-align:center' bindtap='jumpTravelDetails' data-travelId='{{item.id}}'>
+        <image src=' {{item.goods_id.image}}' style='width:200rpx;height:200rpx; '></image>
+        <view class='text-twoline ' style='font-size:25rpx;width:210rpx;margin-left:25rpx; '>{{item.goods_id.name}}</view>
+      </view>
+    </block>
+  </view>
 
-<view bindtap='jumpTravelDetails' class='margin-10' style='height:300rpx;background-color:#41f960;border-radius: 10rpx;'></view>
-<view class='flex-row'>
-  <view class='text-oneline text-title'>日本三日游</view>
-  <view class='text-oneline text-price text-right'>3000/人次</view>
 </view>
-
-<view class='margin-10' style='height:300rpx;background-color:#41f960;border-radius: 10rpx;'></view>
-<view class='flex-row'>
-  <view class='text-oneline text-title'>日本三日游</view>
-  <view class='text-oneline text-price text-right'>3000/人次</view>
-</view>
-
-<view class='margin-10' style='height:300rpx;background-color:#41f960;border-radius: 10rpx;'></view>
-<view class='flex-row'>
-  <view class='text-oneline text-title'>日本三日游</view>
-  <view class='text-oneline text-price text-right'>3000/人次</view>
-</view>
-
-<view class='margin-10' style='height:300rpx;background-color:#41f960;border-radius: 10rpx;'></view>
-<view class='flex-row'>
-  <view class='text-oneline text-title'>日本三日游</view>
-  <view class='text-oneline text-price text-right'>3000/人次</view>
-</view>
+<view style='height:100rpx; '></view>

@@ -43,31 +43,35 @@ App({
   onShow: function () {
 
   },
-  
+
   login: function (callBack) {
-    // wx.login({
-    //   success: function (res) {
-    //     console.log("wx.login:" + JSON.stringify(res))
-    //     if (res.code) {
-    //       util.getOpenId({ code: res.code }, function (ret) {
-    //         console.log("getOpenId:" + JSON.stringify(ret))
-    //         var openId = ret.data.openid
-    //         var param = {
-    //           wx_id: openId
-    //         }
-    //         util.login(param, function (ret) {
-    //           console.log("login:" + JSON.stringify(ret));
-    //           if (ret.data.code == "200") {
-    //             vm.storeUserInfo(ret.data.obj)
-    //             vm.updateUserInfo(function (ret) {
-    //             })
-    //           }
-    //         }, null);
-    //       }, null);
-    //     }
-    //   }
-    // })
+    wx.login({
+      success: function (res) {
+        console.log("wx.login:" + JSON.stringify(res))
+        if (res.code) {
+          util.getOpenId({ code: res.code }, function (ret) {
+            console.log("getOpenId:" + JSON.stringify(ret))
+            var openId = ret.data.ret.openid
+            // vm.updateUserInfo()
+            var param = {
+              account_type: 'xcx',
+              open_id: openId,
+            }
+            util.login(param, function (ret) {
+              console.log("login1111:" + JSON.stringify(param));
+              console.log("login:" + JSON.stringify(ret));
+              if (ret.data.code == "200") {
+                vm.storeUserInfo(ret.data.ret)
+                vm.updateUserInfo(function (ret) {
+                })
+              }
+            }, null);
+          }, null);
+        }
+      }
+    })
   },
+  
   //更新用户信息
   updateUserInfo: function (callBack) {
     //获取用户基本信息
@@ -77,16 +81,14 @@ App({
         console.log("wx.getUserInfo success:" + JSON.stringify(res))
         var param = {
           nick_name: res.userInfo.nickName,
-          avatar: res.userInfo.avatarUrl,
-          phonenum: vm.globalData.userInfo.phonenum,
           gender: res.userInfo.gender,
-          // type: vm.globalData.userInfo.type,
+          avatar: res.userInfo.avatarUrl,
         }
         util.updateUserInfo(param, function (ret, err) {
           console.log("updateUserInfo ret:" + JSON.stringify(ret))
           //更新缓存及globalData
           if (ret.data.code == "200") {
-            vm.storeUserInfo(ret.data.obj)
+            vm.storeUserInfo(ret.data.ret)
           }
         })
         callBack()
@@ -102,6 +104,7 @@ App({
       }
     })
   },
+
   storeUserInfo: function (obj) {
     console.log("storeUserInfo :" + JSON.stringify(obj));
     wx.setStorage({
@@ -110,6 +113,7 @@ App({
     });
     vm.globalData.userInfo = obj;
   },
+
   getUserInfo: function (cb) {
     typeof cb == "function" && cb(vm.globalData.userInfo)
   },
@@ -142,6 +146,7 @@ App({
   },
   //全局变量
   globalData: {
+    baseUrl: 'https://api.it120.cc/jy02149522',
     userInfo: null,
     systemInfo: null,
   }

@@ -1,0 +1,6 @@
+<!--pages/reply/reply.wxml-->
+<textarea style='height:400rpx;'></textarea>
+
+<!-- <cover-view class='travel-add-comment' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>
+  写点评
+</cover-view> -->     

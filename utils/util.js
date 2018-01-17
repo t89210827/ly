@@ -1,7 +1,7 @@
 var TESTMODE = false;
 
 //服务器地址
-var SERVER_URL = "https://fhq.isart.me/api";
+var SERVER_URL = "https://nyfq.isart.me/api";
 var DEBUG_URL = "http://localhost/DSYYServer";
 var SERVER_URL = (TESTMODE) ? DEBUG_URL : SERVER_URL;
 
@@ -96,6 +96,7 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
     //user_id未设置
     if (judgeIsAnyNullStr(param.user_id)) {
       param.user_id = getApp().globalData.userInfo.id;
+      // console.log("user_id" + getApp().globalData.userInfo.id);
     }
     param.token = getApp().globalData.userInfo.token;
   }
@@ -111,9 +112,9 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
       successCallback(res)
       hideLoading()
     },
-    fail: function (err) {
+    fail: function () {
       console.log("wxRequest fail:" + JSON.stringify(err))
-      errorCallback(err)
+      // errorCallback(err)
       hideLoading()
     }
   });
@@ -123,14 +124,103 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-//获取七牛上传token
-function getQnToken(param, successCallback, errorCallback) {
+// http://nyfq.isart.me/api/center/getCollectionLists
+
+//根据用户id获取收藏夹列表
+function getCollectionLists(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/getCollectionLists', param, "GET", successCallback, errorCallback);
+}
+
+//添加到收藏夹
+function addCollectionGoods(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/addCollectionGoods', param, "POST", successCallback, errorCallback);
+}
+
+//获取旅游产品列表
+function getTourGoodsLists(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/tour/getTourGoodsLists', param, "GET", successCallback, errorCallback);
+}
+
+//搜索
+function search(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/index/search', param, "GET", successCallback, errorCallback);
+}
+
+//获取七牛Token
+function getQiniuToken(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/user/getQiniuToken', param, "GET", successCallback, errorCallback);
 }
-//获取首页ads及商品
-function getAds(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/home', param, "GET", successCallback, errorCallback);
+
+//签到
+function addSign(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/addSign', param, "POST", successCallback, errorCallback);
 }
+
+//添加评论
+function addComment(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/comment/addComment', param, "POST", successCallback, errorCallback);
+}
+
+//产品点赞
+function addConsent(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/comment/addConsent', param, "POST", successCallback, errorCallback);
+}
+
+//获取产品的评论详情
+function getGoodsCommentLists(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/comment/getGoodsCommentLists', param, "GET", successCallback, errorCallback);
+}
+
+//获取旅游详情
+function getTourGoodsDetail(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/tour/getTourGoodsDetail', param, "GET", successCallback, errorCallback);
+}
+
+//获取首页特价产品
+function getSpecialGoods(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/index/getSpecialGoods', param, "GET", successCallback, errorCallback);
+}
+
+//根据id获取轮播图的详细信息
+function getBannerDetail(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/index/getBannerDetail', param, "GET", successCallback, errorCallback);
+}
+
+//根据code获取openid
+function getOpenId(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/user/getXCXOpenId', param, "GET", successCallback, errorCallback);
+}
+
+//小程序登录
+function login(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/user/login', param, "POST", successCallback, errorCallback);
+}
+
+//更新用户信息
+function updateUserInfo(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/user/updateById', param, "POST", successCallback, errorCallback);
+}
+
+//获取首页轮播图
+function getAds(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/index/getBanners', param, "GET", successCallback, errorCallback);
+}
+
+//获取首页的菜单信息
+function getIndexMenus(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/index/getIndexMenus', param, "GET", successCallback, errorCallback);
+}
+
+//获取首页的最新产品列表
+function getNewGoods(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/index/getNewGoods', param, "GET", successCallback, errorCallback);
+}
+
+//获取积分商品
+function getGoods(param, successCallback, errorCallback) {
+  wxRequest('https://zygw.isart.me/api/goods/getGoods', param, "GET", successCallback, errorCallback);
+}
+
 
 //返回
 function navigateBack(delta) {
@@ -162,6 +252,17 @@ function getDateStr(str) {
   return str.substr(0, pos)
 }
 //格式化日期时间
+// function formatTime(date) {
+//   var year = date.getFullYear()
+//   var month = date.getMonth() + 1
+//   var day = date.getDate()
+//   var hour = date.getHours()
+//   var minute = date.getMinutes()
+//   var second = date.getSeconds()
+//   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+// }
+
+//格式化日期时间
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -169,8 +270,13 @@ function formatTime(date) {
   var hour = date.getHours()
   var minute = date.getMinutes()
   var second = date.getSeconds()
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-')
 }
+
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}  
 //展示toast
 function showToast(msg, img) {
   console.log(img);
@@ -286,9 +392,70 @@ function imageUtil(e) {
   return imageSize;
 }
 
+//富文本转文本
+ function convertHtmlToText(inputText) {
+  var returnText = "" + inputText;
+  returnText = returnText.replace(/<\/div>/ig, '\r\n');
+  returnText = returnText.replace(/<\/li>/ig, '\r\n');
+  returnText = returnText.replace(/<li>/ig, ' * ');
+  returnText = returnText.replace(/<\/ul>/ig, '\r\n');
+  //-- remove BR tags and replace them with line break
+  returnText = returnText.replace(/<br\s*[\/]?>/gi, "\r\n");
+
+  //-- remove P and A tags but preserve what's inside of them
+  returnText = returnText.replace(/<p.*?>/gi, "\r\n");
+  returnText = returnText.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 ($1)");
+
+  //-- remove all inside SCRIPT and STYLE tags
+  returnText = returnText.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, "");
+  returnText = returnText.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, "");
+  //-- remove all else
+  returnText = returnText.replace(/<(?:.|\s)*?>/g, "");
+
+  //-- get rid of more than 2 multiple line breaks:
+  returnText = returnText.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gim, "\r\n\r\n");
+
+  //-- get rid of more than 2 spaces:
+  returnText = returnText.replace(/ +(?= )/g, '');
+
+  //-- get rid of html-encoded characters:
+  returnText = returnText.replace(/ /gi, " ");
+  returnText = returnText.replace(/&/gi, "&");
+  returnText = returnText.replace(/"/gi, '"');
+  returnText = returnText.replace(/</gi, '<');
+  returnText = returnText.replace(/>/gi, '>');
+
+  return returnText;
+}
+
+
+
 
 
 module.exports = {
   INDEX_PAGE: "/pages/index/index",
   judgeIsAnyNullStr: judgeIsAnyNullStr,
+  getOpenId: getOpenId,
+  login: login,
+  updateUserInfo: updateUserInfo,
+  getAds: getAds,
+  getIndexMenus: getIndexMenus,
+  getNewGoods: getNewGoods,
+  getGoods: getGoods,
+  getBannerDetail: getBannerDetail,
+  getSpecialGoods: getSpecialGoods,
+  formatTime: formatTime,
+  getTourGoodsDetail: getTourGoodsDetail,
+  getDateStr: getDateStr,
+  convertHtmlToText: convertHtmlToText,
+  getGoodsCommentLists: getGoodsCommentLists,
+  addConsent: addConsent,
+  addComment: addComment,
+  getQiniuToken: getQiniuToken,
+  getImgRealUrl: getImgRealUrl,
+  search: search,
+  getTourGoodsLists: getTourGoodsLists,
+  showLoading: showLoading,
+  addCollectionGoods: addCollectionGoods,
+  getCollectionLists: getCollectionLists
 }

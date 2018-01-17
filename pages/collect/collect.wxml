@@ -1,0 +1,7 @@
+<import src="../templates/travelListTpl/travelListTpl.wxml" />
+
+<view>
+  <block wx:for="{{collect}}" wx:key="*this">
+    <template is="traveListTpl" data="{{...item}}"></template>
+  </block>
+</view>

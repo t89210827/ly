@@ -1,0 +1,5 @@
+<!--pages/search/search.wxml-->
+<import src="../templates/travelListTpl/travelListTpl.wxml" />
+<block wx:for="{{serachResult}}">
+  <template is="searchTpl" data="{{...item}}"></template>
+</block>
