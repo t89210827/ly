@@ -43,7 +43,6 @@ App({
   onShow: function () {
 
   },
-
   login: function (callBack) {
     wx.login({
       success: function (res) {
@@ -62,8 +61,9 @@ App({
               console.log("login:" + JSON.stringify(ret));
               if (ret.data.code == "200") {
                 vm.storeUserInfo(ret.data.ret)
-                vm.updateUserInfo(function (ret) {
-                })
+                if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
+                  vm.updateUserInfo(function (ret) {})
+                }
               }
             }, null);
           }, null);
@@ -71,7 +71,6 @@ App({
       }
     })
   },
-  
   //更新用户信息
   updateUserInfo: function (callBack) {
     //获取用户基本信息
@@ -130,6 +129,7 @@ App({
       })
     }
   },
+  
   //引导用户授权
   showModal: function () {
     wx.showModal({

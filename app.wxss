@@ -486,7 +486,7 @@
 .bar-10{
  height: 10rpx;
  background-color: #f4f4f4;
- width: 100%;
+ width: 100
 }
 
 .bar-30{
@@ -499,6 +499,12 @@
  height: 2rpx;
  background-color: #e6e6e6;
  width: 100%;
+}
+.bar-2-left{
+ height: 2rpx;
+ background-color: #e6e6e6;
+ width: 96%;
+ margin-left: 4%;
 }
 
 .font-weight{

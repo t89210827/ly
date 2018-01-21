@@ -2,7 +2,6 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var util = require('../../utils/util.js');
 var vm = null
-var that = null
 var offset = 0
 Page({
   data: {
@@ -20,18 +19,16 @@ Page({
     contents: [],//产品特色
     comment: [],//所有评论
     imgalist: [],//预览列表   
-
     dateils: {},//详情页全部数据
     banner: [],//banner数据
+    userType:true //用户类型
   },
   onLoad: function (options) {
     util.showLoading("加载详情")
     vm = this
-    that = this
-    console.log("1111" + JSON.stringify(options))
     var travelid = options.travelid
     var paramDate = ''
-    //判断有时间参数
+    //判断有时间参数（是否从日历页拿数据）
     if (!util.judgeIsAnyNullStr(options.idx)) {
       var date = options.idx
       var month = options.cur_month
@@ -45,22 +42,28 @@ Page({
     } else {
       paramDate = util.formatTime(new Date);
     }
-    console.log(paramDate)
-
     vm.setData({
       travelid: travelid,
       paramDate: paramDate
     })
-    // console.log(util.getDateStr(paramDate))
     vm.getSystemInfo()
+    vm.userType()
   },
-
+  userType: function () {
+    var userInfo = getApp().globalData.userInfo
+    if (userInfo.type == 1) {
+      vm.setData({
+        userType: false
+      })
+    }
+    console.log("类型" + vm.data.userType)
+  },
+  //跳转到回复页面
   reply: function () {
     wx.navigateTo({
       url: '/pages/reply/reply?comment_id' + comment_id,
     })
   },
-
   //获取产品的评论详情
   getGoodsCommentLists: function () {
     var param = {
@@ -78,7 +81,26 @@ Page({
       })
     })
   },
+  //收藏旅游
   collectTravel: function () {
+    console.log("收藏" + vm.data.dateils.collection)
+    //判断是否收藏过
+    if (vm.data.dateils.collection) {
+      wx.showModal({
+        title: '收藏失败',
+        content: '您曾经收藏过,可以直接在收藏夹中查看',
+        showCancel: false,
+        confirmColor: "#DF9E2D",
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      return
+    }
     var param = {
       goods_id: vm.data.travelid,
       goods_type: 1
@@ -88,8 +110,8 @@ Page({
       wx.showModal({
         title: '收藏成功',
         content: '您可以在收藏夹中查看',
-        showCancel:false,
-        confirmColor:"#DF9E2D",
+        showCancel: false,
+        confirmColor: "#DF9E2D",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -131,7 +153,7 @@ Page({
       vm.getGoodsCommentLists()
     })
   },
-  //获取企业详情页数据
+  //获取旅游详情页数据
   getTourGoodsDetail: function () {
     var travelid = vm.data.travelid
     var paramDate = vm.data.paramDate
@@ -173,9 +195,9 @@ Page({
   getSystemInfo: function () {
     wx.getSystemInfo({
       success: function (res) {
-        that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        vm.setData({
+          sliderLeft: (res.windowWidth / vm.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / vm.data.tabs.length * vm.data.activeIndex
         });
       }
     });

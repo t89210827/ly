@@ -3,7 +3,7 @@ var vm = null
 var util = require('../../utils/util.js')
 const qiniuUploader = require("../../utils/qiniuUploader")
 var qnToken = ''
-var Arraydata = []
+var Arraydata = [] //
 // 初始化七牛相关参数
 function initQiniu() {
   var options = {
@@ -14,26 +14,22 @@ function initQiniu() {
   qiniuUploader.init(options);
 }
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     files: [],
-    content: '',//评论
     goods_id: '',//旅游产品id
-    photo: []//数据数组
+    photo: [], //图片视频数组
+    intro: '',//评论
+    videos: []//视频
   },
-
-  //文字评论
-  writeComment: function (e) {
-    console.log("评论" + JSON.stringify(e.detail.value))
+  textAreaEventListener: function (e) {
+    console.log("55555" + JSON.stringify(e.detail.value))
     vm.setData({
-      content: e.detail.value
+      intro: e.detail.value,
+      // 'intro.content': e.detail.value
     })
   },
   //七牛上传图片
   chooseImage: function (e) {
-    var that = this;
     wx.chooseImage({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
@@ -77,6 +73,7 @@ Page({
       }
     })
   },
+
   //预览图片
   previewImage: function (e) {
     wx.previewImage({
@@ -84,9 +81,10 @@ Page({
       urls: this.data.files // 需要预览的图片http链接列表
     })
   },
+
   //七牛上传视频
   bindButtonTap: function () {
-    var that = this
+    var vm = this
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
@@ -112,20 +110,21 @@ Page({
             qiniuUploader.upload(tempFilePath, (res) => {
               console.log("qiniuUploader upload res:" + JSON.stringify(res));
               var picture = util.getImgRealUrl(res.key)
-              var photoIndex = { 'content': picture, 'type': 2 }
-              Arraydata.push(photoIndex)
+              var videos = {'content': picture, 'type':2}
+              var dataVideos = vm.data.videos
+              dataVideos.push(videos)//添加用户上传视频
+              Arraydata.push(videos)//添加用户上传视频 到 接口数据数组
               vm.setData({
                 photo: Arraydata,
+                videos: dataVideos,
+                src: res.tempFilePath
               })
-              console.log("数据数组" + JSON.stringify(Arraydata))
+              console.log("数据数组" + JSON.stringify(vm.data.videos))
             }, (error) => {
               console.error('error: ' + JSON.stringify(error));
             })
           }
         }, null);
-        that.setData({
-          src: res.tempFilePath
-        })
       }
     })
   },

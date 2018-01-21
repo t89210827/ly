@@ -1,6 +1,8 @@
 /* pages/mine/mine.wxss */
 page {
   background-color: white;
+  position: relative;
+  
 }
 .userinfo-order {
   display: flex;

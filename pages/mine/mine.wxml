@@ -1,16 +1,18 @@
 <!--pages/mine/mine.wxml-->
 <view style='height:510rpx;'>
   <view style='width:750rpx;height:400rpx;background-image:url({{bg.img}}); background-repeat: none;background-size:100% 100%;'>
-
     <view class="userinfo-order">
-      <view class='flex-row'>
-        <image src='/images/pen.png' style='width:50rpx;height:100rpx;margin-right:20rpx;'></image>
-        <view style='height:80rpx;margin-right:580rpx;font-size:30rpx;line-height:80rpx;color:white;'>签到</view>
+      <view class='flex-row' catchtap='signIn'>
+        <view style='position: relative;'>
+          <image src='/images/pen.png' style='width:50rpx;height:100rpx;bottom:5rpx;right:10rpx;position: absolute;' animation="{{animation}}"></image>
+        </view>
+        <view style='height:80rpx;margin-right:540rpx;font-size:30rpx;line-height:80rpx;color:white;'>签到</view>
       </view>
-      <view style='font-size:40rpx;color:white;font-weight:500'>当前积分</view>
-      <view style='font-size:70rpx;color:white;font-weight:700'>{{userInfo.integral}}</view>
-    </view>
 
+      <view style='font-size:40rpx;color:white;font-weight:500' bindtap='jumpIntegralDetails'>当前积分</view>
+      <view style='font-size:70rpx;color:white;font-weight:700' bindtap='jumpIntegralDetails'>{{userInfo.integral}}</view>
+
+    </view>
     <view class='flex-row'>
       <view style='width:80%;'>
         <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
@@ -18,12 +20,10 @@
       </view>
       <view class='userinfo-collect' bindtap='jumpcollect'>收藏夹</view>
     </view>
-
   </view>
 </view>
 
 <view class='bar-30'></view>
-
 
 <view bindtap='jumpmyMaterial' class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
   <image src='/images/me.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>

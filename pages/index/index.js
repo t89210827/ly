@@ -11,7 +11,7 @@ Page({
     Ads: [],//轮播图
     menus: [],//首页菜单
     travel: [],//最新产品
-    SpecialGoods: [],//特价优惠
+    SpecialGoods: [],//特价优惠routes
     navigate_type: '',//分类类型，是否包含二级分类
     slideWidth: '',//滑块宽
     slideLeft: 0,//滑块位置
@@ -23,6 +23,20 @@ Page({
     util.showLoading("加载首页")
     // console.log("88888888888888" + 100.00.toFixed(0))
     console.log("分享携带的参数" + JSON.stringify(options))
+    if (!util.judgeIsAnyNullStr(options.user_id)) {
+      wx.showModal({
+        title: '分享人',
+        content: '分享人' + options.user_id,
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+
     console.log('onLoad')
     vm = this
     //初始化sysInfo
@@ -70,9 +84,11 @@ Page({
     }
     util.getNewGoods(param, function (res) {
       console.log("最新产品" + JSON.stringify(res.data.ret))
-      // var travel = vm.data.travel
-      // var newTravel = res.data.ret
       var travel = res.data.ret
+      for (var i = 0; i < travel.length; i++) {
+        travel[i].price = parseInt(travel[i].price).toFixed(0)
+      }
+      console.log("最新产品2" + JSON.stringify(travel))
       vm.setData({
         // travel: travel.concat(newTravel)
         travel: travel
@@ -146,7 +162,10 @@ Page({
  * 页面相关事件处理函数--监听用户下拉动作
  */
   onPullDownRefresh: function () {
-    // console.log("11")
+    console.log("11")
+    vm.getNewGoods()
+    console.log("11")
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -158,6 +177,13 @@ Page({
   },
 
   /**
+ * 生命周期函数--监听页面卸载
+ */
+  onUnload: function () {
+    offset = 0
+  },
+
+  /**
  * 用户点击右上角分享
  */
   onShareAppMessage: function () {
@@ -165,7 +191,7 @@ Page({
     // var path = '/pages/article/article?article_id=' + article_id + '';
     return {
       title: '来自Acker的分享',
-      path: '/pages/article/article?article_id=123'
+      path: '/pages/index/index?user_id=123'
     }
   }
 });

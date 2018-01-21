@@ -2,6 +2,7 @@
 
 <view>
   <block wx:for="{{collect}}" wx:key="*this">
-    <template is="traveListTpl" data="{{...item}}"></template>
+    <view bindtap='deleteCollectionLists' data-collectId='{{item.id}}'>删除</view>
+    <template is="collectTpl" data="{{...item}}"></template>
   </block>
 </view>

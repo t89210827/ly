@@ -124,7 +124,37 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-// http://nyfq.isart.me/api/center/getCollectionLists
+// http://nyfq.isart.me/api/integral/getIntegralDetaileLists
+
+//获取用户积分明细列表
+function getIntegralDetaileLists(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/integral/getIntegralDetaileLists', param, "GET", successCallback, errorCallback);
+}
+
+//【游客端】获取积分兑换历史
+function getIntegralHistoryListsForUser(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/integral/getIntegralHistoryListsForUser', param, "GET", successCallback, errorCallback);
+}
+
+//【游客端】兑换积分商品
+function addIntegralHistory(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/integral/addIntegralHistory', param, "POST", successCallback, errorCallback);
+}
+
+//获取积分商城列表
+function getIntegralLists(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/integral/getIntegralLists', param, "GET", successCallback, errorCallback);
+}
+
+//签到
+function addSign(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/addSign', param, "POST", successCallback, errorCallback);
+}
+
+//删除收藏夹里的产品
+function deleteCollectionLists(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/deleteCollectionLists', param, "POST", successCallback, errorCallback);
+}
 
 //根据用户id获取收藏夹列表
 function getCollectionLists(param, successCallback, errorCallback) {
@@ -276,7 +306,7 @@ function formatTime(date) {
 function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
-}  
+}
 //展示toast
 function showToast(msg, img) {
   console.log(img);
@@ -393,7 +423,7 @@ function imageUtil(e) {
 }
 
 //富文本转文本
- function convertHtmlToText(inputText) {
+function convertHtmlToText(inputText) {
   var returnText = "" + inputText;
   returnText = returnText.replace(/<\/div>/ig, '\r\n');
   returnText = returnText.replace(/<\/li>/ig, '\r\n');
@@ -457,5 +487,11 @@ module.exports = {
   getTourGoodsLists: getTourGoodsLists,
   showLoading: showLoading,
   addCollectionGoods: addCollectionGoods,
-  getCollectionLists: getCollectionLists
+  getCollectionLists: getCollectionLists,
+  deleteCollectionLists: deleteCollectionLists,
+  addSign: addSign,
+  getIntegralLists: getIntegralLists,
+  addIntegralHistory: addIntegralHistory,
+  getIntegralHistoryListsForUser: getIntegralHistoryListsForUser,
+  getIntegralDetaileLists: getIntegralDetaileLists
 }

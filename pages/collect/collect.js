@@ -3,7 +3,8 @@ var vm = null
 var util = require('../../utils/util.js')
 Page({
   data: {
-    collect: {}
+    collect: {},
+    deleId:[]
   },
   onLoad: function (options) {
     vm = this
@@ -13,13 +14,32 @@ Page({
   },
   //获取收藏夹内容
   getCollectionLists: function () {
-    
     util.getCollectionLists({}, function (res) {
       console.log("收藏夹" + JSON.stringify(res))
       vm.setData({
         collect: res.data.ret.collections
       })
     })
+  },
+  deleteCollectionLists:function(e){
+    console.log("删除" + JSON.stringify(e))    
+    var id = e.currentTarget.dataset.collectid
+    var deleId = vm.data.deleId
+    deleId.push(id)
+    vm.setData({
+      deleId: deleId
+    })
+    var param = {
+      id: vm.data.deleId
+    }
+    util.deleteCollectionLists(param,function(res){
+      console.log(JSON.stringify(res))
+      vm.getCollectionLists()
+      vm.setData({
+        deleId:[]
+      })
+    })
+
   },
   //跳转收藏页
   jumpcollect: function () {

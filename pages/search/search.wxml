@@ -1,5 +1,14 @@
 <!--pages/search/search.wxml-->
 <import src="../templates/travelListTpl/travelListTpl.wxml" />
+<block wx:if="{{isNall}}">
+  <view class='center-style' style='height:1206rpx;width:100%;'>
+    <view>
+      <image src='/images/box.png' style='width:400rpx;height:300rpx;'></image>
+      <view style='font-size:13px;font-weight:100;width:100%;text-align:center;'>没有搜索结果,请重新搜索</view>
+    </view>
+  </view>
+</block>
+
 <block wx:for="{{serachResult}}">
   <template is="searchTpl" data="{{...item}}"></template>
 </block>

@@ -1,6 +1,6 @@
 /* pages/integral/integral.wxss */
 page {
-  background-color: #e6e6e6;
+  background-color: #f2f2f2;
   font-size: 16px;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
@@ -16,4 +16,12 @@ page {
 .weui-tab__content{
     padding-top: 60px;
     text-align: center;
+}
+
+.background-color{
+background-color:#e64340;
+}
+
+.click_hover{
+  background-color: green;
 }

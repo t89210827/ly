@@ -2,7 +2,7 @@
 
 .travel-title{
   font-size: 30rpx;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .travel-price{

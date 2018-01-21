@@ -1,6 +1,6 @@
 /* pages/writeComment/writeComment.wxss */
 page{
-  background-color: #F4F4F4
+  /* background-color: #F4F4F4 */
 }
 .mini-btn{
     margin-right: 5px;
@@ -11,7 +11,23 @@ page{
   position: fixed;
   bottom: 0rpx;
   font-size: 30rpx;
-  background-color: #FFFF00;
+  background-color: #df9e2d;
   color: white;
   letter-spacing: -0.34rpx;
+}
+
+.intro-content{
+height:260rpx; 
+border-radius: 8px; 
+border:#dcdcdc 1rpx solid;
+font-size: 30rpx;
+color: #B4B4B4;
+}
+
+textarea {
+height:260rpx;
+display:block;
+position:relative;
+font-size: 30rpx;
+color: #000;
 }

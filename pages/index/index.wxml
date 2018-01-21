@@ -3,36 +3,35 @@
 <import src="../templates/travelListTpl/travelListTpl.wxml" />
 <!-- 搜索栏 -->
 <view style='width:750rpx;'>
-
-  <view class="page">
-    <view class="page__bd">
-      <view class="weui-search-bar">
-        <view class="weui-search-bar__form">
-          <view class="weui-search-bar__box">
-            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="complete" />
-            <!-- <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+    <view class="page">
+      <view class="page__bd">
+        <view class="weui-search-bar">
+          <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="complete" />
+              <!-- <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
               <icon type="clear" size="14"></icon>
             </view> -->
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui-icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar__text">搜索旅行地/酒店/景点</view>
+            </label>
           </view>
-          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-            <icon class="weui-icon-search" type="search" size="14"></icon>
-            <view class="weui-search-bar__text">搜索旅行地/酒店/景点</view>
-          </label>
+          <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
-        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
       </view>
     </view>
-  </view>
 
-  <!-- 轮播图 -->
-  <swiper indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#FFFFFF" autoplay="true" interval="4000" duration="600" style="height:187px">
-    <block wx:for="{{Ads}}" wx:key="*this">
-      <swiper-item>
-        <image bindtap='jumpDetails' data-bannerId='{{item.id}}' src="{{item.image}}" class="slide-image" width="750rpx" />
-      </swiper-item>
-    </block>
-  </swiper>
+    <!-- 轮播图 -->
+    <swiper indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#FFFFFF" autoplay="true" interval="4000" duration="600" style="height:187px">
+      <block wx:for="{{Ads}}" wx:key="*this">
+        <swiper-item>
+          <image bindtap='jumpDetails' data-bannerId='{{item.id}}' src="{{item.image}}" class="slide-image" width="750rpx" />
+        </swiper-item>
+      </block>
+    </swiper>
 
   <view class='bar-10'></view>
 
@@ -61,6 +60,8 @@
   <block wx:for="{{travel}}" wx:key="*this">
     <template is="traveListTpl" data="{{...item}}"></template>
   </block>
+
+  <view class='bar-2'></view>
 
   <view class='flex-row' style='align-items:center'>
     <view class="line-text font-size-14" style='line-height:30rpx;width:72%;'>

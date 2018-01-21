@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/integral/integral",
     "pages/moldingTravel/moldingTravel",
     "pages/specialTravel/specialTravel",
     "pages/order/order",
     "pages/travelList/travelList",
-    "pages/integral/integral",
     "pages/myMaterial/mymaterial",
     "pages/rili/rili",
     "pages/travel/travel",
@@ -21,13 +21,15 @@
     "pages/writeComment/writeComment",
     "pages/search/search",
     "pages/reply/reply",
-    "pages/collect/collect"
+    "pages/collect/collect",
+    "pages/integralDetails/integralDetails"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#0c0c0c",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "旅游小程序",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
     "color": "#8A8A8A",

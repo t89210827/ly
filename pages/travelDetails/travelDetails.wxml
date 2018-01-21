@@ -117,9 +117,9 @@
         </view>
         <view hidden="{{activeIndex != 2}}" style='min-height:1110rpx'>
           <view class='bar-10 '></view>
-           <!-- <view class='margin-10 '>全部评论</view>  -->
+          <!-- <view class='margin-10 '>全部评论</view>  -->
           <block wx:for="{{comment}}">
-            <template is="commentTpl" data="{{...item}}"></template>
+            <template is="commentTpl" data="{{...item,userType}}"></template>
           </block>
           <view style='height:90rpx;'></view>
           <!-- 底部绝对定位 -->
@@ -140,7 +140,7 @@
   </view>
 </block>
 <block wx:else>
-  <view class="travel-add flex-row" style='background-color:#f9f9f9 '>
+  <view class="travel-add flex-row" style='background-color:#f9f9f9;border-top:1rpx solid #A9A9B1'>
     <button open-type="share" class="travel-share-0 center-style" style='border: none !important;border-radius:0;'>
       <image src='/images/transpond.png' style='width:40rpx;height:40rpx;'></image>
       <text class='font-size-16' style='margin-top:5rpx;'> 转发</text>

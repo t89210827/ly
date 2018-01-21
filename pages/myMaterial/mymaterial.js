@@ -2,6 +2,18 @@
 var app = getApp()
 var vm = null
 var util = require('../../utils/util.js')
+const qiniuUploader = require("../../utils/qiniuUploader");
+var qnToken = ""
+// 初始化七牛相关参数
+function initQiniu() {
+  var options = {
+    region: 'ECN', // 华东区
+    uptoken: qnToken
+  };
+  console.log("initQiniu options:" + JSON.stringify(options))
+  qiniuUploader.init(options);
+}
+
 Page({
   data: {
     userInfo: [],
@@ -21,10 +33,47 @@ Page({
       }
     });
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //上传图片
+  chooseImage: function (e) {
+    // var count = 4 - vm.data.files.length
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths
+        console.log("tempFilePaths:" + JSON.stringify(tempFilePaths))
+        wx.showLoading({
+          title: '正在上传',
+        })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
+        //获取七牛上传token
+        util.getQiniuToken({}, function (res) {
+          console.log(JSON.stringify(res));
+          if (res.data.result) {
+            qnToken = res.data.ret;
+            console.log("qiniu upload token:" + qnToken)
+            initQiniu();
+            //获取token成功后上传图片
+            for (var i = 0; i < tempFilePaths.length; i++) {
+              var tempFilePath = tempFilePaths[i]
+              qiniuUploader.upload(tempFilePath, (res) => {
+                console.log("qiniuUploader upload res:" + JSON.stringify(res));
+                var picture = util.getImgRealUrl(res.key)
+                vm.setData({
+                  'userInfo.avatar': picture
+                })
+              }, (error) => {
+                console.error('error: ' + JSON.stringify(error));
+              })
+            }
+          }
+        }, null);
+      }
+    })
+  },
   onLoad: function (options) {
     vm = this
     var userInfo = app.globalData.userInfo
@@ -55,7 +104,6 @@ Page({
       'userInfo.passport': e.detail.value
     })
   },
-
   saveUserInfo: function () {
     var param = {
       gender: vm.data.userInfo.gender,//姓名
@@ -69,12 +117,25 @@ Page({
     }
     util.updateUserInfo(param, function (res) {
       console.log("更新用户信息：" + JSON.stringify(res))
-
       wx.setStorage({
         key: "userInfo",
         data: res.data.ret
       });
       app.globalData.userInfo = res.data.ret;
+
+      wx.showModal({
+        title: '成功',
+        content: '资料修改成功',
+        confirmColor:"#DF9E2D",
+        showCancel:false,
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
 
     })
   },

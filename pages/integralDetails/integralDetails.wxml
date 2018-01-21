@@ -1,0 +1,22 @@
+<!--pages/integralDetails/integralDetails.wxml-->
+<view>
+  <!-- <view class='flex-row' style='height:100rpx;'>
+    <view>总积分</view>
+  </view>
+  <view class='bar-2'></view> -->
+
+  <block wx:for="{{IntegralDetaileLists}}">
+    <view class='flex-row' style='align-items:center;margin-left:10rpx;'>
+      <view style='width:50rpx;'>{{index+1}}</view>
+
+      <view style='margin-left:10rpx;width:500rpx;'>
+        <view>{{item.content}}</view>
+        <view class='font-size-13'>{{item.updated_at}}</view>
+      </view>
+
+    </view>
+
+    <view class='bar-30'></view>
+  </block>
+
+</view>

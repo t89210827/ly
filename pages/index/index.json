@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "旅游小程序",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

@@ -10,7 +10,8 @@ Page({
   data: {
     search: '',
     serachResult: [],
-    aaa: 10000.00
+    aaa: 10000.00,
+    isNall: false
   },
 
   /**
@@ -32,17 +33,23 @@ Page({
       search_name: vm.data.search//关键字
     }
     util.search(param, function (res) {
-      console.log(JSON.stringify(res))
+      // console.log(JSON.stringify(res))
       var serachResult = vm.data.serachResult
       var newSerachResult = res.data.ret
       for (var i = 0; i < newSerachResult.length; i++) {
         newSerachResult[i].goods_id.price = parseInt(newSerachResult[i].goods_id.price).toFixed()
       }
-      console.log("dewd" + JSON.stringify(serachResult))
+      // console.log("dewd" + JSON.stringify(serachResult))
       vm.setData({
         serachResult: serachResult.concat(newSerachResult)
         // serachResult: serachResult
       })
+      if (util.judgeIsAnyNullStr(vm.data.serachResult)) {
+        vm.setData({
+          isNall: true
+        })
+      }
+      // console.log("isNall" + JSON.stringify(vm.data.isNall))
     })
     offset = offset + 8
   },
@@ -72,7 +79,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    offset = 0
   },
 
   /**
@@ -86,7 +93,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log("33333333")
+    // console.log("33333333")
     vm.search()
   },
 
