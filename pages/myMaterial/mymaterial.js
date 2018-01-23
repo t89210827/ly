@@ -62,6 +62,7 @@ Page({
               qiniuUploader.upload(tempFilePath, (res) => {
                 console.log("qiniuUploader upload res:" + JSON.stringify(res));
                 var picture = util.getImgRealUrl(res.key)
+                app.globalData.userInfo.avatar = picture
                 vm.setData({
                   'userInfo.avatar': picture
                 })
@@ -117,17 +118,16 @@ Page({
     }
     util.updateUserInfo(param, function (res) {
       console.log("更新用户信息：" + JSON.stringify(res))
-      wx.setStorage({
-        key: "userInfo",
-        data: res.data.ret
-      });
-      app.globalData.userInfo = res.data.ret;
-
+      // wx.setStorage({
+      //   key: "userInfo",
+      //   data: res.data.ret
+      // });
+      // app.globalData.userInfo = res.data.ret;
       wx.showModal({
         title: '成功',
         content: '资料修改成功',
-        confirmColor:"#DF9E2D",
-        showCancel:false,
+        confirmColor: "#DF9E2D",
+        showCancel: false,
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')

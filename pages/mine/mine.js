@@ -11,16 +11,6 @@ Page({
   },
   onLoad: function (options) {
     vm = this
-    var userInfo = app.globalData.userInfo
-    if (userInfo.type == 1) {
-      vm.setData({
-        userType: false
-      })
-    }
-    console.log("mine js userInfo : " + JSON.stringify(userInfo))
-    vm.setData({
-      userInfo: userInfo
-    })
     //创建一个动画实例animation
     this.animation = wx.createAnimation({
       transformOrigin: "50% 50%",
@@ -115,7 +105,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    var userInfo = app.globalData.userInfo
+    // var userInfo = wx.getStorageSync("userInfo")
+    if (userInfo.type == 1) {
+      vm.setData({
+        userType: false
+      })
+    }
+    console.log("mine js userInfo : " + JSON.stringify(userInfo))
+    vm.setData({
+      userInfo: userInfo
+    })
   },
 
   /**

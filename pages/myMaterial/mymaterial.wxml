@@ -8,12 +8,12 @@
     </view>
   </view>
 
-  <view class='bar-2-left'></view>
+  <!-- <view class='bar-2-left'></view>
 
   <view style='display:flex;flex-direction:row;align-items: center;width: 100%;height: 100rpx;background-color:white;font-size:30rpx;'>
     <view style='position:relative;padding-left: 30rpx;width:200rpx '>姓名</view>
     <input bindblur="nick_name" style='width:480rpx;text-align: right;' value='{{userInfo.nick_name}}'></input>
-  </view>
+  </view> -->
 
   <view class='bar-2-left'></view>
 
