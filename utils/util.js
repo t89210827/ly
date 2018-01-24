@@ -1,7 +1,7 @@
 var TESTMODE = false;
 
 //服务器地址
-var SERVER_URL = "https://nyfq.isart.me/api";
+var SERVER_URL = "http://nyfq.isart.me/api";
 var DEBUG_URL = "http://localhost/DSYYServer";
 var SERVER_URL = (TESTMODE) ? DEBUG_URL : SERVER_URL;
 
@@ -112,9 +112,9 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
       successCallback(res)
       hideLoading()
     },
-    fail: function () {
+    fail: function (err) {
       console.log("wxRequest fail:" + JSON.stringify(err))
-      // errorCallback(err)
+      errorCallback(err)
       hideLoading()
     }
   });

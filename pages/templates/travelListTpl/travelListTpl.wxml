@@ -41,7 +41,7 @@
 
 <!--该模板用于收藏夹展示-->
 <template name="collectTpl">
-  <view class='margin-5 flex-row' bindtap='jumpTravelDetails' data-travelId='{{id}}'>
+  <view class='margin-5 flex-row' bindtap='jumpTravelDetails' data-travelId='{{goods_id.id}}'>
     <view style='width:200rpx;'>
       <image src='{{goods_id.image}}' style='width:200rpx;height:200rpx;'></image>
     </view>

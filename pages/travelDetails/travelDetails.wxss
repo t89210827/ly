@@ -24,7 +24,7 @@ page {
 /* 顶部导航栏字体颜色 */
 
 .weui-navbar__item.weui-bar__item_on {
-  color: #df9e2d;
+  color: #fd8109;
 }
 
 /* 轮播图样式 */
@@ -59,7 +59,7 @@ page {
   bottom: 0rpx;
    left:0; 
   font-size: 30rpx;
-  background-color: #df9e2d;
+  background-color: #fd8109;
   color: white;
   letter-spacing: -0.34rpx;
 }

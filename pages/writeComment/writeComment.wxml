@@ -55,7 +55,7 @@
 
 <view style="margin: 30rpx 40rpx 30rpx 40rpx; height:260rpx; position: relative;">
   <view class="intro-content" style='border:1px solid block'>
-    <textarea name="intro" bindinput="textAreaEventListener" class="padding-left-10 padding-top-10 padding-bottom-10 padding-right-40" placeholder="{{intro === '' ? '千山万水总是情 写点评论行不行（100字以内，选填）' : intro}}" />
+    <textarea name="intro" cursor-spacing="100" bindinput="textAreaEventListener" class="padding-left-10 padding-top-10 padding-bottom-10 padding-right-40" placeholder="{{intro === '' ? '千山万水总是情 写点评论行不行（100字以内，选填）' : intro}}" />
   </view>
   <view style="position: absolute; right: 10rpx; bottom: 0;">{{intro.length}} / 100</view>
 </view>
@@ -68,7 +68,7 @@
 
 <!-- <view style='margin-left:290rpx;margin-top:30rpx;'> -->
 <cover-view class='travel-add-comment' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>
-  写点评
+  写评价
 </cover-view>
 <!-- <button bindtap='addComment' class="weui-btn mini-btn" style='width:200rpx;background-color:yellow;' type="warn" size="mini">发布</button> -->
 <!-- </view> -->

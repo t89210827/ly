@@ -11,7 +11,7 @@ page{
   position: fixed;
   bottom: 0rpx;
   font-size: 30rpx;
-  background-color: #df9e2d;
+  background-color: #fd8109;
   color: white;
   letter-spacing: -0.34rpx;
 }

@@ -1,29 +1,32 @@
 <!--pages/templates/commentTpl/commentTpl.wxml-->
 <!-- 评论模板 -->
 <template name="commentTpl">
-  <view style='margin-bottom:50rpx;'>
-    <view class='flex-row ' style='min-height:150rpx;padding-top:20rpx;'>
+  <view style='margin-bottom:20rpx;'>
+    <view class='flex-row' style='min-height:150rpx;padding-top:20rpx;'>
       <image class="userinfo-avatar" src="{{user_id.avatar}}" background-size="cover"></image>
       <view>
         <view class='flex-row '>
-          <view style='width:470rpx;color:#877AAC'>{{user_id.nick_name}}</view>
+          <view style='width:510rpx;color:#877AAC'>{{user_id.nick_name}}</view>
           <view class='font-size-15' style='width:40rpx;line-height:54rpx;'>{{consent_count}}</view>
           <view class='center-style' style='margin-bottom:8rpx;' bindtap='addConsent' data-commentId='{{id}}'>
             <block wx:if="{{consent_status==0}}">
-              <image src="/images/praise.png" background-size="cover" style='width:40rpx;height:40rpx; '></image>
+              <image src="/images/praise_r.png" background-size="cover" style='width:40rpx;height:40rpx; '></image>
             </block>
             <block wx:if="{{consent_status==1}}">
               <image src="/images/praise_n.png" background-size="cover" style='width:40rpx;height:40rpx; '></image>
             </block>
           </view>
+
         </view>
 
         <view style='width:500rpx;font-size:30rpx; '>{{content}}</view>
-        <view style='height:20rpx;'></view>
+        <view style='height:10rpx;'></view>
 
         <block wx:for="{{media}}">
           <block wx:if="{{item.type == 1}}">
-            <image src='{{item.content}}' bindtap='previewImage' data-src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;'></image>
+            <view style='width:450rpx;'>
+              <image src='{{item.content}}' bindtap='previewImage' data-src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;margin-bottom:10rpx;'></image>
+            </view>
           </block>
           <block wx:if="{{item.type == 2}}">
             <video src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;margin-bottom:20rpx;'></video>
@@ -33,8 +36,8 @@
     </view>
 
     <view class='flex-row'>
-      <view class='font-size-11' style='margin-left:130rpx;line-height:50rpx;color:#A9A9B1;'>{{created_at}}</view>
-      <view hidden='{{userType}}' class='font-size-13' style='margin-left:280rpx;line-height:50rpx;font-weight:300;'>回复</view>
+      <view class='font-size-11' style='margin-left:130rpx;line-height:30rpx;margin-bottom:10rpx;color:#A9A9B1;'>{{created_at}}</view>
+      <view hidden='{{userType}}' class='font-size-13' style='margin-left:280rpx;line-height:40rpx;font-weight:300;'>回复</view>
     </view>
 
     <view style='margin-left:120rpx;'>

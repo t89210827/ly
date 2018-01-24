@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/integral/integral",
+    "pages/collect/collect",
     "pages/moldingTravel/moldingTravel",
     "pages/specialTravel/specialTravel",
     "pages/order/order",
@@ -21,7 +22,6 @@
     "pages/writeComment/writeComment",
     "pages/search/search",
     "pages/reply/reply",
-    "pages/collect/collect",
     "pages/integralDetails/integralDetails"
   ],
   "window": {
@@ -39,7 +39,7 @@
     "list": [
       {
         "pagePath": "pages/buyTickets/buyTickets",
-        "text": "点评",
+        "text": "抢票",
         "iconPath": "images/home_n.png",
         "selectedIconPath": "images/home_r.png"
       },

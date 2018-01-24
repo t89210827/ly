@@ -55,6 +55,8 @@
     最新产品
   </view>
 
+  <view style='height:2rpx;width:94%;margin:0 3%;background-color:#f4f4f4;'></view>
+
   <view style='height:30rpx;'></view>
 
   <block wx:for="{{travel}}" wx:key="*this">
@@ -70,6 +72,8 @@
     <image src='/images/refresh.png' style='width:40rpx;height:40rpx;margin-right:10rpx;'></image>
     <view bindtap='getSpecialGoods'>换一换</view>
   </view>
+
+  <view style='height:1rpx;width:94%;margin:0 3%;background-color:#f4f4f4;'></view>
 
   <view style='height:20rpx;'></view>
 

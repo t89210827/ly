@@ -133,7 +133,7 @@ Page({
       vm.setData({
         travel: res.data.ret
       })
-      console.log("旅游数据" + JSON.stringify(vm.data.travel))
+      console.log("旅游数据" + JSON.stringify(res))
     })
   },
 

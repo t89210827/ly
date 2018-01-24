@@ -40,7 +40,8 @@
 .day {
     width: 60rpx;
     height: 60rpx;
-    color: #88d2ac;
+    /* color: #88d2ac; */
+     color: black;     
     font-size: 32rpx;
     font-weight: 200;
 }
@@ -264,13 +265,13 @@ page {
   overflow: hidden;
 }
 .brown-color {
-  color: #784344;
+  color: red;
 }
 /* .pink-color {
   color: #ff629a;
 } */
 .pink-color {
-  color: #df9e2d;
+  color: red;
 }
 .white-color {
   color: #fff;

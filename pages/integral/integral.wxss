@@ -1,27 +1,24 @@
 /* pages/integral/integral.wxss */
+
 page {
-  background-color: #f2f2f2;
+   background-color: #f2f2f2; 
   font-size: 16px;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
 
-.page__bd{
-    height: 100%;
+.page__bd {
+  height: 100%;
 }
 
-.page__bd{
-    padding-bottom: 0;
+.page__bd {
+  padding-bottom: 0;
 }
 
-.weui-tab__content{
-    padding-top: 60px;
-    text-align: center;
+.weui-tab__content {
+  padding-top: 60px;
+  text-align: center;
 }
 
-.background-color{
-background-color:#e64340;
-}
-
-.click_hover{
-  background-color: green;
+.background-color {
+  background-color: #f49935;
 }

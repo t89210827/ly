@@ -20,6 +20,19 @@ Page({
     slideRatio: ''
   },
   onLoad: function (options) {
+    wx.canvasToTempFilePath({
+      x: 100,
+      y: 200,
+      width: 50,
+      height: 50,
+      destWidth: 100,
+      destHeight: 100,
+      canvasId: 'myCanvas',
+      success: function (res) {
+        console.log("canvasToTempFilePath" + res.tempFilePath)
+      }
+    })
+
     util.showLoading("加载首页")
     // console.log("88888888888888" + 100.00.toFixed(0))
     console.log("分享携带的参数" + JSON.stringify(options))
