@@ -21,7 +21,7 @@ Page({
     imgalist: [],//预览列表   
     dateils: {},//详情页全部数据
     banner: [],//banner数据
-    userType:true //用户类型
+    userType: true //用户类型
   },
   onLoad: function (options) {
     util.showLoading("加载详情")
@@ -59,9 +59,10 @@ Page({
     console.log("类型" + vm.data.userType)
   },
   //跳转到回复页面
-  reply: function () {
+  jumpReply: function (e) {
+    var comment_id = e.currentTarget.dataset.commentid
     wx.navigateTo({
-      url: '/pages/reply/reply?comment_id' + comment_id,
+      url: '/pages/reply/reply?comment_id=' + comment_id,
     })
   },
   //获取产品的评论详情
@@ -79,6 +80,41 @@ Page({
       vm.setData({
         comment: comment
       })
+    })
+  },
+  //预定
+  gotobuy: function () {
+    wx.showModal({
+      title: '预定',
+      content: '确定预定吗？',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          var param = {
+            goods_id: vm.data.travelid,
+            goods_type: 1,
+            start_time: vm.data.paramDate,
+            price: vm.data.dateils.price
+          }
+          util.tourOrder(param, function (res) {
+            if (res.data.ret.surplus) {
+              wx.showToast({
+                title: '预订成功',
+                icon: 'success',
+                duration: 2000
+              })
+            }else if(!res.data.ret.surplus){
+              wx.showToast({
+                title: '剩余位置不足',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
   },
   //收藏旅游

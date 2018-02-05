@@ -1,8 +1,8 @@
 var TESTMODE = false;
 
 //服务器地址
-var SERVER_URL = "http://nyfq.isart.me/api";
-var DEBUG_URL = "http://localhost/DSYYServer";
+var SERVER_URL = "https://nyfq.isart.me/api";
+var DEBUG_URL = "http://localhost:5555/api";
 var SERVER_URL = (TESTMODE) ? DEBUG_URL : SERVER_URL;
 
 ///////七牛相关///////////////////////////////////
@@ -124,7 +124,27 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-// http://nyfq.isart.me/api/integral/getIntegralDetaileLists
+// http://nyfq.isart.me/api/comment/addCommentReplie
+
+//添加评论回复
+function addCommentReplie(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/comment/addCommentReplie', param, "POST", successCallback, errorCallback);
+}
+
+//删除订单
+function deleteTourOrder(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/order/deleteTourOrder', param, "GET", successCallback, errorCallback);
+}
+
+//旅游产品下单接口
+function tourOrder(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/order/tourOrder', param, "POST", successCallback, errorCallback);
+}
+
+//查询所有订单
+function getTourOrder(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/order/getTourOrder', param, "GET", successCallback, errorCallback);
+}
 
 //获取用户积分明细列表
 function getIntegralDetaileLists(param, successCallback, errorCallback) {
@@ -493,5 +513,9 @@ module.exports = {
   getIntegralLists: getIntegralLists,
   addIntegralHistory: addIntegralHistory,
   getIntegralHistoryListsForUser: getIntegralHistoryListsForUser,
-  getIntegralDetaileLists: getIntegralDetaileLists
+  getIntegralDetaileLists: getIntegralDetaileLists,
+  tourOrder: tourOrder,
+  getTourOrder: getTourOrder,
+  deleteTourOrder: deleteTourOrder,
+  addCommentReplie: addCommentReplie
 }

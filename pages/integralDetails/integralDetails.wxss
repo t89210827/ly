@@ -1,1 +1,4 @@
 /* pages/integralDetails/integralDetails.wxss */
+page{
+  background-color: #F3f3f3;
+}

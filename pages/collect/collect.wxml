@@ -18,7 +18,7 @@
     <view wx:for="{{collect}}" wx:key="{{index}}" class="item">
       <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
         <!-- <image class="item-icon" style='width:100rpx;height:100rpx;' mode="widthFix" src="{{item.icon}}"></image>{{index}}{{item.goods_id.start_place}}   -->
-         <template is="collectTpl" data="{{...item}}"></template> 
+        <template is="collectTpl" data="{{...item}}"></template>
       </view>
       <view data-index="{{index}}" data-collectId='{{item.id}}' bindtap="delItem" class="inner del">删除</view>
     </view>

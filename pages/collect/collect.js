@@ -1,7 +1,6 @@
 var app = getApp()
 var vm = null
 var util = require('../../utils/util.js')
-
 // var initdata = function (that) {
 //   var list = that.data.list
 //   for (var i = 0; i < list.length; i++) {
@@ -9,7 +8,6 @@ var util = require('../../utils/util.js')
 //   }
 //   that.setData({ list: list })
 // }
-
 var initdata = function (that) {
   var collect = vm.data.collect
   for (var i = 0; i < collect.length; i++) {
@@ -30,58 +28,7 @@ Page({
         txtStyle: "",
         icon: "/images/qcm.png",
         txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-      {
-        txtStyle: "",
-        icon: "/images/qcm.png",
-        txt: "指尖快递"
-      },
-
+      }
     ]
 
   },

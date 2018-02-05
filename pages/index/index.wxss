@@ -53,7 +53,7 @@
 }
 
 .recommend_scroll_x_box {
-  height: 180rpx;
+  height: 170rpx;
   white-space: nowrap;
   display: flex;
    /* margin-left: 18rpx;  */
@@ -68,8 +68,8 @@
 .recommend_hot_box {
   width: 160rpx;
   height: 160rpx;
-  margin-right: 30rpx;
-  margin-top: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 15rpx;
   display: inline-block;
 }
 
@@ -87,5 +87,5 @@
   left: 50%;
   transform: translate(-60%, -65%);
   color: white;
-  font-size: 35rpx;
+  font-size: 30rpx;
 }

@@ -6,8 +6,6 @@ view {
 
 .item-box {
   width: 750rpx;
-  /* margin: 0 auto;  
-    padding:40rpx 0;   */
 }
 
 .items {

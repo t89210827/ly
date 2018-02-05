@@ -25,6 +25,12 @@ Page({
       url: '/pages/integralDetails/integralDetails',
     })
   },
+  //跳转到我的订单页面
+  jumpOrder: function () {
+    wx.navigateTo({
+      url: '/pages/order/order',
+    })
+  },
   //签到
   signIn: function () {
     this.animation.translateY(10).step()
@@ -32,47 +38,22 @@ Page({
       //输出动画
       animation: this.animation.export()
     })
-    if (app.globalData.userInfo.sign.status) {
-      wx.showToast({
-        title: '已经签到过了',
-        icon: 'none',
-        duration: 2000
-      })
-      // wx.showModal({
-      //   title: '提醒',
-      //   content: '您已经签到过了',
-      //   showCancel: false,
-      //   confirmColor: "#DF9E2D",
-      //   success: function (res) {
-      //     if (res.confirm) {
-      //       console.log('用户点击确定')
-      //     } else if (res.cancel) {
-      //       console.log('用户点击取消')
-      //     }
-      //   }
-      // })
-    } else {
-      util.addSign({}, function (res) {
-        console.log("签到" + JSON.stringify(res))
-        app.globalData.userInfo.integral = res.data.ret.integral
+    util.addSign({}, function (res) {
+      console.log("签到" + JSON.stringify(res))
+      app.globalData.userInfo.integral = res.data.ret.integral
+      var status = res.data.ret.sign.status //今天是否签到过
+      if (status) {
+        wx.showToast({
+          title: '已经签到过了',
+          icon: 'none',
+          duration: 2000
+        })
+      } else {
         wx.showToast({
           title: '签到成功',
           icon: 'success',
           duration: 2000
         })
-        // wx.showModal({
-        //   title: '成功',
-        //   content: '签到+10',
-        //   showCancel: false,
-        //   confirmColor: "#DF9E2D",
-        //   success: function (res) {
-        //     if (res.confirm) {
-        //       console.log('用户点击确定')
-        //     } else if (res.cancel) {
-        //       console.log('用户点击取消')
-        //     }
-        //   }
-        // })
         wx.setStorage({
           key: "userInfo",
           data: app.globalData.userInfo
@@ -80,8 +61,8 @@ Page({
         vm.setData({
           userInfo: app.globalData.userInfo
         })
-      })
-    }
+      }
+    })
   },
   //跳转收藏页
   jumpcollect: function () {

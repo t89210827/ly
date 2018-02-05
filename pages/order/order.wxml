@@ -1,5 +1,6 @@
 <!--pages/order/order.wxml-->
 <import src="../templates/orderTpl/orderTpl.wxml" />
+<import src="../templates/travelListTpl/travelListTpl.wxml" />
 <view>
   <view class="weui-tab">
     <view class="weui-navbar">
@@ -13,18 +14,28 @@
     <view class="weui-tab__panel">
       <view class="" hidden="{{activeIndex != 0}}">
 
-        <block wx:for="{{[1, 2]}}">
-          <template is="orderTpl" data=""></template>
-        </block>
+        <view class="item-box">
+          <view class="items">
+            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+                <template is="collectTpl" data="{{...item}}"></template>
+              </view>
+              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner del">删除</view>
+            </view>
+          </view>
+        </view>
+        <!-- <block wx:for="{{[1, 2]}}">
 
-        <block wx:for="{{[1, 2]}}">
+          <template is="orderTpl" data=""></template>
+        </block>  -->
+
+        <!-- <block wx:for="{{[1, 2]}}">
           <template is="planeTpl" data=""></template>
-        </block>
+        </block> -->
 
       </view>
-      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选项二的内容</view>
-      <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view>
-      <view class="weui-tab__content" hidden="{{activeIndex != 3}}">选项四的内容</view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">待出行</view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 2}}">待点评</view>
     </view>
   </view>
 </view>

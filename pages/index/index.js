@@ -7,7 +7,6 @@ Page({
   data: {
     inputShowed: false,// 搜索
     inputVal: "",// 搜索
-    systemInfo: [],//用户手机信息
     Ads: [],//轮播图
     menus: [],//首页菜单
     travel: [],//最新产品
@@ -20,6 +19,8 @@ Page({
     slideRatio: ''
   },
   onLoad: function (options) {
+    vm = this
+    vm.getBarTitle()
     wx.canvasToTempFilePath({
       x: 100,
       y: 200,
@@ -32,7 +33,6 @@ Page({
         console.log("canvasToTempFilePath" + res.tempFilePath)
       }
     })
-
     util.showLoading("加载首页")
     // console.log("88888888888888" + 100.00.toFixed(0))
     console.log("分享携带的参数" + JSON.stringify(options))
@@ -49,16 +49,6 @@ Page({
         }
       })
     }
-
-    console.log('onLoad')
-    vm = this
-    //初始化sysInfo
-    app.getSystemInfo(function (res) {
-      console.log("getSystemInfo:" + JSON.stringify(res));
-      vm.setData({
-        systemInfo: res
-      })
-    })
     vm.getAds()//获取banner
     vm.getIndexMenus()//获取首页菜单
     vm.getNewGoods()//获取首页最新产品
@@ -124,6 +114,15 @@ Page({
     }, null)
     offset = offset + 3
   },
+  //设置首页标题
+  getBarTitle: function () {
+    if (getApp().globalData.userInfo.type == 1) {
+      var title = getApp().globalData.userInfo.organization_id
+      wx.setNavigationBarTitle({
+        title: title //页面标题为路由参数
+      })
+    }
+  },
   //获取轮播图
   getAds: function () {
     util.getAds({}, function (res) {
@@ -180,39 +179,11 @@ Page({
     console.log("11")
     wx.stopPullDownRefresh()
   },
-
-  /**
- * 页面上拉触底事件的处理函数
- */
-  onReachBottom: function () {
-    // console.log("1111111111")
-    // vm.getNewGoods()
-  },
-
-  /**
- * 生命周期函数--监听页面卸载
- */
-  onUnload: function () {
-    offset = 0
-  },
-
-  /**
- * 用户点击右上角分享
- */
   onShareAppMessage: function () {
-    // var article_id = wx.getStorageSync('current_article_id');
-    // var path = '/pages/article/article?article_id=' + article_id + '';
+    var user_id = getApp().globalData.userInfo.id
     return {
       title: '来自Acker的分享',
-      path: '/pages/index/index?user_id=123'
+      path: '/pages/index/index?user_id=' + user_id
     }
   }
 });
-
-  // 跳转
-  // jumpSpecial: function () {
-  //   wx.navigateTo({
-  //     url: '/pages/specialTravel/specialTravel',
-  //   })
-  // },
-

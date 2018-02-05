@@ -37,7 +37,7 @@
 
     <view class='flex-row'>
       <view class='font-size-11' style='margin-left:130rpx;line-height:30rpx;margin-bottom:10rpx;color:#A9A9B1;'>{{created_at}}</view>
-      <view hidden='{{userType}}' class='font-size-13' style='margin-left:280rpx;line-height:40rpx;font-weight:300;'>回复</view>
+      <view hidden='{{userType}}' class='font-size-13' style='margin-left:320rpx;line-height:40rpx;font-weight:400;' bindtap='jumpReply' data-commentid='{{id}}'>回复</view>
     </view>
 
     <view style='margin-left:120rpx;'>

@@ -165,8 +165,6 @@
 	text-align: center;
 }
 
-
-
 /* app.json  */
 page {
   background-color: #fff;
@@ -265,7 +263,7 @@ page {
   overflow: hidden;
 }
 .brown-color {
-  color: red;
+  color: #784344;
 }
 /* .pink-color {
   color: #ff629a;

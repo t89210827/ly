@@ -1,1 +1,31 @@
 /* pages/reply/reply.wxss */
+
+.mini-btn{
+    margin-right: 5px;
+}
+.travel-add-comment {
+  width: 100%;
+  height: 90rpx;
+  position: fixed;
+  bottom: 0rpx;
+  font-size: 30rpx;
+  background-color: #fd8109;
+  color: white;
+  letter-spacing: -0.34rpx;
+}
+
+.intro-content{
+height:260rpx; 
+border-radius: 8px; 
+border:#dcdcdc 1rpx solid;
+font-size: 30rpx;
+color: #B4B4B4;
+}
+
+textarea {
+height:260rpx;
+display:block;
+position:relative;
+font-size: 30rpx;
+color: #000;
+}

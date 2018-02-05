@@ -33,7 +33,7 @@
 
 <view class='bar-30'></view>
 
-<view class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
+<view bindtap='jumpOrder' class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
   <image src='/images/collect.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>我的订单</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
