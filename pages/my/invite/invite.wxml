@@ -1,0 +1,15 @@
+<!--pages/my/invite/invite.wxml-->
+<view>
+  <block wx:for="{{invite}}">
+    <view class='flex-row' style='align-items:center;margin-left:10rpx;background-color:white;height:110rpx;'>
+      <view style='width:50rpx;'>{{index+1}}</view>
+      <view style='margin-left:10rpx;width:500rpx;'>
+        <view>{{item.nick_name}}</view>
+        <view class='font-size-13'>{{item.updated_at}}</view>
+      </view>
+    </view>
+
+    <view style='height:2rpx;background-color:#e6e6e6;width:92%;margin-left:8%;'></view>
+  </block>
+
+</view>

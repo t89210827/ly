@@ -49,11 +49,13 @@
 
 <view class='bar-30'></view>
 
-<view hidden='{{userType}}' class='width-100 flex-row white-bg' style="margin:10rpx auto;align-items:center;height:80rpx;">
+<view bindtap='jumpInvite' hidden='{{userType}}' class='width-100 flex-row white-bg' style="margin:10rpx auto;align-items:center;height:80rpx;">
   <image src='/images/user_n.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>
   <view class='font-mydata' style='width:600rpx;'>我的邀请</view>
   <image src='/images/right.png' style='width:40rpx;height:40rpx;'></image>
 </view>
+
+<view hidden='{{userType}}' style='width:90%;height:2rpx;margin-left:10%;background-color:#f6f6f6;'></view>
 
 <view bindtap='jumpIntegral' class='width-100 flex-row white-bg' style='margin:10rpx auto;align-items:center;height:80rpx;'>
   <image src='/images/member.png' style='width:40rpx;height:40rpx;margin:auto 20rpx;'></image>

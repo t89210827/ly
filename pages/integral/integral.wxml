@@ -23,7 +23,7 @@
         <view class="" hidden="{{activeIndex != 1}}">
           <view style='height:10rpx;'></view>
           <block wx:for="{{IntegralHistoryLists}}">
-            <template is="IntegralHistoryLists" data="{{...item}}" />
+            <template is="IntegralHistoryLists" data="{{...item,userType}}" />
           </block>
 
         </view>

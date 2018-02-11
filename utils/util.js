@@ -124,7 +124,27 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-// http://nyfq.isart.me/api/comment/addCommentReplie
+//http://nyfq.isart.me/api/integral/updateIntegralStatusById
+
+//【旅行社端】修改兑换状态
+function updateIntegralStatusById(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/integral/updateIntegralStatusById', param, "POST", successCallback, errorCallback);
+}
+
+//【旅行社端】获取积分兑换历史
+function getIntegralHistoryListsForOrganization(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/integral/getIntegralHistoryListsForOrganization', param, "GET", successCallback, errorCallback);
+}
+
+//邀请朋友
+function addInvitation(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/addInvitation', param, "GET", successCallback, errorCallback);
+}
+
+//我的邀请
+function getMyInvitation(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/center/getMyInvitation', param, "GET", successCallback, errorCallback);
+}
 
 //添加评论回复
 function addCommentReplie(param, successCallback, errorCallback) {
@@ -346,16 +366,16 @@ function showToast(msg, img) {
   }
 }
 //展示modal
-function showModal(title, content) {
+function showModal(title, content, confirmCallBack) {
   wx.showModal({
     title: title,
     content: content,
-    showCancel: false,
+    // showCancel: false,
     confirmColor: "#ffcc00",
     success: function (res) {
       if (res.confirm) {
         console.log('用户点击确定')
-        // confirmCallBack(res)
+        confirmCallBack(res)
       } else if (res.cancel) {
         console.log('用户点击取消')
         // cancelCallBack(res)
@@ -517,5 +537,10 @@ module.exports = {
   tourOrder: tourOrder,
   getTourOrder: getTourOrder,
   deleteTourOrder: deleteTourOrder,
-  addCommentReplie: addCommentReplie
+  addCommentReplie: addCommentReplie,
+  getMyInvitation: getMyInvitation,
+  addInvitation: addInvitation,
+  getIntegralHistoryListsForOrganization: getIntegralHistoryListsForOrganization,
+  updateIntegralStatusById: updateIntegralStatusById,
+  showModal, showModal,
 }

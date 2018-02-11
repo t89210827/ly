@@ -2,31 +2,13 @@
 <import src="../templates/travelListTpl/travelListTpl.wxml" />
 <view>
   <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-    <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">全部</view>
-    <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">亚洲</view>
-    <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">欧洲</view>
-    <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">澳洲</view>
-    <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">包团</view>
+    <block wx:for="{{menus}}">
+      <view class="tab-item {{currentTab==index?'border-bottom':''}}" data-current="{{index}}" bindtap="swichNav" data-type_id='{{item.id}}'>{{item.name}}</view>
+    </block>
   </scroll-view>
   <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
-    <swiper-item wx:for="{{[0,1,2,3,4,5,6,7]}}">
+    <swiper-item wx:for="{{menus_length}}" wx:key="{{*this}}">   
       <scroll-view scroll-y="true" class="scoll-h" bindtap='jumpTravelDetails'>
-        <!-- <block wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="*this">
-           <view class="item-ans">
-            <view class="avatar">
-              <image class="img" src="http://ookzqad11.bkt.clouddn.com/avatar.png"></image>
-            </view>
-            <view class="expertInfo">
-              <view class="name">欢颜</view>
-              <view class="tag">知名情感博主</view>
-              <view class="answerHistory">134个回答，2234人听过 </view>
-            </view>
-            <navigator url="/pages/askExpert/expertDetail" class="askBtn">问TA</navigator>
-          </view> 
-        </block>  -->
-        <!-- <view class="line-text font-size-14" style='line-height:30rpx;'>
-          猜您喜欢
-        </view> -->
         <view style='height:30rpx;'></view>
         <block wx:for="{{travel}}">
           <template is="traveListTpl" data="{{...item}}"></template>
@@ -35,8 +17,3 @@
     </swiper-item>
   </swiper>
 </view>
-<!-- 
-<block wx:for="{{courseList}}">
-    <template is="{{index%2 === 0 ? 'courseLeft' : 'courseRight'}}" data="{{...item}}"></template>
-</block>
- -->

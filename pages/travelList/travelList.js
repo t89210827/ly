@@ -8,22 +8,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // inputShowed: false,
-    // inputVal: "",
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
     tour_category_id: '',//目录id
     travel: [],//全部旅游数据
-    // expertList: [{ 
-    //   img: "avatar.png",
-    //   name: "欢顔",
-    //   tag: "知名情感博主",
-    //   answer: 134,
-    //   listen: 2234
-    // }]
+    menus:'',  //分类
+    menus_length:''  //分类长度
   },
-
+  onLoad: function (options) {
+    console.log("333333333" + JSON.stringify(options))
+    vm = this
+    var tour_category_id = options.scrollLeft// 类别id
+    var currentTab = options.pointer// 指针   
+    vm.setData({
+      tour_category_id: tour_category_id,
+      currentTab: currentTab
+    })
+    //  高度自适应
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log("11111111111" + JSON.stringify(res))
+        var clientHeight = res.windowHeight,
+          clientWidth = res.windowWidth,
+          rpxR = 750 / clientWidth;
+        // var calc = clientHeight * rpxR - 180;
+        var calc = clientHeight * rpxR;
+        console.log(calc)
+        vm.setData({
+          winHeight: calc
+        });
+      }
+    });
+    vm.getTourGoodsLists()
+    vm.getIndexMenus()
+  },
+  //获取旅游类别
+  getIndexMenus: function () {
+    util.getIndexMenus({}, function (res) {
+      console.log("首页菜单" + JSON.stringify(res.data.ret))
+      vm.setData({
+        menus: res.data.ret,
+        menus_length: res.data.ret.length
+      })
+    }, null)
+  },
+  //跳转到商品详情页
   jumpTravelDetails: function (e) {
     var travelid = e.currentTarget.dataset.travelid
     console.log("jumpTravelDetails is : " + JSON.stringify(travelid))
@@ -31,33 +61,15 @@ Page({
       url: '/pages/travelDetails/travelDetails?travelid=' + travelid,
     })
   },
-
   // 滚动切换标签样式
   switchTab: function (e) {
-    console.log(e.detail.current)
-    var tour_category_id = ''//目的地id
     var currentTab = e.detail.current  //指针
-    if (currentTab == 1) {
-      tour_category_id = 2
-    } else if (currentTab == 2) {
-      tour_category_id = 3
-    } else if (currentTab == 3) {
-      tour_category_id = 4
-    } else if (currentTab == 0) {
-      tour_category_id = 0
-    } else if (currentTab == 4) {
-      tour_category_id = 5
-    }
+    var tour_category_id = vm.data.menus[currentTab].id//类别id
     vm.setData({
       tour_category_id: tour_category_id,
       currentTab: currentTab
     })
-
     vm.getTourGoodsLists()
-
-    // this.setData({
-    //   currentTab: e.detail.current
-    // });
     this.checkCor();
   },
   // 点击标题切换当前页时改变样式
@@ -82,46 +94,7 @@ Page({
       })
     }
   },
-  onLoad: function (options) {
-    vm = this
-    // console.log("8888888888" + JSON.stringify(options))
-    var tour_category_id = options.scrollLeft//目的地id
-    var currentTab = ''  //指针
-    if (tour_category_id == 2) {
-      currentTab = 1
-    } else if (tour_category_id == 3) {
-      currentTab = 2
-    } else if (tour_category_id == 4) {
-      currentTab = 3
-    } else if (tour_category_id == 5) {
-      currentTab = 4
-    }
-    vm.setData({
-      tour_category_id: tour_category_id,
-      currentTab: currentTab
-    })
-    
-    console.log("分啊方法" + vm.data.currentTab)
-
-    var that = this;
-    //  高度自适应
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log("11111111111" + JSON.stringify(res))
-        var clientHeight = res.windowHeight,
-          clientWidth = res.windowWidth,
-          rpxR = 750 / clientWidth;
-        // var calc = clientHeight * rpxR - 180;
-        var calc = clientHeight * rpxR;
-        console.log(calc)
-        that.setData({
-          winHeight: calc
-        });
-      }
-    });
-    vm.getTourGoodsLists()
-  },
-
+  //加载列表
   getTourGoodsLists: function () {
     util.showLoading("加载列表")
     var param = {
@@ -136,28 +109,5 @@ Page({
       console.log("旅游数据" + JSON.stringify(res))
     })
   },
-
   footerTap: app.footerTap,
-
-  // showInput: function () {
-  //   this.setData({
-  //     inputShowed: true
-  //   });
-  // },
-  // hideInput: function () {
-  //   this.setData({
-  //     inputVal: "",
-  //     inputShowed: false
-  //   });
-  // },
-  // clearInput: function () {
-  //   this.setData({
-  //     inputVal: ""
-  //   });
-  // },
-  // inputTyping: function (e) {
-  //   this.setData({
-  //     inputVal: e.detail.value
-  //   });
-  // },
 })

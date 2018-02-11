@@ -19,6 +19,11 @@ Page({
       delay: 100
     })
   },
+  jumpInvite:function(){
+    wx.navigateTo({
+      url: '/pages/my/invite/invite',
+    })
+  },
   //跳转到积分详情页
   jumpIntegralDetails: function () {
     wx.navigateTo({

@@ -1,18 +1,5 @@
 <import src="../templates/travelListTpl/travelListTpl.wxml" />
 
-<!-- <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE">
-  <block wx:for="{{collect}}" wx:key="*this">
-     <view bindtap='deleteCollectionLists' data-collectId='{{item.id}}'>删除</view> 
-    <view class='flex-row center-style' style='height:80rpx;'>
-      <view style='width:10%'>{{index+1}}</view>
-      <view style='width:80%'>{{item.goods_id.start_place}}</view>
-      <image src='../../images/delete.png' style='width:40rpx;height:40rpx;'></image>
-    </view>
-    <view style='height:1rpx;width:94%;margin:0 3%;background-color:#f4f4f4;'></view>
-    <template is="collectTpl" data="{{...item}}"></template>
-  </block>
-</view> -->
-
 <view class="item-box">
   <view class="items">
     <view wx:for="{{collect}}" wx:key="{{index}}" class="item">

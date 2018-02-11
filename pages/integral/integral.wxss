@@ -22,3 +22,13 @@ page {
 .background-color {
   background-color: #f49935;
 }
+
+.travel-title{
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.travel-price{
+  font-size: 40rpx;
+  color: red;
+}

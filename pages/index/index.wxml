@@ -39,7 +39,7 @@
   <scroll-view class="recommend_scroll_x_box" scroll-x="true" style="">
     <view style='margin-left:30rpx;'>
       <view class="recommend_hot_box" wx:for="{{menus}}" wx:key="*this">
-        <view style='position:relative;' bindtap='jumpTravelList' data-scrollLeft='{{item.id}}'>
+        <view style='position:relative;' bindtap='jumpTravelList' data-scrollLeft='{{item.id}}' data-pointer='{{index}}'>
           <image src="{{item.image}}" class="recommend_hot_image"></image>
           <text class='recommend_absolute'>{{item.name}}</text>
         </view>
@@ -80,7 +80,7 @@
   <view class='flex-row' style='height:300rpx;float:left;width:100%;'>
     <block wx:for="{{SpecialGoods}}" wx:key="*this">
       <view style='width:33%;text-align:center' bindtap='jumpTravelDetails' data-travelId='{{item.id}}'>
-        <image src=' {{item.goods_id.image}}' style='width:200rpx;height:200rpx; '></image>
+        <image src='{{item.goods_id.image}}' class='box-shadow' style='width:150rpx;height:200rpx; '></image>
         <view class='text-twoline ' style='font-size:25rpx;width:210rpx;margin-left:25rpx; '>{{item.goods_id.name}}</view>
       </view>
     </block>

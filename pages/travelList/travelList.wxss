@@ -109,3 +109,10 @@
 .scoll-h {
   height: 100%;
 }
+
+
+
+.tab-item.border-bottom{
+  border-bottom:8rpx solid #df9e2d;
+  color: #df9e2d;
+}

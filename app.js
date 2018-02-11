@@ -44,6 +44,7 @@ App({
 
   },
   login: function (callBack) {
+    console.log("登陆接口")
     wx.login({
       success: function (res) {
         console.log("wx.login:" + JSON.stringify(res))
@@ -62,7 +63,7 @@ App({
               if (ret.data.code == "200") {
                 vm.storeUserInfo(ret.data.ret)
                 if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
-                  vm.updateUserInfo(function (ret) {})
+                  vm.updateUserInfo(function (ret) { })
                 }
               }
             }, null);
@@ -129,7 +130,6 @@ App({
       })
     }
   },
-  
   //引导用户授权
   showModal: function () {
     wx.showModal({

@@ -118,6 +118,7 @@ Page({
     }
     util.updateUserInfo(param, function (res) {
       console.log("更新用户信息：" + JSON.stringify(res))
+      getApp().login()
       // wx.setStorage({
       //   key: "userInfo",
       //   data: res.data.ret

@@ -21,32 +21,15 @@ Page({
   onLoad: function (options) {
     vm = this
     vm.getBarTitle()
-    wx.canvasToTempFilePath({
-      x: 100,
-      y: 200,
-      width: 50,
-      height: 50,
-      destWidth: 100,
-      destHeight: 100,
-      canvasId: 'myCanvas',
-      success: function (res) {
-        console.log("canvasToTempFilePath" + res.tempFilePath)
-      }
-    })
     util.showLoading("加载首页")
     // console.log("88888888888888" + 100.00.toFixed(0))
     console.log("分享携带的参数" + JSON.stringify(options))
     if (!util.judgeIsAnyNullStr(options.user_id)) {
-      wx.showModal({
-        title: '分享人',
-        content: '分享人' + options.user_id,
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
+      var param = {
+        share_user : options.user_id
+      }
+      util.addInvitation(param,function(res){
+        console.log("分享返回" + JSON.stringify(res))
       })
     }
     vm.getAds()//获取banner
@@ -136,8 +119,9 @@ Page({
   jumpTravelList: function (e) {
     // console.log(JSON.stringify(e))
     var scrollLeft = e.currentTarget.dataset.scrollleft
+    var pointer = e.currentTarget.dataset.pointer    
     wx.navigateTo({
-      url: '/pages/travelList/travelList?scrollLeft=' + scrollLeft,
+      url: '/pages/travelList/travelList?scrollLeft=' + scrollLeft + "&pointer=" + pointer,
     })
   },
   //weui搜索JS
