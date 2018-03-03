@@ -1,0 +1,9 @@
+/* pages/travelCustomization/car/car.wxss */
+.zan-btn--small {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-bottom: 0;
+}

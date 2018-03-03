@@ -7,7 +7,7 @@
     </block>
   </scroll-view>
   <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
-    <swiper-item wx:for="{{menus_length}}" wx:key="{{*this}}">   
+    <swiper-item wx:for="{{menus_length}}" wx:key="{{*this}}">
       <scroll-view scroll-y="true" class="scoll-h" bindtap='jumpTravelDetails'>
         <view style='height:30rpx;'></view>
         <block wx:for="{{travel}}">

@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/travelCustomization/index/index",
+    "pages/travelCustomization/car/car",
+    "pages/travelCustomization/hotel/hotel",
+    "pages/travelCustomization/airplaneTicket/airplaneTicket",
     "pages/my/invite/invite",
     "pages/integral/integral",
     "pages/collect/collect",
@@ -23,7 +27,9 @@
     "pages/writeComment/writeComment",
     "pages/search/search",
     "pages/reply/reply",
-    "pages/integralDetails/integralDetails"
+    "pages/integralDetails/integralDetails",
+    "pages/travelCustomization/package/package",
+    "pages/travelCustomization/customizationDetail/customizationDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

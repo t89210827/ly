@@ -1,0 +1,125 @@
+<!--pages/travelCustomization/index/index.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view hidden="{{activeIndex != 0}}">
+
+
+          <checkbox-group bindchange="checkboxChange">
+            <block wx:for="{{items}}">
+              <view style='margin:30rpx 20rpx;'>
+
+                <view class='flex-row' style='align-items:center;padding-left:10rpx;background-color:white;height:110rpx;'>
+                  <view style='width:50rpx;'>
+                    <checkbox value="{{index}}" style='width:30rpx;height:30rpx;' checked="{{item.checked}}" />
+                  </view>
+                  <navigator url='{{item.src}}' class='flex-row' style='align-items:center;'>
+                    <view style='margin-left:10rpx;width:400rpx;'>
+                      <view>{{item.name}}</view>
+                      <block wx:if='{{index == 0}}'>
+                        <view wx:if='{{airplane.price}}' class='font-size-13'>南航CA1216 空客319</view>
+                        <view wx:else class='font-size-13'>点击选择机票</view>
+                      </block>
+                      <block wx:if='{{index == 1}}'>
+                        <view wx:if='{{hotel.price}}' class='font-size-13'>南航CA1216 空客319</view>
+                        <view wx:else class='font-size-13'>点击选择酒店</view>
+                      </block>
+                      <block wx:if='{{index == 2}}'>
+                        <view wx:if='{{car.price}}' class='font-size-13'>南航CA1216 空客319</view>
+                        <view wx:else class='font-size-13'>点击选择车导</view>
+                      </block>
+                    </view>
+                    <view wx:if="{{index == 0}}" style='width:160rpx;'>{{airplane.price}}</view>
+                    <view wx:if="{{index == 1}}" style='width:160rpx;'>{{hotel.price}}</view>
+                    <view wx:if="{{index == 2}}" style='width:160rpx;'>{{car.price}}</view>
+                    <image src='../../../images/right.png' style='width:40rpx; height:40rpx;'></image>
+                  </navigator>
+                </view>
+
+                <view style='height:2rpx;background-color:#e6e6e6;width:92%;margin-left:8%;'></view>
+
+              </view>
+
+            </block>
+          </checkbox-group>
+
+          <!-- <view style='margin:30rpx 20rpx;'>
+                <view class='flex-row' style='align-items:center;padding-left:10rpx;background-color:white;height:110rpx;'>
+                  <view style='width:50rpx;'>
+                    <checkbox value="1" style='width:30rpx;height:30rpx;' checked="{{items[1].checked}}" />
+                  </view>
+                  <navigator url='../hotel/hotel' class='flex-row' style='align-items:center;'>
+                    <view style='margin-left:10rpx;width:560rpx;'>
+                      <view>酒店</view>
+                      <view class='font-size-13'>如家酒店</view>
+                    </view>
+                    <view>{{hotelPrice}}</view>
+                    <image src='../../../images/right.png' style='width:40rpx; height:40rpx;'></image>
+                  </navigator>
+                </view>
+              </view>
+
+              <view style='margin:30rpx 20rpx;'>
+                <view class='flex-row' style='align-items:center;padding-left:10rpx;background-color:white;height:110rpx;'>
+                  <view style='width:50rpx;'>
+                    <checkbox value="2" style='width:30rpx;height:30rpx;' checked="{{items[2].checked}}" />
+                  </view>
+                  <navigator url='../car/car' class='flex-row' style='align-items:center;'>
+                    <view style='margin-left:10rpx;width:560rpx;'>
+                      <view>车导</view>
+                      <view class='font-size-13'>丰田威驰(5座）</view>
+                    </view>
+                    <view>{{carPrice}}</view>
+                    <image src='../../../images/right.png' style='width:40rpx; height:40rpx;'></image>
+                  </navigator>
+                </view>
+              </view> -->
+
+        </view>
+        <view hidden="{{activeIndex != 1}}">
+
+          <checkbox-group bindchange="checkboxChange">
+            <block wx:for="{{customization}}">
+              <view style='margin:30rpx 20rpx;'>
+
+                <view class='flex-row' style='align-items:center;padding-left:10rpx;background-color:white;height:110rpx;'>
+                  <view style='width:50rpx;'>
+                    <checkbox value="{{index}}" style='width:30rpx;height:30rpx;' checked="{{item.checked}}" />
+                  </view>
+                  <navigator url='../customizationDetail/customizationDetail?id={{item.id}}' class='flex-row' style='align-items:center;'>
+                    <view style='margin-left:10rpx;width:400rpx;'>
+                      <view>{{item.name}}</view>
+                      <view class='font-size-13'>{{item.desc}}</view>
+                    </view>
+                    <view style='width:160rpx;'>{{airplane.price}}</view>
+                    <image src='../../../images/right.png' style='width:40rpx; height:40rpx;'></image>
+                  </navigator>
+                </view>
+
+                <view style='height:2rpx;background-color:#e6e6e6;width:92%;margin-left:8%;'></view>
+
+              </view>
+
+            </block>
+          </checkbox-group>
+
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部绝对定位 -->
+<view class='travel-add' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;border-top:1rpx solid #A9A9B1;'>
+  <view style='width:70%;'>合计：￥{{price}}</view>
+  <view style='width:30%;background-color:#fd8109;color:white' bindtap='order'>下单</view>
+</view>

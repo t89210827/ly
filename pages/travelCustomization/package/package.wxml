@@ -1,0 +1,35 @@
+<!--pages/travelCustomization/package/package.wxml-->
+<block wx:for="0,1,2">
+  <view class="container">
+
+    <view class="zan-panel">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg" mode="aspectFit"></image>
+        </view>
+        <view class="zan-card__detail">
+          <view class="zan-card__detail-row">
+            <view class="zan-card__right-col">¥ 196</view>
+            <view class="zan-card__left-col zan-ellipsis--l2">
+              虎牙长城+大帅府+沈阳故宫一日游
+            </view>
+          </view>
+
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__right-col">
+              <button class="zan-btn zan-btn--small zan-btn--primary">下单</button>
+            </view>
+            <view class="zan-card__left-col">
+              感受首都文化
+            </view>
+          </view>
+
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-c-red">北京风貌</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</block>

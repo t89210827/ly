@@ -1,3 +1,6 @@
 {
+  "usingComponents": {
+    "wxc-cc": "../../minui/@minui/wxc-cc/dist/index"
+  },
   "disableScroll": true
 }

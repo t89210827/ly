@@ -26,9 +26,9 @@ Page({
     console.log("分享携带的参数" + JSON.stringify(options))
     if (!util.judgeIsAnyNullStr(options.user_id)) {
       var param = {
-        share_user : options.user_id
+        share_user: options.user_id
       }
-      util.addInvitation(param,function(res){
+      util.addInvitation(param, function (res) {
         console.log("分享返回" + JSON.stringify(res))
       })
     }
@@ -37,6 +37,13 @@ Page({
     vm.getNewGoods()//获取首页最新产品
     vm.getSpecialGoods()//获取首页特价产品    
   },
+  // previewImage: function () {
+  //   var test = ["http://dsyy.isart.me/tmp_c5f67d16e428c45d5a2e65d301ab6079c27f4d382cafb31f.jpg", "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqWO4s5eicl96Lby8Nl4cNe5icj9qSql1ewzXia4P1viaeLscTp1AplSv8yMWhEcxBC6iaKHNiaftDrdYNw/0"]
+  //   wx.previewImage({
+  //     current: test[0], // 当前显示图片的http链接
+  //     urls: test // 需要预览的图片http链接列表
+  //   })
+  // },
   //跳转商品详情页
   jumpTravelDetails: function (e) {
     console.log("旅游详情" + JSON.stringify(e))
@@ -119,10 +126,21 @@ Page({
   jumpTravelList: function (e) {
     // console.log(JSON.stringify(e))
     var scrollLeft = e.currentTarget.dataset.scrollleft
-    var pointer = e.currentTarget.dataset.pointer    
-    wx.navigateTo({
-      url: '/pages/travelList/travelList?scrollLeft=' + scrollLeft + "&pointer=" + pointer,
-    })
+    var pointer = e.currentTarget.dataset.pointer
+    if (pointer == 0) {
+      wx.showToast({
+        title: '模块正在开发中 敬请期待',
+        icon: 'none',
+        duration: 2000
+      })
+      // wx.navigateTo({
+      //   url: '/pages/travelCustomization/index/index',
+      // })
+    } else {
+      wx.navigateTo({
+        url: '/pages/travelList/travelList?scrollLeft=' + scrollLeft + "&pointer=" + pointer,
+      })
+    }
   },
   //weui搜索JS
   showInput: function () {
@@ -166,7 +184,7 @@ Page({
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
     return {
-      title: '来自Acker的分享',
+      title: '分享',
       path: '/pages/index/index?user_id=' + user_id
     }
   }

@@ -23,7 +23,7 @@
               </block>
             </swiper>
 
-            <view class='flex-row' style='position: absolute;bottom:0rpx;left:0rpx;width:750rpx;height:70rpx;background-color:rgba(0,0,0,0.3);padding-left:20rpx;'>
+            <view class='flex-row' style='position: absolute;bottom:0rpx;left:0rpx;width:730rpx;height:70rpx;background-color:rgba(0,0,0,0.3);padding-left:20rpx;'>
               <view style='width:450rpx;'>
                 <view class='text-oneline font-size-14' style='color:white;line-height:70rpx;'>{{dateils.title}}</view>
               </view>

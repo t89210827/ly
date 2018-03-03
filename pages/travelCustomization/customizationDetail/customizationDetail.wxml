@@ -1,0 +1,34 @@
+<!--pages/travelCustomization/customizationDetail/customizationDetail.wxml-->
+<view class="container">
+
+  <view class="zan-panel">
+    <view class="zan-card">
+      <view class="zan-card__thumb">
+        <image class="zan-card__img" src="{{item.image}}" mode="aspectFit"></image>
+      </view>
+      <view class="zan-card__detail">
+        <view class="zan-card__detail-row">
+          <view class="zan-card__right-col">¥ 196</view>
+          <view class="zan-card__left-col zan-ellipsis--l2">
+            {{item.name}}
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__right-col">
+            <button class="zan-btn zan-btn--small zan-btn--primary" bindtap='clickAirplane' data-car='{{item}}'>下单</button>
+          </view>
+          <view class="zan-card__left-col">
+            <!-- 据辽宁省沈阳市东陵区天坛474米 -->
+            {{item.address}}
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__left-col zan-c-red">本地牌照</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

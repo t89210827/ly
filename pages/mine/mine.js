@@ -19,7 +19,7 @@ Page({
       delay: 100
     })
   },
-  jumpInvite:function(){
+  jumpInvite: function () {
     wx.navigateTo({
       url: '/pages/my/invite/invite',
     })
@@ -101,6 +101,14 @@ Page({
     console.log("mine js userInfo : " + JSON.stringify(userInfo))
     vm.setData({
       userInfo: userInfo
+    })
+  },
+
+  aboutUs: function () {
+    wx.showModal({
+      title: '关于我们',
+      content: '本系统由ISART艺术互联网公司设计制作，祝大家使用愉快！',
+      showCancel: false
     })
   },
 

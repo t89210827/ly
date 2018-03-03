@@ -1,0 +1,20 @@
+<!--pages/travelCustomization/airplaneTicket/airplaneTicket.wxml-->
+<block wx:for="{{airplant}}">
+  <view class='flex-row white-bg' style='margin:10rpx 10rpx;height:200rpx;'>
+    <view style='width:25%;margin-top:40rpx;margin-left:50rpx;'>
+      <view>21:30</view>
+      <view>{{item.start_place}}</view>
+    </view>
+    <view class='center-style' style='width:10%;'>
+      <image src='../../../images/pen.png' style='width:40rpx;height:80rpx;'></image>
+    </view>
+    <view style='width:25%;margin-top:40rpx;margin-left:40rpx;'>
+      <view>23:45</view>
+      <view>虹桥机场</view>
+    </view>
+    <view style='width:25%;margin-top:40rpx;margin-left:40rpx;'>
+      <view>￥346</view>
+      <button class="zan-btn zan-btn--small zan-btn--primary" bindtap='clickAirplane' data-airplane='{{item}}' data-airplanePrice='{{item.price}}'>下单</button>
+    </view>
+  </view>
+</block>

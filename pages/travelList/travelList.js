@@ -4,23 +4,20 @@ var app = getApp();
 var vm = null
 var offset = 0
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
     tour_category_id: '',//目录id
     travel: [],//全部旅游数据
-    menus:'',  //分类
-    menus_length:''  //分类长度
+    menus: '',  //分类
+    menus_length: ''  //分类长度
   },
   onLoad: function (options) {
     console.log("333333333" + JSON.stringify(options))
     vm = this
     var tour_category_id = options.scrollLeft// 类别id
-    var currentTab = options.pointer// 指针   
+    var currentTab = options.pointer-1// 指针   
     vm.setData({
       tour_category_id: tour_category_id,
       currentTab: currentTab
@@ -46,10 +43,12 @@ Page({
   //获取旅游类别
   getIndexMenus: function () {
     util.getIndexMenus({}, function (res) {
-      console.log("首页菜单" + JSON.stringify(res.data.ret))
+      var menus = res.data.ret   
+      menus.shift()
+      console.log("首页菜单" + JSON.stringify(menus))
       vm.setData({
-        menus: res.data.ret,
-        menus_length: res.data.ret.length
+        menus: menus,
+        menus_length: menus.length
       })
     }, null)
   },

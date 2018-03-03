@@ -12,25 +12,25 @@ var initdata = function (vm) {
 
 Page({
   data: {
-    tabs: ["全部", "待出行", "待点评"],
-    activeIndex: 0,
-    sliderOffset: 0,
-    sliderLeft: 0,
-    ordersList: [], //订单列表
-    startX: '',
-    delBtnWidth: 180,//删除按钮宽度单位（rpx）  
+    // tabs: ["全部", "待出行", "待点评"],
+    // activeIndex: 0,
+    // sliderOffset: 0,
+    // sliderLeft: 0,
+    ordersList: [],   //订单列表
+    startX: '',       //触摸起始点水平方向位置  
+    delBtnWidth: 180, //删除按钮宽度单位（rpx）  
   },
   onLoad: function () {
     vm = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        vm.setData({
-          sliderLeft: (res.windowWidth / vm.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / vm.data.tabs.length * vm.data.activeIndex
-        });
-      }
-    });
-    vm.getTourOrder()
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     vm.setData({
+    //       sliderLeft: (res.windowWidth / vm.data.tabs.length - sliderWidth) / 2,
+    //       sliderOffset: res.windowWidth / vm.data.tabs.length * vm.data.activeIndex
+    //     });
+    //   }
+    // });
+    vm.getTourOrder()   //获取全部订单
   },
   //获取全部订单
   getTourOrder: function () {
@@ -80,7 +80,6 @@ Page({
       });
     }
   },
-
   touchE: function (e) {
     if (e.changedTouches.length == 1) {
       //手指移动结束后水平位置  
@@ -157,11 +156,11 @@ Page({
 
   },
 
-//顶部导航
-  tabClick: function (e) {
-    this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
-    });
-  }
+  //顶部导航
+  // tabClick: function (e) {
+  //   this.setData({
+  //     sliderOffset: e.currentTarget.offsetLeft,
+  //     activeIndex: e.currentTarget.id
+  //   });
+  // }
 });

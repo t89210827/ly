@@ -44,6 +44,7 @@
           <text class='recommend_absolute'>{{item.name}}</text>
         </view>
       </view>
+
     </view>
   </scroll-view>
   <!-- </view> -->
@@ -51,7 +52,7 @@
   <!-- <view class='bar-10'></view> -->
   <view style='width:100%;background-color:#f4f4f4;height:30rpx;'></view>
 
-  <view class="line-text font-size-14" style='line-height:30rpx;'>
+  <view class="line-text font-size-14" style='line-height:30rpx;' bindtap='previewImage'>
     最新产品
   </view>
 

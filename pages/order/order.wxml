@@ -1,7 +1,7 @@
 <!--pages/order/order.wxml-->
 <import src="../templates/orderTpl/orderTpl.wxml" />
 <import src="../templates/travelListTpl/travelListTpl.wxml" />
-<view>
+<!-- <view>
   <view class="weui-tab">
     <view class="weui-navbar">
       <block wx:for="{{tabs}}" wx:key="*this">
@@ -12,30 +12,22 @@
       <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
     </view>
     <view class="weui-tab__panel">
-      <view class="" hidden="{{activeIndex != 0}}">
+      <view class="" hidden="{{activeIndex != 0}}"> -->
 
-        <view class="item-box">
-          <view class="items">
-            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
-              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
-                <template is="collectTpl" data="{{...item}}"></template>
-              </view>
-              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner del">删除</view>
-            </view>
-          </view>
-        </view>
-        <!-- <block wx:for="{{[1, 2]}}">
-
-          <template is="orderTpl" data=""></template>
-        </block>  -->
-
-        <!-- <block wx:for="{{[1, 2]}}">
-          <template is="planeTpl" data=""></template>
-        </block> -->
-
+<view class="item-box">
+  <view class="items">
+    <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+        <template is="collectTpl" data="{{...item}}"></template>
       </view>
+      <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner del">删除</view>
+    </view>
+  </view>
+</view>
+
+<!-- </view>
       <view class="weui-tab__content" hidden="{{activeIndex != 1}}">待出行</view>
       <view class="weui-tab__content" hidden="{{activeIndex != 2}}">待点评</view>
     </view>
   </view>
-</view>
+</view> -->

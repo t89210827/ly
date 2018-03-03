@@ -1,1 +1,23 @@
 /* pages/buyTickets/buyTickets.wxss */
+
+.demo {
+  display: block;
+  width: 100%;
+  height: 300rpx;
+  /* background: #f2f2f2; */
+}
+
+.demo__pic {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 15rpx;
+}
+
+.demo__text {
+  text-align: center;
+}
+
+.zan-btn--primary {
+  color: #fff;
+  background-color: #ff5777;
+}

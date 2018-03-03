@@ -1,0 +1,19 @@
+/* pages/travelCustomization/airplaneTicket/airplaneTicket.wxss */
+
+page {
+  background-color: #efefef;
+}
+
+.zan-btn--small {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-bottom: 0;
+}
+
+.zan-btn--primary {
+  color: #fff;
+  background-color: #4b0;
+}

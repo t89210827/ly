@@ -6,12 +6,6 @@ page {
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
 
-/* 顶部导航 */
-
-/* .page__bd{
-    height: 100%;
-} */
-
 .page__bd {
   padding-bottom: 0;
 }

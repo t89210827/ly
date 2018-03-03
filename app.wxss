@@ -1,6 +1,7 @@
 /**app.wxss**/
 @import './style/weui.wxss';  
 @import './pages/templates/travelListTpl/travelListTpl.wxss';
+@import '/bower_components/zanui-weapp/dist/index.wxss';
 /* .container {
   height: 100%;
   display: flex;

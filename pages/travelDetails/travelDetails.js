@@ -96,14 +96,15 @@ Page({
             start_time: vm.data.paramDate,
             price: vm.data.dateils.price
           }
-          util.tourOrder(param, function (res) {
+          util.order(param, function (res) {
+            console.log("旅游商品下单 ： " + JSON.stringify(res))
             if (res.data.ret.surplus) {
               wx.showToast({
                 title: '预订成功',
                 icon: 'success',
                 duration: 2000
               })
-            }else if(!res.data.ret.surplus){
+            } else if (!res.data.ret.surplus) {
               wx.showToast({
                 title: '剩余位置不足',
                 icon: 'none',
@@ -291,15 +292,21 @@ Page({
 
   onShareAppMessage: function (res) {
     console.log("111111111")
+    var user_id = getApp().globalData.userInfo.id
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
-      title: '自定义分享',
-      path: '/page/user?id=123',
+      title: '分享小程序会获得积分呦',
+      path: '/pages/index/index?user_id=' + user_id,
       success: function (res) {
         // 转发成功
+        wx.showToast({
+          title: '分享成功',
+          icon: 'none',
+          duration: 2000
+        })
       },
       fail: function (res) {
         // 转发失败

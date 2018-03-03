@@ -1,5 +1,4 @@
 var TESTMODE = false;
-
 //服务器地址
 var SERVER_URL = "https://nyfq.isart.me/api";
 var DEBUG_URL = "http://localhost:5555/api";
@@ -124,7 +123,32 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-//http://nyfq.isart.me/api/integral/updateIntegralStatusById
+//http://nyfq.isart.me/api/Customization/getByIdCustomization
+
+//根据id获取成型套餐
+function getByIdCustomization(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/Customization/getByIdCustomization', param, "GET", successCallback, errorCallback);
+}
+
+//获取成型套餐列表
+function getCustomization(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/Customization/getCustomization', param, "GET", successCallback, errorCallback);
+}
+
+//获取机票列表
+function getTicket(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/airplane/getTicket', param, "GET", successCallback, errorCallback);
+}
+
+//获取酒店列表
+function getHotel(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/hotel/getHotel', param, "GET", successCallback, errorCallback);
+}
+
+//获取车导列表
+function getCar(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/car/getCar', param, "GET", successCallback, errorCallback);
+}
 
 //【旅行社端】修改兑换状态
 function updateIntegralStatusById(param, successCallback, errorCallback) {
@@ -156,9 +180,9 @@ function deleteTourOrder(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/order/deleteTourOrder', param, "GET", successCallback, errorCallback);
 }
 
-//旅游产品下单接口
-function tourOrder(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/order/tourOrder', param, "POST", successCallback, errorCallback);
+//所有产品下单接口
+function order(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/order/order', param, "POST", successCallback, errorCallback);
 }
 
 //查询所有订单
@@ -534,7 +558,7 @@ module.exports = {
   addIntegralHistory: addIntegralHistory,
   getIntegralHistoryListsForUser: getIntegralHistoryListsForUser,
   getIntegralDetaileLists: getIntegralDetaileLists,
-  tourOrder: tourOrder,
+  order: order,
   getTourOrder: getTourOrder,
   deleteTourOrder: deleteTourOrder,
   addCommentReplie: addCommentReplie,
@@ -542,5 +566,10 @@ module.exports = {
   addInvitation: addInvitation,
   getIntegralHistoryListsForOrganization: getIntegralHistoryListsForOrganization,
   updateIntegralStatusById: updateIntegralStatusById,
-  showModal, showModal,
+  showModal: showModal,
+  getTicket: getTicket,
+  getHotel: getHotel,
+  getCar: getCar,
+  getCustomization: getCustomization,
+  getByIdCustomization: getByIdCustomization
 }
