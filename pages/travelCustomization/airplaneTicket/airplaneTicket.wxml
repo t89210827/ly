@@ -1,20 +1,36 @@
 <!--pages/travelCustomization/airplaneTicket/airplaneTicket.wxml-->
+<view style='height:50rpx;'></view>
 <block wx:for="{{airplant}}">
-  <view class='flex-row white-bg' style='margin:10rpx 10rpx;height:200rpx;'>
-    <view style='width:25%;margin-top:40rpx;margin-left:50rpx;'>
-      <view>21:30</view>
-      <view>{{item.start_place}}</view>
-    </view>
-    <view class='center-style' style='width:10%;'>
-      <image src='../../../images/pen.png' style='width:40rpx;height:80rpx;'></image>
-    </view>
-    <view style='width:25%;margin-top:40rpx;margin-left:40rpx;'>
-      <view>23:45</view>
-      <view>虹桥机场</view>
-    </view>
-    <view style='width:25%;margin-top:40rpx;margin-left:40rpx;'>
-      <view>￥346</view>
-      <button class="zan-btn zan-btn--small zan-btn--primary" bindtap='clickAirplane' data-airplane='{{item}}' data-airplanePrice='{{item.price}}'>下单</button>
+  <view style='height:20rpx;'></view>
+  <view class='lump' bindtap='clickAirplane' data-airplane='{{item}}'>
+    <view class='zan-font-16'>机票</view>
+    <view class='zan-row' style='margin-top:20rpx;'>
+      <view class='zan-col zan-col-8'>
+        <image src='http://p3zrwgxiu.bkt.clouddn.com/airplane.jpg' class='travel_image'></image>
+      </view>
+      <view class='zan-col zan-col-16'>
+        <view class='zan-font-14'>{{item.company}}</view>
+        <view class='zan-row'>
+          <view class='zan-col zan-col-8'>
+            <view class='zan-font-16'>{{item.start_time}}</view>
+            <view class='zan-font-12' style='color:#999999'>{{item.start_place}}</view>
+          </view>
+          <view class='zan-col zan-col-6'>
+            <image src='../../../images/goto.png' style='width:50rpx;height:50rpx;'></image>
+          </view>
+          <view class='zan-col zan-col-6'>
+            <view class='zan-font-16'>{{item.end_time}}</view>
+            <view class='zan-font-12' style='color:#999999'>{{item.end_place}}</view>
+          </view>
+        </view>
+        <!-- <view class='zan-font-18' style='color:#f91111;'>￥18888/天</view> -->
+        <view class='zan-font-12' style='line-height:33rpx;color:#f91111;margin-top:10rpx;'>￥{{item.price}}</view>
+      </view>
     </view>
   </view>
 </block>
+
+<!-- 底部绝对定位 -->
+<view class='travel-plane' bindtap='addComment' style='text-align:center;line-height:50rpx;border-bottom:1rpx solid #A9A9B1;'>
+  <view style='width:100%;letter-spacing:1rpx;'>点击选择机票</view>
+</view>

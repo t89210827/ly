@@ -17,3 +17,30 @@ page {
   color: #fff;
   background-color: #4b0;
 }
+
+
+.lump {
+  background-color: white;
+  width: 100%;
+  height: 250rpx;
+  padding: 20rpx 30rpx;
+}
+
+.travel_image {
+  width: 230rpx;
+  height: 180rpx;
+}
+
+/* 底部绝对定位 */
+
+.travel-plane {
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  position: fixed;
+  top: 0;
+  font-size: 28rpx;
+  color: #646464;
+  background-color: white;
+  letter-spacing: -0.34rpx;
+}

@@ -4,7 +4,28 @@
 
   <view class='margin-5 flex-row' catchtap='jumpTravelDetails' data-travelId='{{id}}'>
     <view style='width:200rpx;'>
-        <image class='box-shadow' src='{{image}}' style='width:150rpx;height:200rpx;margin-left:35rpx;'></image>
+      <image class='box-shadow' src='{{image}}' style='width:150rpx;height:200rpx;margin-left:35rpx;'></image>
+    </view>
+    <view class='margin-left-20' style='width:500rpx;'>
+      <view class='travel-title margin-top-10 text-oneline'>{{title}}</view>
+      <view class='margin-top-20'>
+        <text class='travel-price'>￥{{price}}</text> 起</view>
+      <view class='flex-row margin-top-20'>
+        <!-- <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{categorie.type}}</text>  -->
+        <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{categorie.name}}</text>
+        <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
+      </view>
+    </view>
+  </view>
+
+  <view style='height:40rpx;'></view>
+</template>
+<!--该模板用于订单列表页旅游产品展示-->
+<template name="traveOrderListTpl">
+
+  <view class='margin-5 flex-row' catchtap='jumpTravelDetails' data-travelId='{{id}}'>
+    <view style='width:200rpx;'>
+      <image class='box-shadow' src='{{image}}' style='width:150rpx;height:200rpx;margin-left:35rpx;'></image>
     </view>
     <view class='margin-left-20' style='width:500rpx;'>
       <view class='travel-title margin-top-10 text-oneline'>{{title}}</view>
@@ -12,7 +33,7 @@
         <text class='travel-price'>￥{{price}}</text> 起</view>
       <view class='flex-row margin-top-20'>
         <!-- <text style='font-size:24rpx;line-height:38rpx;'>1318条点评</text> -->
-        <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{categorie.type}}</text>
+        <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{name}}</text>
         <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
       </view>
     </view>
@@ -50,10 +71,33 @@
       <view class='margin-top-20'>
         <text class='travel-price'>￥{{goods_id.price}}</text> 起</view>
       <view class='flex-row margin-top-20'>
-          <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>剩余 {{goods_id.total}} 位</text>
-     <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
+        <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>剩余 {{goods_id.total}} 位</text>
+        <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
       </view>
     </view>
   </view>
   <view class='bar-10'></view>
+</template>
+
+
+<!--该模板用于旅游定制列表页展示-->
+<template name="traveCustomizationListTpl">
+
+  <view class='margin-5 flex-row' catchtap='jumpTravelDetails' data-travelId='{{id}}'>
+    <view style='width:200rpx;'>
+      <image class='box-shadow' src='{{image}}' style='width:150rpx;height:200rpx;margin-left:35rpx;'></image>
+    </view>
+    <view class='margin-left-20' style='width:500rpx;'>
+      <view class='travel-title margin-top-10 text-oneline'>{{title}}</view>
+      <view class='margin-top-20'>
+        <text class='travel-price'>￥{{price}}</text> 起</view>
+      <view class='flex-row margin-top-20'>
+        <!-- <text style='font-size:24rpx;line-height:38rpx;'>1318条点评</text> -->
+        <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{categorie.type}}</text>
+        <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
+      </view>
+    </view>
+  </view>
+
+  <view style='height:40rpx;'></view>
 </template>

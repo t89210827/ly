@@ -25,6 +25,9 @@ function qiniuUrlTool(img_url, type) {
   }
   var qn_img_url;
   switch (type) {
+    case "travel_title":      //广告图片
+      qn_img_url = img_url + "?imageView2/2/w/300/h/400/interlace/1";
+      break;
     case "top_ad":      //广告图片
       qn_img_url = img_url + "?imageView2/2/w/640/h/330/interlace/1";
       break;
@@ -123,7 +126,17 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-//http://nyfq.isart.me/api/Customization/getByIdCustomization
+//http://localhost/nyfq/public/api/order/getOrders
+
+//根据user_id和goods_type获取订单信息
+function getOrders(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/order/getOrders', param, "GET", successCallback, errorCallback);
+}
+
+//获取抢票接口
+function getTicketGoods(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ticket/getTicketGoods', param, "GET", successCallback, errorCallback);
+}
 
 //根据id获取成型套餐
 function getByIdCustomization(param, successCallback, errorCallback) {
@@ -315,6 +328,12 @@ function getGoods(param, successCallback, errorCallback) {
   wxRequest('https://zygw.isart.me/api/goods/getGoods', param, "GET", successCallback, errorCallback);
 }
 
+//根据type获取旅游产品
+function getTourGoods(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/tour/getTourGoods', param, "GET", successCallback, errorCallback);
+}
+
+// http://localhost/nyfq/public/api/tour/getTourGoods
 
 //返回
 function navigateBack(delta) {
@@ -571,5 +590,10 @@ module.exports = {
   getHotel: getHotel,
   getCar: getCar,
   getCustomization: getCustomization,
-  getByIdCustomization: getByIdCustomization
+  getByIdCustomization: getByIdCustomization,
+  qiniuUrlTool: qiniuUrlTool,
+  getTourGoods: getTourGoods,
+  getTicketGoods: getTicketGoods,
+  getOrders: getOrders,
+  imageUtil: imageUtil,
 }

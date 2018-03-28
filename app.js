@@ -1,4 +1,3 @@
-//app.js
 //                            _ooOoo_  
 //                           o8888888o  
 //                           88" . "88  
@@ -33,6 +32,7 @@ App({
       //调用登录接口
       vm.login(null);
     } else {
+      vm.login(null);
       vm.globalData.userInfo = wx.getStorageSync("userInfo");
       console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
     }
@@ -70,6 +70,15 @@ App({
       }
     })
   },
+  //存数据到缓存
+  storeUserInfo: function (obj) {
+    console.log("storeUserInfo :" + JSON.stringify(obj));
+    wx.setStorage({
+      key: "userInfo",
+      data: obj
+    });
+    vm.globalData.userInfo = obj;
+  },
   //更新用户信息
   updateUserInfo: function (callBack) {
     //获取用户基本信息
@@ -103,15 +112,6 @@ App({
     })
   },
 
-  storeUserInfo: function (obj) {
-    console.log("storeUserInfo :" + JSON.stringify(obj));
-    wx.setStorage({
-      key: "userInfo",
-      data: obj
-    });
-    vm.globalData.userInfo = obj;
-  },
-
   getUserInfo: function (cb) {
     typeof cb == "function" && cb(vm.globalData.userInfo)
   },
@@ -132,13 +132,18 @@ App({
   showModal: function () {
     wx.showModal({
       title: '提示',
-      content: '若不授权获取用户信息，则读书有益的部分重要功能将无法使用；请点击【重新授权】——选中【用户信息】和【地理位置】方可使用。',
+      content: '若不授权获取用户信息，则小程序的部分重要功能将无法使用；请点击【重新授权',
       showCancel: false,
       confirmText: "重新授权",
       success: function (res) {
         if (res.confirm) {
-          vm.openSetting()
-        }
+          // vm.openSetting()
+          wx.openSetting({
+            success: (res) => {
+              console.log("重新授权 ： " + JSON.stringify(res))
+            }
+          })
+        } A
       }
     })
   },

@@ -110,7 +110,7 @@ Page({
             qiniuUploader.upload(tempFilePath, (res) => {
               console.log("qiniuUploader upload res:" + JSON.stringify(res));
               var picture = util.getImgRealUrl(res.key)
-              var videos = {'content': picture, 'type':2}
+              var videos = { 'content': picture, 'type': 2 }
               var dataVideos = vm.data.videos
               dataVideos.push(videos)//添加用户上传视频
               Arraydata.push(videos)//添加用户上传视频 到 接口数据数组
@@ -132,13 +132,21 @@ Page({
   addComment: function () {
     console.log("55555555555555555555555")
     var param = {
-      content: vm.data.content,//评论的文本内容
+      content: vm.data.intro,//评论的文本内容
       goods_id: vm.data.goods_id,//产品编号
       goods_type: 1,//产品类型（备注）
       media: vm.data.photo//	上传的多媒体数组
     }
     util.addComment(param, function (res) {
       console.log("用户点评" + JSON.stringify(res))
+      wx.navigateBack({
+        delta: 1
+      })
+      wx.showToast({
+        title: '评价审核通过后才能展示出来，请耐心等待',
+        icon: 'none',
+        duration: 4000
+      })
     })
   },
 

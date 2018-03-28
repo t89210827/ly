@@ -5,10 +5,30 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     userInfo: [],//用户信息
-    userType: true,//用户类型
-    bg: { img: "http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.d029e2f8f631332fc66f31747082f4c1.jpg?imageView2/2/w/750/h/500/interlace/1" },//背景
-    animation: ''//执行动画
+    userType: true,//用户类型 
+    bg: { img: "http://p3zrwgxiu.bkt.clouddn.com/%E8%83%8C%E6%99%AF.jpg" },//背景
+    animation: '',   //执行动画
+
+    toast: {
+      show: false
+    }
   },
+  //签到弹出框显示
+  showToast: function () {
+    this.setData({
+      toast: {
+        show: true
+      }
+    })
+    setTimeout(() => {
+      this.setData({
+        toast: {
+          show: false
+        }
+      })
+    }, 1500)
+  },
+
   onLoad: function (options) {
     vm = this
     //创建一个动画实例animation
@@ -48,11 +68,7 @@ Page({
       app.globalData.userInfo.integral = res.data.ret.integral
       var status = res.data.ret.sign.status //今天是否签到过
       if (status) {
-        wx.showToast({
-          title: '已经签到过了',
-          icon: 'none',
-          duration: 2000
-        })
+        vm.showToast()
       } else {
         wx.showToast({
           title: '签到成功',
@@ -91,6 +107,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log("获取用户缓存11 ： " + JSON.stringify(app.globalData.userInfo))
     var userInfo = app.globalData.userInfo
     // var userInfo = wx.getStorageSync("userInfo")
     if (userInfo.type == 1) {

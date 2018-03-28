@@ -1,4 +1,6 @@
 <!--pages/mine/mine.wxml-->
+<wxc-toast is-show="{{toast.show}}" text="已经签到过了"></wxc-toast>
+
 <view style='height:510rpx;'>
   <view style='width:750rpx;height:400rpx;background-image:url({{bg.img}}); background-repeat: none;background-size:100% 100%;'>
     <view class="userinfo-order">

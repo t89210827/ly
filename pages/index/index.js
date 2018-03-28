@@ -20,7 +20,6 @@ Page({
   },
   onLoad: function (options) {
     vm = this
-    vm.getBarTitle()
     util.showLoading("加载首页")
     // console.log("88888888888888" + 100.00.toFixed(0))
     console.log("分享携带的参数" + JSON.stringify(options))
@@ -37,13 +36,6 @@ Page({
     vm.getNewGoods()//获取首页最新产品
     vm.getSpecialGoods()//获取首页特价产品    
   },
-  // previewImage: function () {
-  //   var test = ["http://dsyy.isart.me/tmp_c5f67d16e428c45d5a2e65d301ab6079c27f4d382cafb31f.jpg", "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqWO4s5eicl96Lby8Nl4cNe5icj9qSql1ewzXia4P1viaeLscTp1AplSv8yMWhEcxBC6iaKHNiaftDrdYNw/0"]
-  //   wx.previewImage({
-  //     current: test[0], // 当前显示图片的http链接
-  //     urls: test // 需要预览的图片http链接列表
-  //   })
-  // },
   //跳转商品详情页
   jumpTravelDetails: function (e) {
     console.log("旅游详情" + JSON.stringify(e))
@@ -80,6 +72,7 @@ Page({
       var travel = res.data.ret
       for (var i = 0; i < travel.length; i++) {
         travel[i].price = parseInt(travel[i].price).toFixed(0)
+        travel[i].image = util.qiniuUrlTool(travel[i].image, "travel_title")
       }
       console.log("最新产品2" + JSON.stringify(travel))
       vm.setData({
@@ -98,6 +91,12 @@ Page({
     util.getSpecialGoods(param, function (res) {
       console.log("特价优惠" + JSON.stringify(res.data.ret))
       var SpecialGoods = res.data.ret
+
+      for (var i = 0; i < SpecialGoods.length; i++) {
+        SpecialGoods[i].goods_id.image = util.qiniuUrlTool(SpecialGoods[i].goods_id.image, "travel_title")
+      }
+      console.log("特价优惠2" + JSON.stringify(SpecialGoods))
+
       vm.setData({
         SpecialGoods: SpecialGoods
       })
@@ -106,6 +105,7 @@ Page({
   },
   //设置首页标题
   getBarTitle: function () {
+    console.log("1111111" + JSON.stringify(getApp().globalData.userInfo.type))
     if (getApp().globalData.userInfo.type == 1) {
       var title = getApp().globalData.userInfo.organization_id
       wx.setNavigationBarTitle({
@@ -128,14 +128,14 @@ Page({
     var scrollLeft = e.currentTarget.dataset.scrollleft
     var pointer = e.currentTarget.dataset.pointer
     if (pointer == 0) {
-      wx.showToast({
-        title: '模块正在开发中 敬请期待',
-        icon: 'none',
-        duration: 2000
-      })
-      // wx.navigateTo({
-      //   url: '/pages/travelCustomization/index/index',
+      // wx.showToast({
+      //   title: '模块正在开发中 敬请期待',
+      //   icon: 'none',
+      //   duration: 2000
       // })
+      wx.navigateTo({
+        url: '/pages/travelCustomization/index/index',
+      })
     } else {
       wx.navigateTo({
         url: '/pages/travelList/travelList?scrollLeft=' + scrollLeft + "&pointer=" + pointer,
@@ -171,6 +171,7 @@ Page({
   },
   //加载
   onShow: function () {
+    vm.getBarTitle()
   },
   /**
  * 页面相关事件处理函数--监听用户下拉动作

@@ -12,29 +12,35 @@ var initdata = function (vm) {
 
 Page({
   data: {
-    // tabs: ["全部", "待出行", "待点评"],
-    // activeIndex: 0,
-    // sliderOffset: 0,
-    // sliderLeft: 0,
+    tabs: ["旅游", "机票", "酒店", "车导", "抢票"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0,
+
     ordersList: [],   //订单列表
     startX: '',       //触摸起始点水平方向位置  
     delBtnWidth: 180, //删除按钮宽度单位（rpx）  
   },
   onLoad: function () {
     vm = this;
-    // wx.getSystemInfo({
-    //   success: function (res) {
-    //     vm.setData({
-    //       sliderLeft: (res.windowWidth / vm.data.tabs.length - sliderWidth) / 2,
-    //       sliderOffset: res.windowWidth / vm.data.tabs.length * vm.data.activeIndex
-    //     });
-    //   }
-    // });
+    wx.getSystemInfo({
+      success: function (res) {
+        vm.setData({
+          sliderLeft: (res.windowWidth / vm.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / vm.data.tabs.length * vm.data.activeIndex
+        });
+      }
+    });
     vm.getTourOrder()   //获取全部订单
   },
   //获取全部订单
   getTourOrder: function () {
-    util.getTourOrder({}, function (res) {
+    console.log("索引 ： " + JSON.stringify(vm.data.activeIndex))
+    var param = {
+      goods_type: parseInt(vm.data.activeIndex) + 1
+    }
+    // util.getTourOrder(param, function (res) {
+    util.getOrders(param, function (res) {
       console.log("全部订单 ： " + JSON.stringify(res))
       vm.setData({
         ordersList: res.data.ret
@@ -156,11 +162,12 @@ Page({
 
   },
 
-  //顶部导航
-  // tabClick: function (e) {
-  //   this.setData({
-  //     sliderOffset: e.currentTarget.offsetLeft,
-  //     activeIndex: e.currentTarget.id
-  //   });
-  // }
+  // 顶部导航
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+    vm.getTourOrder()   //获取全部订单
+  }
 });

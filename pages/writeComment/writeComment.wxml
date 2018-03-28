@@ -31,8 +31,8 @@
     <view class="weui-cell__bd">
       <view class="weui-uploader">
         <view class="weui-uploader__hd">
-          <view class="weui-uploader__title">视频图片</view>
-          <view class="weui-uploader__info">{{files.length}}/3</view>
+          <view class="weui-uploader__title">上传视频</view>
+          <view class="weui-uploader__info">{{videos.length}}/3</view>
         </view>
         <view class="weui-uploader__bd">
           <view class="weui-uploader__files" id="uploaderFiles">
@@ -42,7 +42,7 @@
               </view>
             </block>
           </view>
-          <block wx:if="{{files.length<3}}">
+          <block wx:if="{{videos.length<3}}">
             <view class="weui-uploader__input-box">
               <view class="weui-uploader__input" bindtap="bindButtonTap"></view>
             </view>

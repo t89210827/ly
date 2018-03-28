@@ -13,13 +13,14 @@ Page({
       { name: '机票', src: '../airplaneTicket/airplaneTicket', value: '', },
       { name: '酒店', src: '../hotel/hotel', value: '', },
       { name: '车导', src: '../car/car', value: '', },
+      // { name: '一日游套餐', src: '../oneDayTour/oneDayTour', value: '', },
     ],
     items_two: [
       { name: '成型套餐A', src: '../airplaneTicket/airplaneTicket', value: '', },
       { name: '成型套餐B', src: '../hotel/hotel', value: '', },
       { name: '成型套餐C', src: '../car/car', value: '', },
       { name: '成型套餐D', src: '../car/car', value: '', },
-    ], 
+    ],
     isClick: [],         //选中数组
     airplane: {},        //飞机票
     hotel: {},           //酒店
@@ -101,6 +102,20 @@ Page({
       activeIndex: e.currentTarget.id
     });
   },
+  affirm: function () {
+    wx.showModal({
+      title: '确认',
+      content: '您确认要下单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          vm.order()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   //下单
   order: function () {
     var airplane = wx.getStorageSync('airplane')
@@ -136,6 +151,21 @@ Page({
         })
       }
     }
+    wx.showModal({
+      title: '提示',
+      content: '下单成功',
+      confirmText: '看订单',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          wx.navigateTo({
+            url: '/pages/order/order',
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

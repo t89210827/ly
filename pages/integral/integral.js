@@ -10,7 +10,7 @@ Page({
     activeIndex: 0,//默认导航
     sliderOffset: 0,
     sliderLeft: 0,
-    userType:''
+    userType: ''
   },
   onLoad: function () {
     var that = this;
@@ -42,7 +42,7 @@ Page({
   //修改登陆状态
   updateStatus: function (e) {
     console.log("修改登陆状态")
-    util.showModal("确定", "确定修改兑换状态吗？（确定后不可更改）", function (res){
+    util.showModal("确定", "确定修改兑换状态吗？（确定后不可更改）", function (res) {
       var historyid = e.currentTarget.dataset.historyid
       var param = {
         id: historyid

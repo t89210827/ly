@@ -16,9 +16,12 @@ Page({
       key: 'car',
       data: e.currentTarget.dataset.car,
     })
-    wx.navigateTo({
-      url: '../index/index',
+    wx.navigateBack({
+      delta: 1
     })
+    // wx.navigateTo({
+    //   url: '../index/index',
+    // })
   },
   //获取车导列表
   getCar: function () {

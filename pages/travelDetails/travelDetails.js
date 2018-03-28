@@ -21,7 +21,9 @@ Page({
     imgalist: [],//预览列表   
     dateils: {},//详情页全部数据
     banner: [],//banner数据
-    userType: true //用户类型
+    userType: true, //用户类型
+
+    images: [] //产品特色图片
   },
   onLoad: function (options) {
     util.showLoading("加载详情")
@@ -74,9 +76,22 @@ Page({
       page: 10
     }
     util.getGoodsCommentLists(param, function (res) {
-      console.log("用户评论数据返回" + JSON.stringify(res))
+      console.log("用户评论数据返回" + JSON.stringify(res.data.ret))
       var comment = res.data.ret.lists
       var media = res.data.ret.lists.media
+      if (util.judgeIsAnyNullStr(comment)) {
+        vm.setData({
+          comment: "nall"
+        })
+        console.log("用户评论数据返回1" + JSON.stringify(vm.data.comment))
+        return
+      }
+      for (var i = 0; i < comment.length; i++) {
+        if (comment[i].content == null) {
+          // console.log("-----" + JSON.stringify(comment[i].content))
+          comment[i].content = ""
+        }
+      }
       vm.setData({
         comment: comment
       })
@@ -190,6 +205,19 @@ Page({
       vm.getGoodsCommentLists()
     })
   },
+  //获取图片的高宽
+  imageLoad: function (e) {
+    console.log("imageLoad e:" + JSON.stringify(e))
+    var imageSize = util.imageUtil(e)
+    var index = parseInt(e.currentTarget.id)
+    var obj = vm.data.contents
+    obj[index].content.imageWidth = imageSize.imageWidth
+    obj[index].content.imageHeight = imageSize.imageHeight
+
+    vm.setData({
+      contents: obj
+    })
+  },
   //获取旅游详情页数据
   getTourGoodsDetail: function () {
     var travelid = vm.data.travelid
@@ -203,6 +231,15 @@ Page({
       var dateils = res.data.ret
       var routes = dateils.routes
       var contents = dateils.contents
+
+      for (var i = 0; i < contents.length; i++) {
+        if (contents[i].type == 1) {
+          var imagesIndex = contents[i].content
+          var index = { url: imagesIndex, "imageWidth": 0, "imageHeight": 0 }
+          contents[i].content = index
+        }
+      }
+      // console.log("产品特色" + JSON.stringify(contents))
       for (var i = 0; i < routes.length; i++) {
         // routes[i].place = routes[i].place.split("<icon_plan>")
         routes[i].content = routes[i].content.replace(/<_>/ig, "\r\n")
@@ -298,7 +335,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '分享小程序会获得积分呦',
+      title: '分享小程序并且好友进入小程序会获得积分呦',
       path: '/pages/index/index?user_id=' + user_id,
       success: function (res) {
         // 转发成功

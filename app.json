@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/buyTickets/buyTickets",
     "pages/travelCustomization/index/index",
+    "pages/travelCustomization/customizationDetail/customizationDetail",
     "pages/travelCustomization/car/car",
     "pages/travelCustomization/hotel/hotel",
     "pages/travelCustomization/airplaneTicket/airplaneTicket",
@@ -17,7 +19,6 @@
     "pages/travel/travel",
     "pages/travelDetails/travelDetails",
     "pages/mine/mine",
-    "pages/buyTickets/buyTickets",
     "pages/templates/travelListTpl/travelListTpl",
     "pages/templates/newestTravelTpl/newestTravelTpl",
     "pages/templates/integralTpl/integralTpl",
@@ -29,7 +30,8 @@
     "pages/reply/reply",
     "pages/integralDetails/integralDetails",
     "pages/travelCustomization/package/package",
-    "pages/travelCustomization/customizationDetail/customizationDetail"
+    "pages/travelCustomization/oneDayTour/oneDayTour",
+    "pages/buyTicketList/buyTicketList"
   ],
   "window": {
     "backgroundTextStyle": "light",

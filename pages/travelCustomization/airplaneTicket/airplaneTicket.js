@@ -37,9 +37,13 @@ Page({
       data: e.currentTarget.dataset.airplane
     })
 
-    wx.navigateTo({
-      url: '../index/index',
+    wx.navigateBack({
+      delta: 1
     })
+
+    // wx.navigateTo({
+    //   url: '../index/index',
+    // })
   },
 
   onReady: function () {

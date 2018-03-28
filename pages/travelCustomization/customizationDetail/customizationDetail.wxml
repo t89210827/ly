@@ -1,34 +1,68 @@
 <!--pages/travelCustomization/customizationDetail/customizationDetail.wxml-->
-<view class="container">
-
-  <view class="zan-panel">
-    <view class="zan-card">
-      <view class="zan-card__thumb">
-        <image class="zan-card__img" src="{{item.image}}" mode="aspectFit"></image>
+<view wx:if="{{customizationData.airplane}}">
+  <view style='height:20rpx;'></view>
+  <view class='lump'>
+    <view class='zan-font-16'>机票</view>
+    <view class='zan-row' style='margin-top:20rpx;'>
+      <view class='zan-col zan-col-8'>
+        <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
       </view>
-      <view class="zan-card__detail">
-        <view class="zan-card__detail-row">
-          <view class="zan-card__right-col">¥ 196</view>
-          <view class="zan-card__left-col zan-ellipsis--l2">
-            {{item.name}}
+      <view class='zan-col zan-col-16'>
+        <view class='zan-font-14'>{{customizationData.airplane.company}}</view>
+        <view class='zan-row'>
+          <view class='zan-col zan-col-8'>
+            <view class='zan-font-16'>{{customizationData.airplane.start_time}}</view>
+            <view class='zan-font-12' style='color:#999999'>{{customizationData.airplane.start_place}}</view>
+          </view>
+          <view class='zan-col zan-col-6'>
+            <image src='../../../images/goto.png' style='width:50rpx;height:50rpx;'></image>
+          </view>
+          <view class='zan-col zan-col-6'>
+            <view class='zan-font-16'>{{customizationData.airplane.end_time}}</view>
+            <view class='zan-font-12' style='color:#999999'>{{customizationData.airplane.end_place}}</view>
           </view>
         </view>
-
-        <view class="zan-card__detail-row zan-c-gray-darker">
-          <view class="zan-card__right-col">
-            <button class="zan-btn zan-btn--small zan-btn--primary" bindtap='clickAirplane' data-car='{{item}}'>下单</button>
-          </view>
-          <view class="zan-card__left-col">
-            <!-- 据辽宁省沈阳市东陵区天坛474米 -->
-            {{item.address}}
-          </view>
-        </view>
-
-        <view class="zan-card__detail-row zan-c-gray-darker">
-          <view class="zan-card__left-col zan-c-red">本地牌照</view>
-        </view>
+        <!-- <view class='zan-font-18' style='color:#f91111;'>￥18888/天</view> -->
+        <view class='zan-font-12' style='line-height:33rpx;color:#f91111;margin-top:10rpx;'>￥{{customizationData.airplane.price}}</view>
       </view>
     </view>
   </view>
+</view>
 
+<view style='height:20rpx;'></view>
+<view class='lump'>
+  <view class='zan-font-16'>车导</view>
+  <view class='zan-row' style='margin-top:20rpx;'>
+    <view class='zan-col zan-col-8'>
+      <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+    </view>
+    <view class='zan-col zan-col-16'>
+      <view>丰田威驰（5座）</view>
+      <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥60/天</view>
+      <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>据辽宁省沈阳市东陵区天坛474米</view>
+    </view>
+  </view>
+</view>
+
+<view style='height:20rpx;'></view>
+<view class='lump'>
+  <view class='zan-font-16'>酒店</view>
+  <view class='zan-row' style='margin-top:20rpx;'>
+    <view class='zan-col zan-col-8'>
+      <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+    </view>
+    <view class='zan-col zan-col-16'>
+      <view>沈阳小何日租公寓（浑南店）</view>
+      <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥18888/天</view>
+      <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>和平区生活格林坊三期</view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部绝对定位 -->
+<view class='travel-order' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;border-top:1rpx solid #A9A9B1;'>
+  <view style='width:60%;'>合计：￥
+    <text style='color:red;font-size:34rpx;letter-spacing:2rpx;'>10000</text>
+  </view>
+  <view style='width:40%;background-color:#5c2b06;color:white' bindtap='order'>下单</view>
 </view>

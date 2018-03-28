@@ -1,7 +1,8 @@
 <!--pages/order/order.wxml-->
 <import src="../templates/orderTpl/orderTpl.wxml" />
 <import src="../templates/travelListTpl/travelListTpl.wxml" />
-<!-- <view>
+
+<view>
   <view class="weui-tab">
     <view class="weui-navbar">
       <block wx:for="{{tabs}}" wx:key="*this">
@@ -12,22 +13,158 @@
       <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
     </view>
     <view class="weui-tab__panel">
-      <view class="" hidden="{{activeIndex != 0}}"> -->
+      <view class="" hidden="{{activeIndex != 0}}">
 
-<view class="item-box">
-  <view class="items">
-    <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
-      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
-        <template is="collectTpl" data="{{...item}}"></template>
+        <view style='height:20rpx;'></view>
+        <view class="item-box">
+          <view class="items">
+            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+
+                <view class='margin-5 flex-row' catchtap='jumpTravelDetails' data-travelId='{{item.tourGoods.id}}'>
+                  <view style='width:200rpx;'>
+                    <image class='box-shadow' src='{{item.tourGoods.image}}' style='width:150rpx;height:200rpx;margin-left:35rpx;'></image>
+                  </view>
+                  <view class='margin-left-20' style='width:500rpx;'>
+                    <view class='travel-title margin-top-10 text-oneline'>{{item.tourGoods.title}}</view>
+                    <view class='margin-top-20'>
+                      <text class='travel-price'>￥{{item.tourGoods.price}}</text> 起</view>
+                    <view class='flex-row margin-top-20'>
+                      <!-- <text style='font-size:24rpx;line-height:38rpx;'>1318条点评</text> -->
+                      <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{item.categories.name}}</text>
+                      <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
+                    </view>
+                  </view>
+                </view>
+                <view style='height:40rpx;'></view>
+
+              </view>
+              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner del">删除</view>
+            </view>
+          </view>
+        </view>
+
       </view>
-      <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner del">删除</view>
+
+      <view hidden="{{activeIndex != 1}}">
+        <view style='height:20rpx;'></view>
+        <view class="item-box">
+          <view class="items">
+            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+
+                <view class='zan-row' style='margin-top:20rpx;'>
+                  <view class='zan-col zan-col-8'>
+                    <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+                  </view>
+                  <view class='zan-col zan-col-16'>
+                    <view class='zan-font-14'>{{item.planGoods.company}}</view>
+                    <view class='zan-row'>
+                      <view class='zan-col zan-col-8'>
+                        <view class='zan-font-16'>{{item.planGoods.start_time}}</view>
+                        <view class='zan-font-12' style='color:#999999'>{{item.planGoods.start_place}}</view>
+                      </view>
+                      <view class='zan-col zan-col-6'>
+                        <image src='../../../images/goto.png' style='width:50rpx;height:50rpx;'></image>
+                      </view>
+                      <view class='zan-col zan-col-6'>
+                        <view class='zan-font-16'>{{item.planGoods.end_time}}</view>
+                        <view class='zan-font-12' style='color:#999999'>{{item.planGoods.end_place}}</view>
+                      </view>
+                    </view>
+                    <view class='zan-font-12' style='line-height:33rpx;color:#f91111;margin-top:10rpx;'>￥{{item.planGoods.price}}</view>
+                  </view>
+                </view>
+
+              </view>
+              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner delplane">删除</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view hidden="{{activeIndex != 2}}">
+
+        <view style='height:20rpx;'></view>
+        <view class="item-box">
+          <view class="items">
+            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+
+                <view class='zan-row' style='margin-top:20rpx;'>
+                  <view class='zan-col zan-col-8'>
+                    <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+                  </view>
+                  <view class='zan-col zan-col-16'>
+                    <view>{{item.hotelGoods.name}}</view>
+                    <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{item.hotelGoods.price}}/天</view>
+                    <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{item.hotelGoods.address}}</view>
+                  </view>
+                </view>
+
+              </view>
+              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner delplane">删除</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+      <view hidden="{{activeIndex != 3}}">
+
+        <view style='height:20rpx;'></view>
+        <view class="item-box">
+          <view class="items">
+            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+
+                <view class='zan-row' style='margin-top:20rpx;'>
+                  <view class='zan-col zan-col-8'>
+                    <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+                  </view>
+                  <view class='zan-col zan-col-16'>
+                    <view>{{item.carGoods.name}}</view>
+                    <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{item.carGoods.price}}/天</view>
+                    <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{item.carGoods.address}}</view>
+                  </view>
+                </view>
+
+              </view>
+              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner delplane">删除</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+      <view hidden="{{activeIndex != 4}}">
+
+        <view style='height:15rpx;'></view>
+        <view class="item-box">
+          <view class="items">
+            <view wx:for="{{ordersList}}" wx:key="{{index}}" class="item">
+              <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
+
+                <view class='zan-row' style='margin-top:20rpx;'>
+                  <view class='zan-col zan-col-8'>
+                    <image src='{{item.ticket.image}}' class='travel_image'></image>
+                  </view>
+                  <view class='zan-col zan-col-16'>
+                    <view style='height:18rpx;'></view>
+                    <view style='font-size:37rpx;'>{{item.ticket.name}}</view>
+                    <view style='height:30rpx;'></view>
+                    <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{item.ticket.price}}/天</view>
+                  </view>
+                </view>
+
+              </view>
+              <view data-index="{{index}}" data-orderid='{{item.id}}' bindtap="delItem" class="inner delplane">删除</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
     </view>
   </view>
 </view>
-
-<!-- </view>
-      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">待出行</view>
-      <view class="weui-tab__content" hidden="{{activeIndex != 2}}">待点评</view>
-    </view>
-  </view>
-</view> -->

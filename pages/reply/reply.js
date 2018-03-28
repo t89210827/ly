@@ -27,6 +27,9 @@ Page({
     }
     util.addCommentReplie(param, function (res) {
       console.log("旅行社回复 " + JSON.stringify(res))
+      wx.navigateBack({
+        delta: 1
+      })
     })
   },
 

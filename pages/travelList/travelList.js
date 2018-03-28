@@ -17,7 +17,7 @@ Page({
     console.log("333333333" + JSON.stringify(options))
     vm = this
     var tour_category_id = options.scrollLeft// 类别id
-    var currentTab = options.pointer-1// 指针   
+    var currentTab = options.pointer - 1// 指针   
     vm.setData({
       tour_category_id: tour_category_id,
       currentTab: currentTab
@@ -43,7 +43,7 @@ Page({
   //获取旅游类别
   getIndexMenus: function () {
     util.getIndexMenus({}, function (res) {
-      var menus = res.data.ret   
+      var menus = res.data.ret
       menus.shift()
       console.log("首页菜单" + JSON.stringify(menus))
       vm.setData({
@@ -102,8 +102,12 @@ Page({
       tour_category_id: vm.data.tour_category_id//目的地编号
     }
     util.getTourGoodsLists(param, function (res) {
+      var travel = res.data.ret
+      for (var i = 0; i < travel.length; i++) {
+        travel[i].image = util.qiniuUrlTool(travel[i].image, "travel_title")
+      }
       vm.setData({
-        travel: res.data.ret
+        travel: travel
       })
       console.log("旅游数据" + JSON.stringify(res))
     })

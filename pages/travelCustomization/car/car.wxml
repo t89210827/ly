@@ -1,36 +1,20 @@
 <!--pages/travelCustomization/car/car.wxml-->
 <block wx:for="{{carList}}">
-  <view class="container">
 
-    <view class="zan-panel">
-      <view class="zan-card">
-        <view class="zan-card__thumb">
-          <image class="zan-card__img" src="{{item.image}}" mode="aspectFit"></image>
-        </view>
-        <view class="zan-card__detail">
-          <view class="zan-card__detail-row">
-            <view class="zan-card__right-col">¥ 196</view>
-            <view class="zan-card__left-col zan-ellipsis--l2">
-              {{item.name}}
-            </view>
-          </view>
-
-          <view class="zan-card__detail-row zan-c-gray-darker">
-            <view class="zan-card__right-col">
-              <button class="zan-btn zan-btn--small zan-btn--primary" bindtap='clickAirplane' data-car='{{item}}'>下单</button>
-            </view>
-            <view class="zan-card__left-col">
-              <!-- 据辽宁省沈阳市东陵区天坛474米 -->
-              {{item.address}}
-            </view>
-          </view>
-
-          <view class="zan-card__detail-row zan-c-gray-darker">
-            <view class="zan-card__left-col zan-c-red">本地牌照</view>
-          </view>
-        </view>
+  <view style='height:20rpx;'></view>
+  <view class='lump' bindtap='clickAirplane' data-car='{{item}}'>
+    <view class='zan-font-16'>车导</view>
+    <view class='zan-row' style='margin-top:20rpx;'>
+      <view class='zan-col zan-col-8'>
+        <image src='{{item.image}}' class='travel_image'></image>
+      </view>
+      <view class='zan-col zan-col-16'>
+        <view>{{item.name}}</view>
+        <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{item.price}}/天</view>
+        <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{item.address}}</view>
       </view>
     </view>
-
   </view>
 </block>
+
+<view></view>

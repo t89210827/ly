@@ -1,36 +1,19 @@
 <!--pages/travelCustomization/hotel/hotel.wxml-->
 <block wx:for="{{hotelList}}">
-  <view class="container">
 
-    <view class="zan-panel">
-      <view class="zan-card">
-        <view class="zan-card__thumb">
-          <image class="zan-card__img" src="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg" mode="aspectFit"></image>
-        </view>
-        <view class="zan-card__detail">
-          <view class="zan-card__detail-row">
-            <view class="zan-card__right-col">¥ 196</view>
-            <view class="zan-card__left-col zan-ellipsis--l2">
-              {{item.name}}
-            </view>
-          </view>
-
-          <view class="zan-card__detail-row zan-c-gray-darker">
-            <view class="zan-card__right-col">
-              <button class="zan-btn zan-btn--small zan-btn--primary" bindtap='clickHotel' data-hotel='{{item}}'>下单</button>
-            </view>
-            <view class="zan-card__left-col">
-              <!-- 据您519米 奥体中心 -->
-              {{item.address}}
-            </view>
-          </view>
-
-          <view class="zan-card__detail-row zan-c-gray-darker">
-            <view class="zan-card__left-col zan-c-red">干净卫生</view>
-          </view>
-        </view>
+  <view style='height:20rpx;'></view>
+  <view class='lump' bindtap='clickHotel' data-hotel='{{item}}'>
+    <view class='zan-font-16'>酒店</view>
+    <view class='zan-row' style='margin-top:20rpx;'>
+      <view class='zan-col zan-col-8'>
+        <image src='{{item.image}}' class='travel_image'></image>
+      </view>
+      <view class='zan-col zan-col-16'>
+        <view>{{item.name}}</view>
+        <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{item.price}}/天</view>
+        <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{item.address}}</view>
       </view>
     </view>
-
   </view>
+
 </block>

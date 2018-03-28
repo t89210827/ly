@@ -30,9 +30,13 @@ Page({
       key: 'hotel',
       data: e.currentTarget.dataset.hotel,
     })
-    wx.navigateTo({
-      url: '../index/index',
+
+    wx.navigateBack({
+      delta: 1
     })
+    // wx.navigateTo({
+    //   url: '../index/index',
+    // })
   },
   //下单
   order: function (e) {
