@@ -23,7 +23,8 @@ Page({
     banner: [],//banner数据
     userType: true, //用户类型
 
-    images: [] //产品特色图片
+    images: [], //产品特色图片
+    money: [],  //价格和余位
   },
   onLoad: function (options) {
     util.showLoading("加载详情")
@@ -41,6 +42,8 @@ Page({
         year: year
       })
       paramDate = [year, month, date].join('-')
+
+      vm.getTourGoodsByGoodsIdAndDate()
     } else {
       paramDate = util.formatTime(new Date);
     }
@@ -50,6 +53,28 @@ Page({
     })
     vm.getSystemInfo()
     vm.userType()
+  },
+  // 根据旅游产品id获取产品日期
+  getTourGoodsByGoodsIdAndDate: function () {
+    var param = {
+      tour_goods_id: vm.data.travelid,
+      date: vm.data.paramDate
+    }
+    util.getTourGoodsByGoodsIdAndDate(param, function (res) {
+      // console.log("-----" + JSON.stringify(res))
+      var money = res.data.ret
+      if (util.judgeIsAnyNullStr(money)) {
+        var obj = []
+        var moneyNall = {}
+        console.log("-----1" + JSON.stringify(money))
+        moneyNall.price = vm.data.dateils.price
+        moneyNall.surplus = vm.data.surplus
+        obj.push(moneyNall)
+        money = obj
+      }
+      console.log("-----" + JSON.stringify(money))
+      vm.setData({ money: money })
+    })
   },
   userType: function () {
     var userInfo = getApp().globalData.userInfo
@@ -222,6 +247,7 @@ Page({
   getTourGoodsDetail: function () {
     var travelid = vm.data.travelid
     var paramDate = vm.data.paramDate
+    // var paramDate = "2018-03-29"
     var param = {
       id: travelid,
       date: paramDate,
@@ -263,6 +289,7 @@ Page({
         routes: routes,
         contents: contents
       })
+      vm.getTourGoodsByGoodsIdAndDate()   //根据日期和产品id 获取价格和余位
     })
   },
   //顶部导航栏
@@ -327,27 +354,37 @@ Page({
 
   },
 
-  onShareAppMessage: function (res) {
-    console.log("111111111")
+  // onShareAppMessage: function (res) {
+  //   console.log("111111111")
+  //   var user_id = getApp().globalData.userInfo.id
+  //   if (res.from === 'button') {
+  //     console.log(res.target)
+  //   }
+  //   return {
+  //     title: '分享小程序并且好友进入小程序会获得积分呦',
+  //     path: '/pages/index/index?user_id=' + user_id,
+  //     success: function (res) {
+  //       wx.showToast({
+  //         title: '分享成功',
+  //         icon: 'none',
+  //         duration: 2000
+  //       })
+  //     },
+  //     fail: function (res) {
+  //     }
+  //   }
+  // },
+
+  onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '分享小程序并且好友进入小程序会获得积分呦',
-      path: '/pages/index/index?user_id=' + user_id,
-      success: function (res) {
-        // 转发成功
-        wx.showToast({
-          title: '分享成功',
-          icon: 'none',
-          duration: 2000
-        })
-      },
-      fail: function (res) {
-        // 转发失败
+    if (app.globalData.userInfo.organization_id) {
+
+      return {
+        title: app.globalData.userInfo.organization_id,
+        path: '/pages/index/index?share_user=' + user_id
       }
     }
+
   },
+
 })

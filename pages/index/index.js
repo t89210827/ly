@@ -21,16 +21,17 @@ Page({
   onLoad: function (options) {
     vm = this
     util.showLoading("加载首页")
-    // console.log("88888888888888" + 100.00.toFixed(0))
-    console.log("分享携带的参数" + JSON.stringify(options))
-    if (!util.judgeIsAnyNullStr(options.user_id)) {
-      var param = {
-        share_user: options.user_id
-      }
-      util.addInvitation(param, function (res) {
-        console.log("分享返回" + JSON.stringify(res))
-      })
-    }
+
+    // console.log("首页onLoad参数" + JSON.stringify(options))
+    // if (!util.judgeIsAnyNullStr(options.user_id)) {
+    //   var param = {
+    //     share_user: options.user_id
+    //   }
+    //   util.addInvitation(param, function (res) {
+    //     console.log("分享返回" + JSON.stringify(res))
+    //   })
+    // }
+
     vm.getAds()//获取banner
     vm.getIndexMenus()//获取首页菜单
     vm.getNewGoods()//获取首页最新产品
@@ -105,12 +106,28 @@ Page({
   },
   //设置首页标题
   getBarTitle: function () {
-    console.log("1111111" + JSON.stringify(getApp().globalData.userInfo.type))
-    if (getApp().globalData.userInfo.type == 1) {
+    console.log("1111111" + JSON.stringify(getApp().globalData.userInfo))
+    if (!util.judgeIsAnyNullStr(getApp().globalData.userInfo)) {
+      // if (getApp().globalData.userInfo.type == 1) {
       var title = getApp().globalData.userInfo.organization_id
       wx.setNavigationBarTitle({
         title: title //页面标题为路由参数
       })
+      // }
+    } else {
+      //调用登录接口
+      app.login(function (res) {
+        console.log("111111" + JSON.stringify(res))
+
+        // if (res.type == 1) {
+        var title = res.organization_id
+        wx.setNavigationBarTitle({
+          title: title //页面标题为路由参数
+        })
+        // }
+
+      });
+
     }
   },
   //获取轮播图
@@ -179,14 +196,17 @@ Page({
   onPullDownRefresh: function () {
     console.log("11")
     vm.getNewGoods()
-    console.log("11")
     wx.stopPullDownRefresh()
   },
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    return {
-      title: '分享',
-      path: '/pages/index/index?user_id=' + user_id
+    if (app.globalData.userInfo.organization_id) {
+
+      return {
+        title: app.globalData.userInfo.organization_id,
+        path: '/pages/index/index?share_user=' + user_id
+      }
     }
+
   }
 });

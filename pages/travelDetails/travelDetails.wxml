@@ -36,9 +36,9 @@
             <text class='text-threeline font-size-14 margin-bottom-15 font-weight-300'>{{dateils.name}}</text>
             <view class='flex-row' style='height:64rpx;'>
               <view style='line-height:64rpx;' class='travel-price'>￥</view>
-              <view style='line-height:64rpx;width:470rpx;' class='travel-price'>{{dateils.price}}</view>
+              <view style='line-height:64rpx;width:470rpx;' class='travel-price'>{{money[0].price}}</view>
               <view class='zan-font-16 zan-c-gray-darker' style='line-height:64rpx;'>剩余：</view>
-              <view class='zan-font-16 zan-c-gray-darker' style='line-height:64rpx;'>{{surplus}}位</view>
+              <view class='zan-font-16 zan-c-gray-darker' style='line-height:64rpx;'>{{money[0].surplus}}位</view>
             </view>
           </view>
           <!-- <view style='width:100%;height:1rpx;background-color:#8f8f8f'></view> -->

@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id:'' ,                //成型套餐id
-    customizationData:[],  //套餐数据
+    id: '',                //成型套餐id
+    customizationData: [],  //套餐数据
   },
 
   /**
@@ -18,7 +18,7 @@ Page({
     vm = this
     console.log(options)
     vm.setData({
-      id:options.id
+      id: options.id
     })
     vm.getByIdCustomization()
   },
@@ -30,7 +30,7 @@ Page({
     util.getByIdCustomization(param, function (res) {
       console.log("根据id获取成型套餐 ：" + JSON.stringify(res))
       vm.setData({
-        customizationData:res.data.ret
+        customizationData: res.data.ret
       })
     })
   },
@@ -81,6 +81,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var user_id = getApp().globalData.userInfo.id
+    if (app.globalData.userInfo.organization_id) {
+
+      return {
+        title: app.globalData.userInfo.organization_id,
+        path: '/pages/index/index?share_user=' + user_id
+      }
+    }
 
   }
 })

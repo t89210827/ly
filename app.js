@@ -20,8 +20,16 @@
 //                      佛祖保佑       永无BUG  
 const util = require('./utils/util.js')
 var vm = null
+var share_user = null
 App({
-  onLaunch: function () {
+  onLaunch: function (e) {
+    console.log("onLaunch  ---------" + JSON.stringify(e))
+
+    if (!util.judgeIsAnyNullStr(e.query.share_user)) {
+      share_user = e.query.share_user
+      console.log("分享人  ---------" + share_user)
+    }
+
     //获取vm
     vm = this
     //获取用户缓存数据
@@ -32,7 +40,7 @@ App({
       //调用登录接口
       vm.login(null);
     } else {
-      vm.login(null);
+      // vm.login(null);
       vm.globalData.userInfo = wx.getStorageSync("userInfo");
       console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
     }
@@ -41,7 +49,7 @@ App({
   onShow: function () {
 
   },
-  login: function (callBack) {
+  login: function (userInfoCallback) {
     console.log("登陆接口")
     wx.login({
       success: function (res) {
@@ -51,15 +59,26 @@ App({
             console.log("getOpenId:" + JSON.stringify(ret))
             var openId = ret.data.ret.openid
             // vm.updateUserInfo()
-            var param = {
-              account_type: 'xcx',
-              open_id: openId,
+            if (share_user == null) {
+              var param = {
+                account_type: 'xcx',
+                open_id: openId,
+              }
+            } else {
+              var param = {
+                account_type: 'xcx',
+                open_id: openId,
+                share_user: share_user
+              }
             }
             util.login(param, function (ret) {
               console.log("login1111:" + JSON.stringify(param));
               console.log("login:" + JSON.stringify(ret));
               if (ret.data.code == "200") {
                 vm.storeUserInfo(ret.data.ret)
+
+                typeof userInfoCallback == "function" && userInfoCallback(vm.globalData.userInfo)
+
                 if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
                   vm.updateUserInfo(function (ret) { })
                 }

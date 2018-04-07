@@ -14,12 +14,42 @@
     <view class="weeks box box-lr box-pack-center box-align-center">
       <view class="flex week fs28" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
     </view>
-    
+
     <view class="days box box-lr box-wrap">
       <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
       </view>
       <view class="grid white-color box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap="tapDayItem">
-        <view class="day {{item.choosed ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item.day}}</view>
+
+        <view class="day {{item.choosed ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">
+          <!-- <view class="day border-radius pink-bg box box-align-center box-pack-center"> -->
+          <view style='position: relative;'>
+            <view>
+              {{item.day}}
+            </view>
+
+            <block wx:if="{{item.money}}">
+
+              <view style='position: absolute;top:38rpx;left:-40rpx;letter-spacing:4rpx;'>
+                <view class='flex-row zan-font-12 zan-c-gray-darker' style='align-items: center;width:100rpx;'>
+                  <image src='../../images/price.png' style='width:30rpx;height:30rpx;'></image>
+                  <view style='margin-left:8rpx;'>{{item.money}}</view>
+                </view>
+              </view>
+              <view style='position: absolute;top:70rpx;left:-40rpx;letter-spacing:4rpx;'>
+                <view class='flex-row zan-font-12 zan-c-gray-darker' style='align-items: center;width:100rpx;'>
+                  <image src='../../images/chair.png' style='width:30rpx;height:30rpx;'></image>
+                  <view style='margin-left:8rpx;'>{{item.site}}</view>
+                </view>
+              </view>
+
+            </block>
+
+          </view>
+        </view>
+
+
+        <!-- <view class="day box box-align-center box-pack-center">{{item.day}}</view> -->
+
       </view>
     </view>
   </view>
@@ -38,4 +68,16 @@
       <view class="picker-view" wx:for="{{picker_month}}" style="line-height: 50px">{{item}}月</view>
     </picker-view-column>
   </picker-view>
+</view>
+
+<view style='position: absolute;top: 10rpx;left: 10rpx;' class='zan-font-10'>
+  <view class='flex-row' style='align-item:center'>
+    <image src='../../images/price.png' style='width:30rpx;height:30rpx;'></image>
+    <view style='margin-left:8rpx;'>价格: 元</view>
+  </view>
+
+  <view class='flex-row' style='align-item:center'>
+    <image src='../../images/chair.png' style='width:30rpx;height:30rpx;'></image>
+    <view style='margin-left:8rpx;'>余位: 位</view>
+  </view>
 </view>

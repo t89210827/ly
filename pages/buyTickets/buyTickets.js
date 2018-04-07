@@ -62,7 +62,12 @@ Page({
     }
     util.getTicketGoods(param, function (res) {
       console.log("抢票列表 ：" + JSON.stringify(res.data.ret))
+      var tickets = res.data.ret
+      for(var i = 0 ;i<tickets.length ; i++){
+        tickets[i].image = util.qiniuUrlTool(tickets[i].image,"ticket")
+      }
       vm.setData({ tickets: res.data.ret })
+
     })
   },
 
@@ -109,6 +114,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var user_id = getApp().globalData.userInfo.id
+    if (app.globalData.userInfo.organization_id) {
+
+      return {
+        title: app.globalData.userInfo.organization_id,
+        path: '/pages/index/index?share_user=' + user_id
+      }
+    }
 
   }
 })

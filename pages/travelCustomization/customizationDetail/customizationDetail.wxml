@@ -5,7 +5,7 @@
     <view class='zan-font-16'>机票</view>
     <view class='zan-row' style='margin-top:20rpx;'>
       <view class='zan-col zan-col-8'>
-        <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+        <image src='http://p3zrwgxiu.bkt.clouddn.com/airplane.jpg' class='travel_image'></image>
       </view>
       <view class='zan-col zan-col-16'>
         <view class='zan-font-14'>{{customizationData.airplane.company}}</view>
@@ -34,11 +34,12 @@
   <view class='zan-font-16'>车导</view>
   <view class='zan-row' style='margin-top:20rpx;'>
     <view class='zan-col zan-col-8'>
-      <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+      <!-- <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image> -->
+      <image src='{{customizationData.car.image}}' class='travel_image'></image>
     </view>
     <view class='zan-col zan-col-16'>
-      <view>丰田威驰（5座）</view>
-      <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥60/天</view>
+      <view>{{customizationData.car.name}}</view>
+      <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{customizationData.car.price}}/天</view>
       <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>据辽宁省沈阳市东陵区天坛474米</view>
     </view>
   </view>
@@ -49,12 +50,12 @@
   <view class='zan-font-16'>酒店</view>
   <view class='zan-row' style='margin-top:20rpx;'>
     <view class='zan-col zan-col-8'>
-      <image src='http://p3zrwgxiu.bkt.clouddn.com/car.jpg' class='travel_image'></image>
+      <image src='{{customizationData.hotel.image}}' class='travel_image'></image>
     </view>
     <view class='zan-col zan-col-16'>
-      <view>沈阳小何日租公寓（浑南店）</view>
-      <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥18888/天</view>
-      <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>和平区生活格林坊三期</view>
+      <view>{{customizationData.hotel.name}}</view>
+      <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{customizationData.hotel.price}}/天</view>
+      <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{customizationData.hotel.address}}</view>
     </view>
   </view>
 </view>

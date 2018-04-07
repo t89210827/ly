@@ -28,6 +28,9 @@ function qiniuUrlTool(img_url, type) {
     case "travel_title":      //广告图片
       qn_img_url = img_url + "?imageView2/2/w/300/h/400/interlace/1";
       break;
+    case "ticket":      //抢票
+      qn_img_url = img_url + "?imageView2/2/w/350/h/200/interlace/1";
+      break;
     case "top_ad":      //广告图片
       qn_img_url = img_url + "?imageView2/2/w/640/h/330/interlace/1";
       break;
@@ -126,7 +129,7 @@ function test(param) {
   console.log(JSON.stringify("11"));
 }
 
-//http://localhost/nyfq/public/api/order/getOrders
+// http://localhost/nyfq/public/api/order/getOrders
 
 //根据user_id和goods_type获取订单信息
 function getOrders(param, successCallback, errorCallback) {
@@ -333,7 +336,17 @@ function getTourGoods(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/tour/getTourGoods', param, "GET", successCallback, errorCallback);
 }
 
-// http://localhost/nyfq/public/api/tour/getTourGoods
+//根据产品id获取产品日期相关信息
+function getTourGoodsByTourGoodsId(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/tour/getTourGoodsByTourGoodsId', param, "GET", successCallback, errorCallback);
+}
+
+//根据旅游产品id获取产品日期
+function getTourGoodsByGoodsIdAndDate(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/tour/getTourGoodsByGoodsIdAndDate', param, "GET", successCallback, errorCallback);
+}
+
+//http://localhost/nyfq/public/api/tour/getTourGoodsByGoodsIdAndDate
 
 //返回
 function navigateBack(delta) {
@@ -341,6 +354,7 @@ function navigateBack(delta) {
     delta: delta
   })
 }
+
 //判断是否有空字符串
 function judgeIsAnyNullStr() {
   if (arguments.length > 0) {
@@ -541,10 +555,6 @@ function convertHtmlToText(inputText) {
   return returnText;
 }
 
-
-
-
-
 module.exports = {
   INDEX_PAGE: "/pages/index/index",
   judgeIsAnyNullStr: judgeIsAnyNullStr,
@@ -596,4 +606,6 @@ module.exports = {
   getTicketGoods: getTicketGoods,
   getOrders: getOrders,
   imageUtil: imageUtil,
+  getTourGoodsByTourGoodsId: getTourGoodsByTourGoodsId,
+  getTourGoodsByGoodsIdAndDate: getTourGoodsByGoodsIdAndDate,
 }

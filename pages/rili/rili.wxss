@@ -26,7 +26,7 @@
 .weeks {
     height: 50rpx;
     line-height: 50rpx;
-    opacity: 0.5
+    opacity: 0.5;
 }
 .week {
     text-align: center;
@@ -39,9 +39,10 @@
 }
 .day {
     width: 60rpx;
+    /* height: 60rpx; */
     height: 60rpx;
     /* color: #88d2ac; */
-     color: black;     
+     color: red;     
     font-size: 32rpx;
     font-weight: 200;
 }

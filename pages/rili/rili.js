@@ -1,4 +1,6 @@
 'use strict';
+var util = require('../../utils/util.js')
+var vm = null
 let choose_year = null,
   choose_month = null;
 const conf = {
@@ -6,24 +8,18 @@ const conf = {
   data: {
     hasEmptyGrid: false,
     showPicker: false,
-    travelid: ''
+    travelid: '',
+    detail: [],
   },
   onLoad(options) {
+
+    vm = this
     var travelid = options.travelid
     this.setData({
       travelid: travelid
     })
-    const date = new Date();
-    const cur_year = date.getFullYear();
-    const cur_month = date.getMonth() + 1;
-    const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
-    this.calculateEmptyGrids(cur_year, cur_month);
-    this.calculateDays(cur_year, cur_month);
-    this.setData({
-      cur_year,
-      cur_month,
-      weeks_ch
-    });
+    this.getTourGoodsByTourGoodsId()  //获取余位及价格
+
   },
   getThisMonthDays(year, month) {
     return new Date(year, month, 0).getDate();
@@ -49,16 +45,71 @@ const conf = {
       });
     }
   },
+
+  getTourGoodsByTourGoodsId: function () {
+    var param = {
+      tour_goods_id: this.data.travelid
+    }
+    util.getTourGoodsByTourGoodsId(param, function (res) {
+      console.log("获取余位及金额：" + JSON.stringify(res))
+      var detail = res.data.ret
+      for (let i = 0; i < detail.length; i++) {
+        detail[i].price = parseInt(detail[i].price)
+      }
+      vm.setData({
+        detail: detail
+      });
+
+      const date = new Date();
+      const cur_year = date.getFullYear();
+      const cur_month = date.getMonth() + 1;
+      const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
+      vm.calculateEmptyGrids(cur_year, cur_month);
+      vm.calculateDays(cur_year, cur_month);
+      vm.setData({
+        cur_year,
+        cur_month,
+        weeks_ch
+      });
+
+    })
+  },
+
   calculateDays(year, month) {
     let days = [];
-
+    let detail = vm.data.detail
     const thisMonthDays = this.getThisMonthDays(year, month);
-
+    // console.log("年月" + JSON.stringify(year + "----" + month))
     for (let i = 1; i <= thisMonthDays; i++) {
+      var date = year + "-" + month + "-" + i
+
+      // console.log("日期：" + JSON.stringify(date))
       days.push({
         day: i,
         choosed: false
       });
+
+    }
+
+    for (let j = 0; j < detail.length; j++) {
+      // console.log("日期：" + JSON.stringify(date + "---" + detail[j].date))
+      for (let k = 1; k <= thisMonthDays; k++) {
+
+        var month = ("0" + month).slice(-2);
+        var day = ("0" + k).slice(-2);
+        var date = year + "-" + month + "-" + day
+
+        // console.log("-----" + JSON.stringify(date + "---" + detail[j].date))
+        if (date == detail[j].date) {
+          // console.log("days :----" + JSON.stringify(days[k-1]))
+          days[k - 1] = {
+            day: k,
+            money: detail[j].price,
+            site: detail[j].surplus,
+            choosed: false
+          }
+        }
+      }
     }
 
     this.setData({
@@ -162,13 +213,26 @@ const conf = {
 
     this.setData(o);
   },
-  onShareAppMessage() {
-    return {
-      title: '小程序日历',
-      desc: '还是新鲜的日历哟',
-      path: 'pages/index/index'
-    };
-  }
+
+  onShareAppMessage: function () {
+    var user_id = getApp().globalData.userInfo.id
+    if (app.globalData.userInfo.organization_id) {
+
+      return {
+        title: app.globalData.userInfo.organization_id,
+        path: '/pages/index/index?share_user=' + user_id
+      }
+    }
+
+  },
+
+  // onShareAppMessage() {
+  //   return {
+  //     title: '小程序日历',
+  //     desc: '旅游小程序',
+  //     path: 'pages/index/index'
+  //   };
+  // }
 };
 
 Page(conf);
