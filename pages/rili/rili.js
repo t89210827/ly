@@ -216,14 +216,10 @@ const conf = {
 
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
     }
-
   },
 
   // onShareAppMessage() {

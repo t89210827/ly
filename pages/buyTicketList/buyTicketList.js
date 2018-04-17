@@ -69,13 +69,12 @@ Page({
    */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    // if (getApp().globalData.userInfo.organization_id) {
+    //   console.log("---" + JSON.stringify())
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
+      // }
     }
-
-  }
+  },
 })

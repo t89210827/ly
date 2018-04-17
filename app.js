@@ -21,12 +21,14 @@
 const util = require('./utils/util.js')
 var vm = null
 var share_user = null
+// var organization_id = "南洋风情"
 App({
   onLaunch: function (e) {
     console.log("onLaunch  ---------" + JSON.stringify(e))
 
     if (!util.judgeIsAnyNullStr(e.query.share_user)) {
       share_user = e.query.share_user
+      // organization_id = e.query.organization_id
       console.log("分享人  ---------" + share_user)
     }
 
@@ -50,44 +52,70 @@ App({
 
   },
   login: function (userInfoCallback) {
-    console.log("登陆接口")
+    // console.log("登陆接口")
     wx.login({
       success: function (res) {
-        console.log("wx.login:" + JSON.stringify(res))
+        console.log("登陆接口:" + JSON.stringify(res))
         if (res.code) {
-          util.getOpenId({ code: res.code }, function (ret) {
-            console.log("getOpenId:" + JSON.stringify(ret))
-            var openId = ret.data.ret.openid
-            // vm.updateUserInfo()
-            if (share_user == null) {
-              var param = {
-                account_type: 'xcx',
-                open_id: openId,
-              }
-            } else {
-              var param = {
-                account_type: 'xcx',
-                open_id: openId,
-                share_user: share_user
-              }
-            }
-            util.login(param, function (ret) {
-              console.log("login1111:" + JSON.stringify(param));
-              console.log("login:" + JSON.stringify(ret));
-              if (ret.data.code == "200") {
-                vm.storeUserInfo(ret.data.ret)
+          var code = res.code
 
-                typeof userInfoCallback == "function" && userInfoCallback(vm.globalData.userInfo)
+          //获取用户信息
+          wx.getUserInfo({
+            success: function (res) {
+              console.log('用户信息 : ' + JSON.stringify(res))
+              var userInfo = res.userInfo;
 
-                if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
-                  vm.updateUserInfo(function (ret) { })
+              util.getOpenId({ code: code }, function (ret) {
+                console.log("openid:" + JSON.stringify(ret.data.ret.openid))
+                var openId = ret.data.ret.openid
+                // vm.updateUserInfo()
+                if (share_user == null) {
+                  var param = {
+                    account_type: 'xcx',
+                    open_id: openId,
+
+                    gender: userInfo.gender,
+                    nick_name: userInfo.nickName,
+                    avatar: userInfo.avatarUrl,
+                  }
+                } else {
+                  var param = {
+                    account_type: 'xcx',
+                    open_id: openId,
+                    share_user: share_user,
+                    
+                    // organization_id: organization_id,
+                    nick_name: userInfo.nickName,
+                    avatar: userInfo.avatarUrl,
+                    gender: userInfo.gender,
+                  }
                 }
-              }
-            }, null);
-          }, null);
+                util.login(param, function (ret) {
+                  console.log("登陆接口参数:" + JSON.stringify(param));
+                  console.log("登陆接口返回参数:" + JSON.stringify(ret));
+                  if (ret.data.code == "200") {
+                    vm.storeUserInfo(ret.data.ret)
+
+                    typeof userInfoCallback == "function" && userInfoCallback(vm.globalData.userInfo)
+
+                    if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
+                      vm.updateUserInfo(function (ret) { })
+                    }
+                  }
+                }, null);
+              }, null);
+
+            },
+            fail: function (res) {
+              console.log('getUserInfo fail res is:' + JSON.stringify(res));
+              vm.showModal();
+            }
+          })
+
         }
       }
     })
+
   },
   //存数据到缓存
   storeUserInfo: function (obj) {

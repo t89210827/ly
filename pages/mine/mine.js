@@ -31,6 +31,9 @@ Page({
 
   onLoad: function (options) {
     vm = this
+    // vm.getUserInfo()
+    var userInfo = getApp().globalData.userInfo
+    vm.setData({ userInfo: userInfo })
     //创建一个动画实例animation
     this.animation = wx.createAnimation({
       transformOrigin: "50% 50%",
@@ -39,6 +42,29 @@ Page({
       delay: 100
     })
   },
+
+  //更新当前用户信息
+  getUserInfo: function () {
+    wx.login({
+      success: function () {
+        wx.getUserInfo({
+          success: function (res) {
+            var simpleUser = res.userInfo;
+            console.log("---" + JSON.stringify(simpleUser))
+            var param = {
+              gender: simpleUser.gender,
+              avatar: simpleUser.avatarUrl,
+              nick_name: simpleUser.nickName
+            }
+            util.updateUserInfo(param, function (res) {
+              console.log("更新用户信息:" + JSON.stringify(res))
+            })
+          }
+        });
+      }
+    });
+  },
+
   jumpInvite: function () {
     wx.navigateTo({
       url: '/pages/my/invite/invite',
@@ -169,13 +195,9 @@ Page({
    */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
     }
-
-  }
+  },
 })

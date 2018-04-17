@@ -12,8 +12,8 @@
         <text class='travel-price'>￥{{price}}</text> 起</view>
       <view class='flex-row margin-top-20'>
         <!-- <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{categorie.type}}</text>  -->
-        <text style='font-size:24rpx;line-height:38rpx;width:400rpx;'>{{categorie.name}}</text>
-        <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;'>沈阳出发</text>
+        <text style='font-size:24rpx;line-height:38rpx;width:200rpx;'>{{categorie.name}}</text>
+        <text style='font-size:24rpx;font-weight:100;line-height:38rpx;margin-top:1prpx;width:290rpx;text-align:right;'>{{start_place}}</text>
       </view>
     </view>
   </view>
@@ -78,8 +78,6 @@
   </view>
   <view class='bar-10'></view>
 </template>
-
-
 <!--该模板用于旅游定制列表页展示-->
 <template name="traveCustomizationListTpl">
 

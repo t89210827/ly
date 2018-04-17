@@ -135,7 +135,7 @@ Page({
       content: '是否删除？',
       success: function (res) {
         if (res.confirm) {
-          
+
           var id = e.currentTarget.dataset.collectid
           var deleId = vm.data.deleId
           deleId.push(id)
@@ -265,18 +265,12 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
     }
-
-  }
+  },
+  
 })

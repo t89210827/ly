@@ -31,7 +31,7 @@ function qiniuUrlTool(img_url, type) {
     case "ticket":      //抢票
       qn_img_url = img_url + "?imageView2/2/w/350/h/200/interlace/1";
       break;
-    case "top_ad":      //广告图片
+    case "top_ad":              //广告图片
       qn_img_url = img_url + "?imageView2/2/w/640/h/330/interlace/1";
       break;
     case "folder_index":        //首页图片
@@ -128,7 +128,6 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
 function test(param) {
   console.log(JSON.stringify("11"));
 }
-
 // http://localhost/nyfq/public/api/order/getOrders
 
 //根据user_id和goods_type获取订单信息
@@ -346,7 +345,12 @@ function getTourGoodsByGoodsIdAndDate(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/tour/getTourGoodsByGoodsIdAndDate', param, "GET", successCallback, errorCallback);
 }
 
-//http://localhost/nyfq/public/api/tour/getTourGoodsByGoodsIdAndDate
+//根据id获取旅行社信息
+function getOrganizations(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/organizations/getOrganizations', param, "GET", successCallback, errorCallback);
+}
+
+//  http://localhost/nyfq/public/api/organizations/getOrganizations
 
 //返回
 function navigateBack(delta) {
@@ -608,4 +612,5 @@ module.exports = {
   imageUtil: imageUtil,
   getTourGoodsByTourGoodsId: getTourGoodsByTourGoodsId,
   getTourGoodsByGoodsIdAndDate: getTourGoodsByGoodsIdAndDate,
+  getOrganizations: getOrganizations,
 }

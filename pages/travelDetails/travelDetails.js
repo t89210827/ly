@@ -17,8 +17,7 @@ Page({
     surplus: '',//剩余位数
     routes: [],//线路概述
     contents: [],//产品特色
-    comment: [],//所有评论
-    imgalist: [],//预览列表   
+    comment: [],//所有评论  
     dateils: {},//详情页全部数据
     banner: [],//banner数据
     userType: true, //用户类型
@@ -53,6 +52,14 @@ Page({
     })
     vm.getSystemInfo()
     vm.userType()
+  },
+
+  showtoast: function () {
+    wx.showToast({
+      title: '评价审核通过后才能展示出来，请耐心等待',
+      icon: 'none',
+      duration: 4000
+    })
   },
   // 根据旅游产品id获取产品日期
   getTourGoodsByGoodsIdAndDate: function () {
@@ -202,15 +209,18 @@ Page({
   },
   // 预览图片  
   previewImage: function (e) {
+    var obj = e.target.dataset.srcs;
     var current = e.target.dataset.src;
-    vm.data.imgalist.push(current);
-    // console.log("预览图片1" + vm.data.imgalist);      
+    var arr = []
+    for (var i = 0; i < obj.length; i++) {
+      if (obj[i].type == 1) {
+        arr.push(obj[i].content)
+      }
+    }
+    console.log("预览图片1" + JSON.stringify(arr));
     wx.previewImage({
       current: current, // 当前显示图片的http链接  
-      urls: vm.data.imgalist // 需要预览的图片http链接列表  
-    })
-    vm.setData({
-      imgalist: []
+      urls: arr // 需要预览的图片http链接列表  
     })
   },
   addComment: function () {
@@ -314,9 +324,7 @@ Page({
       url: '/pages/rili/rili?travelid=' + vm.data.travelid
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+
   onReady: function () {
 
   },
@@ -377,14 +385,10 @@ Page({
 
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
     }
-
   },
 
 })

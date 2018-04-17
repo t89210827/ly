@@ -35,7 +35,8 @@ Page({
     vm.getAds()//获取banner
     vm.getIndexMenus()//获取首页菜单
     vm.getNewGoods()//获取首页最新产品
-    vm.getSpecialGoods()//获取首页特价产品    
+    vm.getSpecialGoods()//获取首页特价产品   
+    vm.getUserInfo()    //获取当前用户信息 
   },
   //跳转商品详情页
   jumpTravelDetails: function (e) {
@@ -90,7 +91,8 @@ Page({
       page: 3
     }
     util.getSpecialGoods(param, function (res) {
-      console.log("特价优惠" + JSON.stringify(res.data.ret))
+      // console.log("特价优惠" + JSON.stringify(res.data.ret))
+      console.log("特价优惠" + JSON.stringify(res))
       var SpecialGoods = res.data.ret
 
       for (var i = 0; i < SpecialGoods.length; i++) {
@@ -108,28 +110,48 @@ Page({
   getBarTitle: function () {
     console.log("1111111" + JSON.stringify(getApp().globalData.userInfo))
     if (!util.judgeIsAnyNullStr(getApp().globalData.userInfo)) {
-      // if (getApp().globalData.userInfo.type == 1) {
-      var title = getApp().globalData.userInfo.organization_id
+      // if (getApp().globalData.userInfo.organization_id == 0) {
+      //   return
+      // }
+      var organization_id = getApp().globalData.userInfo.organization_id
+
+      if (organization_id == 0) {
+        var title = "北方国际旅游平台"
+        console.log("旅行社id为0")
+      } else {
+        console.log("旅行社id为其他")
+        var param = {
+          id: organization_id
+        }
+        //根据旅行社id获取旅行社信息
+        util.getOrganizations(param, function (res) {
+          console.log("根据旅行社id获取旅行社信息" + JSON.stringify(res))
+        })
+      }
+      // var title = getApp().globalData.userInfo.organization_id
       wx.setNavigationBarTitle({
         title: title //页面标题为路由参数
       })
-      // }
-    } else {
-      //调用登录接口
-      app.login(function (res) {
-        console.log("111111" + JSON.stringify(res))
-
-        // if (res.type == 1) {
-        var title = res.organization_id
-        wx.setNavigationBarTitle({
-          title: title //页面标题为路由参数
-        })
-        // }
-
-      });
 
     }
+    // else {
+    //   app.login(function (res) {
+    //     console.log("111111" + JSON.stringify(res))
+
+    //     if (res.organization_id == 0) {
+    //       return
+    //     }
+
+    //     var title = res.organization_id
+    //     wx.setNavigationBarTitle({
+    //       title: title //页面标题为路由参数
+    //     })
+
+    //   });
+    // }
+
   },
+
   //获取轮播图
   getAds: function () {
     util.getAds({}, function (res) {
@@ -139,6 +161,7 @@ Page({
       })
     }, null)
   },
+
   // 跳转到旅游列表页
   jumpTravelList: function (e) {
     // console.log(JSON.stringify(e))
@@ -181,6 +204,7 @@ Page({
   //     inputVal: ""
   //   });
   // },
+
   inputTyping: function (e) {
     this.setData({
       inputVal: e.detail.value
@@ -198,15 +222,38 @@ Page({
     vm.getNewGoods()
     wx.stopPullDownRefresh()
   },
+
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    var organization_id = getApp().globalData.userInfo.organization_id
+    // if (getApp().globalData.userInfo.organization_id) {
+    //   console.log("---" + JSON.stringify())
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
+      // }
     }
-
+  },
+  //更新当前用户信息
+  getUserInfo: function () {
+    wx.login({
+      success: function () {
+        wx.getUserInfo({
+          success: function (res) {
+            var simpleUser = res.userInfo;
+            console.log("---" + JSON.stringify(simpleUser))
+            var param = {
+              gender: simpleUser.gender,
+              avatar: simpleUser.avatarUrl,
+              nick_name: simpleUser.nickName
+            }
+            util.updateUserInfo(param, function (res) {
+              console.log("更新用户信息:" + JSON.stringify(res))
+            })
+          }
+        });
+      }
+    });
   }
+
 });

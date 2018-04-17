@@ -80,7 +80,7 @@
               <view style='width:3%;'></view>
               <view style='width:65%;'>
                 <view class='flex-row'>
-                  <text class='font-weight font-size-13 text-oneline'>{{item.place}}</text>
+                  <text class='font-weight font-size-13'>{{item.place}}</text>
                 </view>
                 <view style='height:10rpx;'></view>
                 <text class='font-weight font-size-12'>{{item.content}}</text>
@@ -128,14 +128,16 @@
 
           <block wx:if="{{comment=='nall'}}">
             <view style='margin:300rpx 150rpx 0 150rpx;'>
-              <image src='../../../images/box.png' style='width:440rpx;height:300rpx;'></image>
+              <image src='../../images/box.png' style='width:440rpx;height:300rpx;'></image>
             </view>
             <view class='zan-font-16 zan-c-gray-darker' style='width:750rpx;text-align:center;'>还没有评论，快来写第一条吧</view>
           </block>
-
-          <block wx:for="{{comment}}">
-            <template is="commentTpl" data="{{...item,userType}}"></template>
+          <block wx:if="{{comment!='nall'}}">
+            <block wx:for="{{comment}}">
+              <template is="commentTpl" data="{{...item,userType}}"></template>
+            </block>
           </block>
+
           <view style='height:90rpx;'></view>
         </view>
       </view>

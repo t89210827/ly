@@ -1,7 +1,8 @@
 /**app.wxss**/
-@import './style/weui.wxss';  
+@import './style/weui.wxss';
 @import './pages/templates/travelListTpl/travelListTpl.wxss';
 @import '/bower_components/zanui-weapp/dist/index.wxss';
+
 /* .container {
   height: 100%;
   display: flex;
@@ -12,7 +13,7 @@
   box-sizing: border-box;
 }  */
 
- page {
+page {
   /* height: 100%; */
   font-size: 16px;
 }
@@ -20,55 +21,65 @@
 .page {
   background-color: #f8f8f8;
   /* height: 100%; */
-} 
+}
 
 .hidden {
   display: none;
 }
 
-.float-left{
-  float:left;
+.float-left {
+  float: left;
 }
 
-.float-right{
-  float:right;
+.float-right {
+  float: right;
 }
 
 .font-size-10 {
   font-size: 10px;
 }
+
 .font-size-11 {
   font-size: 11px;
 }
+
 .font-size-12 {
   font-size: 12px;
 }
+
 .font-size-13 {
   font-size: 13px;
 }
+
 .font-size-14 {
   font-size: 14px;
 }
+
 .font-size-15 {
   font-size: 15px;
 }
+
 .font-size-16 {
   font-size: 16px;
 }
+
 .font-size-17 {
   font-size: 17px;
 }
+
 .font-size-18 {
   font-size: 18px;
 }
+
 .font-size-19 {
   font-size: 19px;
 }
+
 .font-size-20 {
   font-size: 20px;
 }
 
-.font-weight{
+.font-weight {
   font-weight: bold;
 }
 
@@ -88,16 +99,16 @@
   margin-left: 15rpx;
 }
 
-.margin-left-20{
-  margin-left:20rpx;
+.margin-left-20 {
+  margin-left: 20rpx;
 }
 
-.margin-left-30{
-  margin-left:30rpx;
+.margin-left-30 {
+  margin-left: 30rpx;
 }
 
-.margin-left-40{
-  margin-left:40rpx;
+.margin-left-40 {
+  margin-left: 40rpx;
 }
 
 .margin-right-2 {
@@ -116,20 +127,20 @@
   margin-right: 15rpx;
 }
 
-.margin-right-20{
-  margin-right:20rpx;
+.margin-right-20 {
+  margin-right: 20rpx;
 }
 
-.margin-right-30{
-  margin-right:30rpx;
+.margin-right-30 {
+  margin-right: 30rpx;
 }
 
-.margin-right-40{
-  margin-right:40rpx;
+.margin-right-40 {
+  margin-right: 40rpx;
 }
 
-.margin-right-50{
-  margin-right:50rpx;
+.margin-right-50 {
+  margin-right: 50rpx;
 }
 
 .margin-top-5 {
@@ -347,7 +358,7 @@
   border-top: 1px solid #d0d0d0;
 }
 
-.border-t{
+.border-t {
   border-top: 1px solid #f0f0f0;
 }
 
@@ -396,12 +407,12 @@
   text-align: center;
 }
 
-.text-right{
+.text-right {
   text-align: right;
 }
 
-.text-left{
-  text-align:left;
+.text-left {
+  text-align: left;
 }
 
 .white-font {
@@ -453,7 +464,7 @@
   text-overflow: ellipsis;
 }
 
-.clear{
+.clear {
   clear: both;
 }
 
@@ -463,60 +474,62 @@
   align-items: center;
 }
 
-.flex-row{
-  display:flex;
-  flex-direction:row;
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }
 
-.margin-5{
-  margin:5rpx 5rpx;
+.margin-5 {
+  margin: 5rpx 5rpx;
 }
 
-.margin-10{
-  margin:10rpx;
+.margin-10 {
+  margin: 10rpx;
 }
 
-.width-100{
+.width-100 {
   width: 100%;
 }
 
-.width-50{
-  width:50%;
+.width-50 {
+  width: 50%;
 }
 
-.bar-10{
- height: 10rpx;
- background-color: #f4f4f4;
- width: 100
+.bar-10 {
+  height: 10rpx;
+  background-color: #f4f4f4;
+  width: 100;
 }
 
-.bar-15{
- height: 15rpx;
- background-color: #f4f4f4;
- width: 100
+.bar-15 {
+  height: 15rpx;
+  background-color: #f4f4f4;
+  width: 100;
 }
 
-.bar-30{
- height: 30rpx;
- background-color: #f4f4f4;
- width: 100%;
+.bar-30 {
+  height: 30rpx;
+  background-color: #f4f4f4;
+  width: 100%;
 }
 
-.bar-2{
- height: 2rpx;
- background-color: #e6e6e6;
- width: 100%;
-}
-.bar-2-left{
- height: 2rpx;
- background-color: #e6e6e6;
- width: 96%;
- margin-left: 4%;
+.bar-2 {
+  height: 2rpx;
+  background-color: #e6e6e6;
+  width: 100%;
 }
 
-.font-weight{
-  font-weight: 300
+.bar-2-left {
+  height: 2rpx;
+  background-color: #e6e6e6;
+  width: 96%;
+  margin-left: 4%;
 }
-.font-weight-300{
-  font-weight: 300
+
+.font-weight {
+  font-weight: 300;
+}
+
+.font-weight-300 {
+  font-weight: 300;
 }

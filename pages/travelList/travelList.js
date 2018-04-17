@@ -112,17 +112,12 @@ Page({
       console.log("旅游数据" + JSON.stringify(res))
     })
   },
-
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
     }
-
   },
 
   footerTap: app.footerTap,

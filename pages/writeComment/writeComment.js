@@ -142,11 +142,14 @@ Page({
       wx.navigateBack({
         delta: 1
       })
-      wx.showToast({
-        title: '评价审核通过后才能展示出来，请耐心等待',
-        icon: 'none',
-        duration: 4000
-      })
+      var pages = getCurrentPages
+      var page = pages[pages.length - 2]
+      page.showtoast
+      // wx.showToast({
+      //   title: '评价审核通过后才能展示出来，请耐心等待',
+      //   icon: 'none',
+      //   duration: 4000
+      // })
     })
   },
 
@@ -204,13 +207,9 @@ Page({
    */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    if (app.globalData.userInfo.organization_id) {
-
-      return {
-        title: app.globalData.userInfo.organization_id,
-        path: '/pages/index/index?share_user=' + user_id
-      }
+    return {
+      title: getApp().globalData.userInfo.organization_id,
+      path: '/pages/index/index?share_user=' + user_id
     }
-
-  }
+  },
 })

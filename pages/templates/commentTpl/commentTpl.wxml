@@ -25,7 +25,7 @@
         <block wx:for="{{media}}">
           <block wx:if="{{item.type == 1}}">
             <view style='width:450rpx;'>
-              <image src='{{item.content}}' bindtap='previewImage' data-src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;margin-bottom:10rpx;'></image>
+              <image src='{{item.content}}' bindtap='previewImage' data-srcs='{{media}}' data-src='{{item.content}}' style='width:140rpx;float:left;height:140rpx;margin-right:10rpx;margin-bottom:10rpx;'></image>
             </view>
           </block>
           <block wx:if="{{item.type == 2}}">
