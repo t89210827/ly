@@ -21,6 +21,7 @@
 const util = require('./utils/util.js')
 var vm = null
 var share_user = null
+var travelid = null
 // var organization_id = "南洋风情"
 App({
   onLaunch: function (e) {
@@ -83,7 +84,7 @@ App({
                     account_type: 'xcx',
                     open_id: openId,
                     share_user: share_user,
-                    
+
                     // organization_id: organization_id,
                     nick_name: userInfo.nickName,
                     avatar: userInfo.avatarUrl,
@@ -190,7 +191,7 @@ App({
               console.log("重新授权 ： " + JSON.stringify(res))
             }
           })
-        } A
+        }
       }
     })
   },

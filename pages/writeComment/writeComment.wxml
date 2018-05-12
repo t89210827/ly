@@ -15,7 +15,7 @@
               </view>
             </block>
           </view>
-          <block wx:if="{{files.length<8}}">
+          <block wx:if="{{files.length<7}}">
             <view class="weui-uploader__input-box">
               <view class="weui-uploader__input" bindtap="chooseImage"></view>
             </view>
@@ -37,8 +37,8 @@
         <view class="weui-uploader__bd">
           <view class="weui-uploader__files" id="uploaderFiles">
             <block wx:for="{{videos}}" wx:key="*this">
-              <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                <video class="weui-uploader__img" poster='http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.ea1116f9b46946278ac9dcbdccb9b021.png' controls="true" src="{{item.content}}" />
+              <view class="weui-uploader__file" bindtap="" id="{{item}}">
+                <video class="weui-uploader__img" poster='http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.ea1116f9b46946278ac9dcbdccb9b021.png' controls="true" src="{{item}}" />
               </view>
             </block>
           </view>
@@ -67,8 +67,8 @@
 <view style='height:150rpx;'></view>
 
 <!-- <view style='margin-left:290rpx;margin-top:30rpx;'> -->
-<cover-view class='travel-add-comment' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>
-  写评价
+<cover-view class='travel-add-comment' bindtap='affirm' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>
+  提交评论
 </cover-view>
 <!-- <button bindtap='addComment' class="weui-btn mini-btn" style='width:200rpx;background-color:yellow;' type="warn" size="mini">发布</button> -->
 <!-- </view> -->

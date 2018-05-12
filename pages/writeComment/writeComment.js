@@ -15,9 +15,8 @@ function initQiniu() {
 }
 Page({
   data: {
-    files: [],
+    files: [],          //图片数组
     goods_id: '',//旅游产品id
-    photo: [], //图片视频数组
     intro: '',//评论
     videos: []//视频
   },
@@ -51,23 +50,28 @@ Page({
             qnToken = res.data.ret;
             console.log("qiniu upload token:" + qnToken)
             initQiniu();
+
+            var files = vm.data.files
             //获取token成功后上传图片
-            for (var i = 0; i < tempFilePaths.length; i++) {
+            // for (var i = 0; i < tempFilePaths.length; i++) {
+            for (var i = 0; i < 8; i++) {
               var tempFilePath = tempFilePaths[i]
               qiniuUploader.upload(tempFilePath, (res) => {
-                console.log("qiniuUploader upload res:" + JSON.stringify(res));
                 var picture = util.getImgRealUrl(res.key)
+                console.log("七牛云上传返回:" + JSON.stringify(picture));
                 var photoIndex = { 'content': picture, 'type': 1 }
                 Arraydata.push(photoIndex)
+                files.push(picture)
                 vm.setData({
-                  photo: Arraydata,
-                  files: vm.data.files.concat(picture)
+                  // photo: Arraydata,
+                  files: files
                 })
-                console.log("数据数组" + JSON.stringify(Arraydata))
+                console.log("数据数组" + JSON.stringify(files))
               }, (error) => {
                 console.error('error: ' + JSON.stringify(error));
               })
             }
+
           }
         }, null);
       }
@@ -110,16 +114,17 @@ Page({
             qiniuUploader.upload(tempFilePath, (res) => {
               console.log("qiniuUploader upload res:" + JSON.stringify(res));
               var picture = util.getImgRealUrl(res.key)
+              var dataVideos = vm.data.videos                     //视频数组
+
               var videos = { 'content': picture, 'type': 2 }
-              var dataVideos = vm.data.videos
-              dataVideos.push(videos)//添加用户上传视频
-              Arraydata.push(videos)//添加用户上传视频 到 接口数据数组
+              dataVideos.push(picture)//添加用户上传    视频视频
+              Arraydata.push(videos)//添加用户上传视频 到 参数数组
               vm.setData({
-                photo: Arraydata,
+                // photo: Arraydata,
                 videos: dataVideos,
-                src: res.tempFilePath
+                // src: res.tempFilePath
               })
-              console.log("数据数组" + JSON.stringify(vm.data.videos))
+              console.log("数据数组" + JSON.stringify(dataVideos))
             }, (error) => {
               console.error('error: ' + JSON.stringify(error));
             })
@@ -128,23 +133,42 @@ Page({
       }
     })
   },
+
+  affirm: function () {
+    wx.showModal({
+      title: '确定',
+      content: '确定要提交评论吗?',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+
+          vm.addComment()
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
   //发布评论
   addComment: function () {
-    console.log("55555555555555555555555")
+    console.log("555555555555")
     var param = {
       content: vm.data.intro,//评论的文本内容
       goods_id: vm.data.goods_id,//产品编号
       goods_type: 1,//产品类型（备注）
-      media: vm.data.photo//	上传的多媒体数组
+      // media: vm.data.photo//	上传的多媒体数组
+      media: Arraydata//	上传的多媒体数组
     }
     util.addComment(param, function (res) {
       console.log("用户点评" + JSON.stringify(res))
       wx.navigateBack({
         delta: 1
       })
-      var pages = getCurrentPages
+      var pages = getCurrentPages()
       var page = pages[pages.length - 2]
-      page.showtoast
+      page.showtoast()
       // wx.showToast({
       //   title: '评价审核通过后才能展示出来，请耐心等待',
       //   icon: 'none',

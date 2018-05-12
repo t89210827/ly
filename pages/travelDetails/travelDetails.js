@@ -22,12 +22,46 @@ Page({
     banner: [],//banner数据
     userType: true, //用户类型
 
-    images: [], //产品特色图片
-    money: [],  //价格和余位
+    images: [],     //产品特色图片
+    money: [],      //价格和余位
   },
+
+  userType: function () {
+    var userInfo = getApp().globalData.userInfo
+    if (userInfo.type == 1) {
+      vm.setData({
+        userType: false
+      })
+    }
+    console.log("类型" + vm.data.userType)
+  },
+
   onLoad: function (options) {
-    util.showLoading("加载详情")
     vm = this
+    console.log("888888888888" + JSON.stringify(options))
+
+    if (!util.judgeIsAnyNullStr(getApp().globalData.userInfo)) {
+      vm.userType()
+      vm.load(options)
+    } else {
+      getApp().login(function (userInfo) {
+        // console.log("11111111111" + JSON.stringify(res))
+        if (userInfo.type == 1) {
+          vm.setData({
+            userType: false
+          })
+        }
+        vm.load(options)
+      })
+    }
+
+
+
+  },
+
+  load: function (options) {
+    util.showLoading("加载详情")
+
     var travelid = options.travelid
     var paramDate = ''
     //判断有时间参数（是否从日历页拿数据）
@@ -51,7 +85,6 @@ Page({
       paramDate: paramDate
     })
     vm.getSystemInfo()
-    vm.userType()
   },
 
   showtoast: function () {
@@ -83,15 +116,7 @@ Page({
       vm.setData({ money: money })
     })
   },
-  userType: function () {
-    var userInfo = getApp().globalData.userInfo
-    if (userInfo.type == 1) {
-      vm.setData({
-        userType: false
-      })
-    }
-    console.log("类型" + vm.data.userType)
-  },
+
   //跳转到回复页面
   jumpReply: function (e) {
     var comment_id = e.currentTarget.dataset.commentid
@@ -385,9 +410,10 @@ Page({
 
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
+    console.log("转发" + vm.data.travelid)
     return {
       title: getApp().globalData.userInfo.organization_id,
-      path: '/pages/index/index?share_user=' + user_id
+      path: '/pages/travelDetails/travelDetails?share_user=' + user_id + "&travelid=" + vm.data.travelid
     }
   },
 
