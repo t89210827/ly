@@ -21,16 +21,23 @@
 const util = require('./utils/util.js')
 var vm = null
 var share_user = null
+var organization_id = null
 var travelid = null
-// var organization_id = "南洋风情"
 App({
   onLaunch: function (e) {
     console.log("onLaunch  ---------" + JSON.stringify(e))
 
     if (!util.judgeIsAnyNullStr(e.query.share_user)) {
       share_user = e.query.share_user
-      // organization_id = e.query.organization_id
+      organization_id = e.query.organization_id
       console.log("分享人  ---------" + share_user)
+      console.log("旅行社id  -------" + organization_id)
+    }
+
+    if (!util.judgeIsAnyNullStr(e.query.travelid)) {
+      travelid = e.query.travelid
+
+      console.log("旅游线路id  -------" + travelid)
     }
 
     //获取vm
@@ -41,18 +48,35 @@ App({
     //如果没有缓存
     if (userInfo == null || userInfo == undefined || userInfo == "") {
       //调用登录接口
-      vm.login(null);
-    } else {
+      vm.getSetting()
       // vm.login(null);
+    } else {
       vm.globalData.userInfo = wx.getStorageSync("userInfo");
       console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
     }
   },
+
+  getSetting: function () {
+    // 可以通过 wx.getSetting 先查询一下用户是否授权了获取用户信息这个 scope
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+          wx.redirectTo({
+            url: '/pages/getUserInfoPage/getUserInfoPage',
+          })
+          console.log("用户没有授权获取用户信息")
+        } else {
+          vm.login()
+        }
+      }
+    })
+  },
+
   //监听小程序打开
   onShow: function () {
 
   },
-  login: function (userInfoCallback) {
+  login: function () {
     // console.log("登陆接口")
     wx.login({
       success: function (res) {
@@ -74,18 +98,17 @@ App({
                   var param = {
                     account_type: 'xcx',
                     open_id: openId,
-
                     gender: userInfo.gender,
                     nick_name: userInfo.nickName,
                     avatar: userInfo.avatarUrl,
                   }
                 } else {
                   var param = {
+                    share_user: share_user,
+                    organization_id: organization_id,
+
                     account_type: 'xcx',
                     open_id: openId,
-                    share_user: share_user,
-
-                    // organization_id: organization_id,
                     nick_name: userInfo.nickName,
                     avatar: userInfo.avatarUrl,
                     gender: userInfo.gender,
@@ -96,16 +119,24 @@ App({
                   console.log("登陆接口返回参数:" + JSON.stringify(ret));
                   if (ret.data.code == "200") {
                     vm.storeUserInfo(ret.data.ret)
+                    console.log("跳转到首页");
 
-                    typeof userInfoCallback == "function" && userInfoCallback(vm.globalData.userInfo)
-
+                    if (travelid == null) {
+                      wx.switchTab({
+                        url: '/pages/index/index',
+                      })
+                    } else {
+                      wx.navigateTo({
+                        url: '/pages/travelDetails/travelDetails?travelid=' + travelid,
+                      })
+                    }
+                    // typeof userInfoCallback == "function" && userInfoCallback(vm.globalData.userInfo)
                     if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
                       vm.updateUserInfo(function (ret) { })
                     }
                   }
                 }, null);
               }, null);
-
             },
             fail: function (res) {
               console.log('getUserInfo fail res is:' + JSON.stringify(res));

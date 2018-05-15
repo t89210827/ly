@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/getUserInfoPage/getUserInfoPage",
     "pages/buyTickets/buyTickets",
     "pages/travelCustomization/index/index",
     "pages/travelCustomization/customizationDetail/customizationDetail",

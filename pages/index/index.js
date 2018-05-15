@@ -22,21 +22,14 @@ Page({
     vm = this
     util.showLoading("加载首页")
 
-    // console.log("首页onLoad参数" + JSON.stringify(options))
-    // if (!util.judgeIsAnyNullStr(options.user_id)) {
-    //   var param = {
-    //     share_user: options.user_id
-    //   }
-    //   util.addInvitation(param, function (res) {
-    //     console.log("分享返回" + JSON.stringify(res))
-    //   })
-    // }
-
     vm.getAds()//获取banner
     vm.getIndexMenus()//获取首页菜单
     vm.getNewGoods()//获取首页最新产品
     vm.getSpecialGoods()//获取首页特价产品   
     vm.getUserInfo()    //获取当前用户信息 
+
+    vm.getBarTitle()
+
   },
   //跳转商品详情页
   jumpTravelDetails: function (e) {
@@ -48,7 +41,6 @@ Page({
   },
   //跳转banner详情页
   jumpDetails: function (e) {
-    // console.log("banner: " + JSON.stringify(e.currentTarget.dataset.bannerid))
     var bannerid = e.currentTarget.dataset.bannerid
     wx.navigateTo({
       url: '/pages/bannerDetails/bannerDetails?bannerid=' + bannerid,
@@ -108,48 +100,27 @@ Page({
   },
   //设置首页标题
   getBarTitle: function () {
-    console.log("1111111" + JSON.stringify(getApp().globalData.userInfo))
     if (!util.judgeIsAnyNullStr(getApp().globalData.userInfo)) {
-      // if (getApp().globalData.userInfo.organization_id == 0) {
-      //   return
-      // }
       var organization_id = getApp().globalData.userInfo.organization_id
+      console.log("根据旅行社id获取旅行社信息" + JSON.stringify(organization_id))
 
-      if (organization_id == 0) {
-        var title = "北方国际旅游平台"
-        console.log("旅行社id为0")
-      } else {
-        console.log("旅行社id为其他")
+      // var title = "北方国际旅游平台"
+      if (organization_id != 0) {
+        console.log("旅行社id不为0")
         var param = {
           id: organization_id
         }
         //根据旅行社id获取旅行社信息
         util.getOrganizations(param, function (res) {
-          console.log("根据旅行社id获取旅行社信息" + JSON.stringify(res))
+          var title = res.data.ret.name
+          console.log("根据旅行社id获取旅行社信息" + JSON.stringify(title))
+          wx.setNavigationBarTitle({
+            title: title //页面标题为路由参数
+          })
         })
       }
-      // var title = getApp().globalData.userInfo.organization_id
-      wx.setNavigationBarTitle({
-        title: title //页面标题为路由参数
-      })
 
     }
-    // else {
-    //   app.login(function (res) {
-    //     console.log("111111" + JSON.stringify(res))
-
-    //     if (res.organization_id == 0) {
-    //       return
-    //     }
-
-    //     var title = res.organization_id
-    //     wx.setNavigationBarTitle({
-    //       title: title //页面标题为路由参数
-    //     })
-
-    //   });
-    // }
-
   },
 
   //获取轮播图
@@ -199,11 +170,6 @@ Page({
       inputShowed: false
     });
   },
-  // clearInput: function () {
-  //   this.setData({
-  //     inputVal: ""
-  //   });
-  // },
 
   inputTyping: function (e) {
     this.setData({
@@ -212,7 +178,6 @@ Page({
   },
   //加载
   onShow: function () {
-    vm.getBarTitle()
   },
   /**
  * 页面相关事件处理函数--监听用户下拉动作
@@ -226,12 +191,9 @@ Page({
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
     var organization_id = getApp().globalData.userInfo.organization_id
-    // if (getApp().globalData.userInfo.organization_id) {
-    //   console.log("---" + JSON.stringify())
     return {
-      title: getApp().globalData.userInfo.organization_id,
+      title: "分享还会获得积分哦！",
       path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
-      // }
     }
   },
   //更新当前用户信息

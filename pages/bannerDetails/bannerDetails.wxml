@@ -14,6 +14,9 @@
   <view style='height:20rpx;'></view>
 
   <block wx:if="{{item.type == 1}}">
-    <image src='{{item.content}}' style='width:100%;height:400rpx;'></image>
+
+    <image id="{{index}}" src='{{item.content}}' bindload="imageLoad" style='width:{{item.imageWidth}}px;height:{{item.imageHeight}}px;margin-bottom:-11rpx;'></image>
+
+    <!-- <image src='{{item.content}}' style='width:100%;height:400rpx;'></image> -->
   </block>
 </block>

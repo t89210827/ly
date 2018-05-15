@@ -1,5 +1,6 @@
 // pages/bannerDetails/bannerDetails.js
 var util = require('../../utils/util.js')
+var vm = this
 //获取应用实例
 Page({
   /**
@@ -10,7 +11,7 @@ Page({
   },
 
   onLoad: function (options) {
-    var vm = this
+    vm = this
     var bannerid = options.bannerid
     // console.log("banner: " + JSON.stringify(options))
     var param = {
@@ -22,6 +23,21 @@ Page({
       vm.setData({
         details: details
       })
+    })
+  },
+
+  //获取图片的高宽
+  imageLoad: function (e) {
+    console.log("imageLoad e:" + JSON.stringify(e))
+    var imageSize = util.imageUtil(e)
+    var index = parseInt(e.currentTarget.id)
+    var obj = vm.data.details
+    console.log("imageLoad e1:" + JSON.stringify(obj))
+    obj[index].imageWidth = imageSize.imageWidth
+    obj[index].imageHeight = imageSize.imageHeight
+
+    vm.setData({
+      details: obj
     })
   },
 
@@ -72,12 +88,10 @@ Page({
    */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    // if (getApp().globalData.userInfo.organization_id) {
-    //   console.log("---" + JSON.stringify())
+    var organization_id = getApp().globalData.userInfo.organization_id
     return {
-      title: getApp().globalData.userInfo.organization_id,
-      path: '/pages/index/index?share_user=' + user_id
-      // }
+      title: "分享还会获得积分哦！",
+      path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
     }
   },
 

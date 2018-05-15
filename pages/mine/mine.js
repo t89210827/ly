@@ -133,7 +133,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log("获取用户缓存11 ： " + JSON.stringify(app.globalData.userInfo))
     var userInfo = app.globalData.userInfo
     // var userInfo = wx.getStorageSync("userInfo")
     if (userInfo.type == 1) {
@@ -195,9 +194,10 @@ Page({
    */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
+    var organization_id = getApp().globalData.userInfo.organization_id
     return {
-      title: getApp().globalData.userInfo.organization_id,
-      path: '/pages/index/index?share_user=' + user_id
+      title: "分享还会获得积分哦！",
+      path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
     }
   },
 })

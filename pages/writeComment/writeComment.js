@@ -231,9 +231,10 @@ Page({
    */
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
+    var organization_id = getApp().globalData.userInfo.organization_id
     return {
-      title: getApp().globalData.userInfo.organization_id,
-      path: '/pages/index/index?share_user=' + user_id
+      title: "分享还会获得积分哦！",
+      path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
     }
   },
 })

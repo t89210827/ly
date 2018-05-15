@@ -1,13 +1,20 @@
-// pages/travelCustomization/package/package.js
+// pages/getUserInfo/getUserInfo.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
 
   },
 
+  //点击获取用户信息接口返回信息
+  getUserInfo: function (e) {
+    if (e.detail.errMsg == "getUserInfo:ok") {
+      // var userInfo = e.detail.userInfo
+      getApp().login()
+    } else if (e.detail.errMsg == "getUserInfo:fail auth deny") {
+      getApp().showModal()
+    }
+    console.log("用户信息" + JSON.stringify(e))
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,15 +64,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    var user_id = getApp().globalData.userInfo.id
-    var organization_id = getApp().globalData.userInfo.organization_id
-    return {
-      title: "分享还会获得积分哦！",
-      path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
-    }
-  },
 })

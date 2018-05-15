@@ -35,11 +35,9 @@ Page({
     }
     console.log("类型" + vm.data.userType)
   },
-
   onLoad: function (options) {
     vm = this
     console.log("888888888888" + JSON.stringify(options))
-
     if (!util.judgeIsAnyNullStr(getApp().globalData.userInfo)) {
       vm.userType()
       vm.load(options)
@@ -54,14 +52,10 @@ Page({
         vm.load(options)
       })
     }
-
-
-
   },
 
   load: function (options) {
     util.showLoading("加载详情")
-
     var travelid = options.travelid
     var paramDate = ''
     //判断有时间参数（是否从日历页拿数据）
@@ -410,10 +404,10 @@ Page({
 
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
-    console.log("转发" + vm.data.travelid)
+    var organization_id = getApp().globalData.userInfo.organization_id
     return {
-      title: getApp().globalData.userInfo.organization_id,
-      path: '/pages/travelDetails/travelDetails?share_user=' + user_id + "&travelid=" + vm.data.travelid
+      title: "分享还会获得积分哦！",
+      path: '/pages/index/index?share_user=' + user_id + "&travelid=" + vm.data.travelid + '&organization_id=' + organization_id
     }
   },
 

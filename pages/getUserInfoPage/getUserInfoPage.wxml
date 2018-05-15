@@ -1,0 +1,8 @@
+<!--pages/getUserInfo/getUserInfo.wxml-->
+<view style='height:500rpx'></view>
+
+<button style='height:80rpx;line-height:80rpx;background-color:#ff6f30;width:50%;border-radius:50rpx;color:#fff;' lang='zh_CN' bindgetuserinfo="getUserInfo" open-type="getUserInfo">获取用户信息</button>
+
+<view class='center-style' style='width:750rpx;'>
+  <view class='zan-font-18 zan-c-gray-dark' style='width:600rpx;margin-top:100rpx;text'>请授权获取您的用户信息,否则小程序重要功能将无法使用。</view>
+</view>

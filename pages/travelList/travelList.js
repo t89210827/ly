@@ -25,7 +25,6 @@ Page({
     //  高度自适应
     wx.getSystemInfo({
       success: function (res) {
-        console.log("11111111111" + JSON.stringify(res))
         var clientHeight = res.windowHeight,
           clientWidth = res.windowWidth,
           rpxR = 750 / clientWidth;
@@ -114,9 +113,10 @@ Page({
   },
   onShareAppMessage: function () {
     var user_id = getApp().globalData.userInfo.id
+    var organization_id = getApp().globalData.userInfo.organization_id
     return {
-      title: getApp().globalData.userInfo.organization_id,
-      path: '/pages/index/index?share_user=' + user_id
+      title: "分享还会获得积分哦！",
+      path: '/pages/index/index?share_user=' + user_id + '&organization_id=' + organization_id
     }
   },
 
