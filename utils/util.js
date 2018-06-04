@@ -1,7 +1,7 @@
 var TESTMODE = false;
 //服务器地址
 var SERVER_URL = "https://nyfq.isart.me/api";
-var DEBUG_URL = "http://localhost:5555/api";
+var DEBUG_URL = "http://testnyfq.isart.me/api";
 var SERVER_URL = (TESTMODE) ? DEBUG_URL : SERVER_URL;
 
 ///////七牛相关///////////////////////////////////
@@ -350,7 +350,12 @@ function getOrganizations(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/organizations/getOrganizations', param, "GET", successCallback, errorCallback);
 }
 
-//  http://localhost/nyfq/public/api/organizations/getOrganizations
+//删除评论回复
+function delCommentReplie(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/comment/delCommentReplie', param, "POST", successCallback, errorCallback);
+}
+
+//  http://localhost/nyfq/public/api/comment/delCommentReplie
 
 //返回
 function navigateBack(delta) {
@@ -613,4 +618,5 @@ module.exports = {
   getTourGoodsByTourGoodsId: getTourGoodsByTourGoodsId,
   getTourGoodsByGoodsIdAndDate: getTourGoodsByGoodsIdAndDate,
   getOrganizations: getOrganizations,
+  delCommentReplie: delCommentReplie,
 }

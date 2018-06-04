@@ -81,6 +81,31 @@ Page({
     vm.getSystemInfo()
   },
 
+  deleteReplies: function (e) {
+    var repliesid = e.currentTarget.dataset.repliesid
+    wx.showModal({
+      title: '提示',
+      content: '您确定要删除此条评论吗？',
+      // showCancel: false,
+      confirmText: "确定",
+      success: function (res) {
+        if (res.confirm) {
+          var param = {
+            id: repliesid
+          }
+          util.delCommentReplie(param, function (res) {
+            if (res.data.result) {
+              var replie = res.data.ret
+              console.log("删除此条回复" + JSON.stringify(replie))
+              vm.getGoodsCommentLists()       //刷新评论
+            }
+          })
+
+        }
+      }
+    })
+  },
+
   showtoast: function () {
     wx.showToast({
       title: '评价审核通过后才能展示出来，请耐心等待',
@@ -88,6 +113,7 @@ Page({
       duration: 4000
     })
   },
+
   // 根据旅游产品id获取产品日期
   getTourGoodsByGoodsIdAndDate: function () {
     var param = {
@@ -152,7 +178,7 @@ Page({
   gotobuy: function () {
     wx.showModal({
       title: '预定',
-      content: '确定预定吗？',
+      content: '确定点赞  吗？',
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')

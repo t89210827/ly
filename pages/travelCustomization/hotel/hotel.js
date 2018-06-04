@@ -18,8 +18,12 @@ Page({
     }
     util.getHotel(param, function (res) {
       console.log("酒店列表 " + JSON.stringify(res))
+      var hotelList = res.data.ret
+      for (var index in hotelList) {
+        hotelList[index].price = parseInt(hotelList[index].price).toFixed(0)
+      }
       vm.setData({
-        hotelList: res.data.ret
+        hotelList: hotelList
       })
     })
   },

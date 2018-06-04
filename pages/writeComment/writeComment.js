@@ -2,8 +2,7 @@
 var vm = null
 var util = require('../../utils/util.js')
 const qiniuUploader = require("../../utils/qiniuUploader")
-var qnToken = ''
-var Arraydata = [] //
+var qnToken = '' //
 // 初始化七牛相关参数
 function initQiniu() {
   var options = {
@@ -18,7 +17,9 @@ Page({
     files: [],          //图片数组
     goods_id: '',//旅游产品id
     intro: '',//评论
-    videos: []//视频
+    videos: [],//视频
+
+    Arraydata: []
   },
   textAreaEventListener: function (e) {
     console.log("55555" + JSON.stringify(e.detail.value))
@@ -32,6 +33,7 @@ Page({
     wx.chooseImage({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      count: 9,
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
@@ -51,22 +53,38 @@ Page({
             console.log("qiniu upload token:" + qnToken)
             initQiniu();
 
-            var files = vm.data.files
+            // var files = vm.data.files
+            var files = []
+            // var Arraydata = vm.data.Arraydata
+            var Arraydata = []
             //获取token成功后上传图片
             // for (var i = 0; i < tempFilePaths.length; i++) {
-            for (var i = 0; i < 8; i++) {
+            var length = tempFilePaths.length
+            // for (var index in tempFilePaths) {
+            //   Arraydata.push('')
+            //   files.push({ id: index })
+            // }
+
+            console.log("------------:" + JSON.stringify(Arraydata));
+
+            for (var i = 0; i < tempFilePaths.length; i++) {
               var tempFilePath = tempFilePaths[i]
+
+              console.log("Arraydata数组" + JSON.stringify(i))
               qiniuUploader.upload(tempFilePath, (res) => {
+
                 var picture = util.getImgRealUrl(res.key)
                 console.log("七牛云上传返回:" + JSON.stringify(picture));
                 var photoIndex = { 'content': picture, 'type': 1 }
                 Arraydata.push(photoIndex)
                 files.push(picture)
+                // Arraydata[i] = photoIndex
+                // files[i] = picture
                 vm.setData({
-                  // photo: Arraydata,
-                  files: files
+                  Arraydata: Arraydata.push(photoIndex),
+                  files: files.push(picture)
                 })
-                console.log("数据数组" + JSON.stringify(files))
+                console.log("files数组" + JSON.stringify(files))
               }, (error) => {
                 console.error('error: ' + JSON.stringify(error));
               })
@@ -115,16 +133,17 @@ Page({
               console.log("qiniuUploader upload res:" + JSON.stringify(res));
               var picture = util.getImgRealUrl(res.key)
               var dataVideos = vm.data.videos                     //视频数组
+              var Arraydata = vm.data.Arraydata
+
 
               var videos = { 'content': picture, 'type': 2 }
               dataVideos.push(picture)//添加用户上传    视频视频
               Arraydata.push(videos)//添加用户上传视频 到 参数数组
               vm.setData({
-                // photo: Arraydata,
                 videos: dataVideos,
-                // src: res.tempFilePath
+                Arraydata: Arraydata,
               })
-              console.log("数据数组" + JSON.stringify(dataVideos))
+              console.log("数据数组2" + JSON.stringify(Arraydata))
             }, (error) => {
               console.error('error: ' + JSON.stringify(error));
             })
@@ -159,7 +178,7 @@ Page({
       goods_id: vm.data.goods_id,//产品编号
       goods_type: 1,//产品类型（备注）
       // media: vm.data.photo//	上传的多媒体数组
-      media: Arraydata//	上传的多媒体数组
+      media: vm.data.Arraydata//	上传的多媒体数组
     }
     util.addComment(param, function (res) {
       console.log("用户点评" + JSON.stringify(res))

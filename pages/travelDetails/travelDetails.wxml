@@ -92,10 +92,10 @@
           <!-- <text style='margin:10rpx 10rpx; '>以上行程可能因为天气或者因为其他原因有所变动,具体行程以导游安排</text> -->
           <view style='height:90rpx; '></view>
         </view>
-        <view class="" hidden="{{activeIndex != 1}}" style='min-height:1110rpx'>
+        <view hidden="{{activeIndex != 1}}" style='min-height:1110rpx'>
           <block wx:for="{{contents}}">
             <block wx:if="{{item.type==2}}">
-              <video src='{{item.content}} ' controls loop="true" style='width:100%;height:400rpx; '></video>
+              <video src='{{item.content}}' loop="true" style='width:750rpx;height:500rpx;' objectFit='cover'></video>
             </block>
             <block wx:if="{{item.type==0}}">
               <view style='margin:20rpx; '>
@@ -146,9 +146,13 @@
 </view>
 <!-- 底部绝对定位 -->
 <block wx:if="{{activeIndex == 2}}">
-  <view class='travel-add-comment' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>写评价
+  <!-- <view class='travel-add-comment' bindtap='addComment' style='font-size:37 rpx;text-align:center;line-height:90rpx;'>写评价
+  </view> -->
+  <view class='travel-add-comment center-style' bindtap='addComment'>
+    <image src='../../images/comment_two.png' style='width:50rpx;height:50rpx;'></image>
   </view>
 </block>
+
 <block wx:else>
   <view class="travel-add flex-row" style='background-color:#f9f9f9;border-top:1rpx solid #A9A9B1'>
     <button open-type="share" class="travel-share-0 center-style" style='border: none !important;border-radius:0;'>
@@ -159,6 +163,6 @@
       <image src='/images/collect.png' style='width:40rpx;height:40rpx;'></image>
       <text class='font-size-16' style='margin-top:5rpx;'> 收藏</text>
     </button>
-    <view class='travel-share2 ' style="background-color:#fd8109;line-height:90rpx;" catchtap="gotobuy">立即预定</view>
+    <view class='travel-share2 ' style="background-color:#fd8109;line-height:90rpx;" catchtap="gotobuy">点赞</view>
   </view>
 </block>

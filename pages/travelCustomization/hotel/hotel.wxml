@@ -3,16 +3,39 @@
 
   <view style='height:20rpx;'></view>
   <view class='lump' bindtap='clickHotel' data-hotel='{{item}}'>
-    <view class='zan-font-16'>酒店</view>
-    <view class='zan-row' style='margin-top:20rpx;'>
-      <view class='zan-col zan-col-8'>
-        <image src='{{item.image}}' class='travel_image'></image>
+    <!-- <view class='zan-font-16'>酒店</view> -->
+    <view class='zan-row' style='margin-top:20rpx;position:relative;'>
+      <view class='zan-col zan-col-7'>
+        <image src='{{item.image}}' style='width:200rpx;height:260rpx;'></image>
       </view>
-      <view class='zan-col zan-col-16'>
-        <view>{{item.name}}</view>
-        <view class='zan-font-18' style='color:#f91111;margin-top:15rpx;'>￥{{item.price}}/天</view>
-        <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{item.address}}</view>
+      <view class='zan-col zan-col-17'>
+        <view style='font-size:36rpx;line-height:60rpx;'>{{item.name}}</view>
+        <view style='font-size:28rpx;line-height:50rpx;height:50rpx;'>{{item.english_name == null?'':item.english_name}}</view>
+        <view style='height:40rpx;'></view>
+        <view class='zan-c-gray-dark' style='font-size:24rpx;line-height:50rpx;'>{{item.address}}</view>
+        <view>
+          <view class='zan-col zan-col-12'>
+            <view class="zan-tag zan-tag--danger zan-tag--plain" style='font-size:24rpx;'>{{item.label == null? '':item.label}}</view>
+          </view>
+          <view class='zan-col zan-col-12' style='color:#f91111;text-align:right;'>
+            <!-- <text class='zan-font-12'>￥</text>
+            <text class='zan-font-18'>{{item.price}}</text>
+            <text class='zan-font-12' style='padding-right:45rpx;'> 起</text> -->
+          </view>
+        </view>
+        <!-- <view class='zan-font-12' style='color:#999999;margin-top:20rpx;'>{{item.address}}</view> -->
       </view>
+
+
+      <view style='text-align:right;padding-right:45rpx;position:absolute;top:156rpx;right:20rpx;'>
+        <view style='color:#f91111;'>
+          <text class='zan-font-12'>￥</text>
+          <text class='zan-font-18'>{{item.price}}</text>
+          <text class='zan-font-12'> 起</text>
+        </view>
+        <view wx:if="{{item.sale == 1}}" class='zan-c-gray-dark zan-font-12'>原价{{item.primecost}}</view>
+      </view>
+
     </view>
   </view>
 

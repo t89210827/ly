@@ -24,6 +24,11 @@
     </view>
   </view>
 
+  <!-- <view style='height:100rpx;'></view>
+  <video src='http://dsyy.isart.me/o_1ce8kmlb51v1118qvpch1dd3qidl.mp4' style='width:750rpx;height:500rpx;' objectFit='fill'></video>
+  <view style='height:100rpx;'></view> -->
+
+
   <!-- 轮播图 -->
   <swiper indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#FFFFFF" autoplay="true" interval="4000" duration="600" style="height:187px" circular="true">
     <block wx:for="{{Ads}}" wx:key="*this">

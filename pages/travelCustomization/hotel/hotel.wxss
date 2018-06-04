@@ -12,11 +12,6 @@
 .lump {
   background-color: white;
   width: 100%;
-  height: 250rpx;
+  height: 300rpx;
   padding: 20rpx 30rpx;
-}
-
-.travel_image {
-  width: 230rpx;
-  height: 180rpx;
 }
