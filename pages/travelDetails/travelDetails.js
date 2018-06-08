@@ -42,8 +42,10 @@ Page({
       vm.userType()
       vm.load(options)
     } else {
+      // wx.redirectTo({
+      //   url: '/pages/getUserInfoPage/getUserInfoPage',
+      // })
       getApp().login(function (userInfo) {
-        // console.log("11111111111" + JSON.stringify(res))
         if (userInfo.type == 1) {
           vm.setData({
             userType: false
@@ -433,7 +435,7 @@ Page({
     var organization_id = getApp().globalData.userInfo.organization_id
     return {
       title: "分享还会获得积分哦！",
-      path: '/pages/index/index?share_user=' + user_id + "&travelid=" + vm.data.travelid + '&organization_id=' + organization_id
+      path: '/pages/travelDetails/travelDetails?share_user=' + user_id + "&travelid=" + vm.data.travelid + '&organization_id=' + organization_id
     }
   },
 

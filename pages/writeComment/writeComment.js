@@ -3,6 +3,11 @@ var vm = null
 var util = require('../../utils/util.js')
 const qiniuUploader = require("../../utils/qiniuUploader")
 var qnToken = '' //
+
+//上传图片计数
+var upload_img_count = 0;
+var upload_img_arr = [];
+
 // 初始化七牛相关参数
 function initQiniu() {
   var options = {
@@ -15,18 +20,10 @@ function initQiniu() {
 Page({
   data: {
     files: [],          //图片数组
-    goods_id: '',//旅游产品id
-    intro: '',//评论
-    videos: [],//视频
-
+    goods_id: '',       //旅游产品id
+    intro: '',          //评论
+    videos: [],         //视频
     Arraydata: []
-  },
-  textAreaEventListener: function (e) {
-    console.log("55555" + JSON.stringify(e.detail.value))
-    vm.setData({
-      intro: e.detail.value,
-      // 'intro.content': e.detail.value
-    })
   },
   //七牛上传图片
   chooseImage: function (e) {
@@ -36,63 +33,46 @@ Page({
       count: 9,
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths
-
-        console.log("tempFilePaths:" + JSON.stringify(tempFilePaths))
-        wx.showLoading({
-          title: '正在上传',
-        })
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
-        //获取七牛上传token
-        util.getQiniuToken({}, function (res) {
-          console.log(JSON.stringify(res));
-          if (res.data.result) {
-            qnToken = res.data.ret;
-            console.log("qiniu upload token:" + qnToken)
-            initQiniu();
-
-            // var files = vm.data.files
-            var files = []
-            // var Arraydata = vm.data.Arraydata
-            var Arraydata = []
-            //获取token成功后上传图片
-            // for (var i = 0; i < tempFilePaths.length; i++) {
-            var length = tempFilePaths.length
-            // for (var index in tempFilePaths) {
-            //   Arraydata.push('')
-            //   files.push({ id: index })
-            // }
-
-            console.log("------------:" + JSON.stringify(Arraydata));
-
-            for (var i = 0; i < tempFilePaths.length; i++) {
-              var tempFilePath = tempFilePaths[i]
-
-              console.log("Arraydata数组" + JSON.stringify(i))
-              qiniuUploader.upload(tempFilePath, (res) => {
-
-                var picture = util.getImgRealUrl(res.key)
-                console.log("七牛云上传返回:" + JSON.stringify(picture));
-                var photoIndex = { 'content': picture, 'type': 1 }
-                Arraydata.push(photoIndex)
-                files.push(picture)
-                // Arraydata[i] = photoIndex
-                // files[i] = picture
-                vm.setData({
-                  Arraydata: Arraydata.push(photoIndex),
-                  files: files.push(picture)
-                })
-                console.log("files数组" + JSON.stringify(files))
-              }, (error) => {
-                console.error('error: ' + JSON.stringify(error));
-              })
-            }
-
-          }
-        }, null);
+        upload_img_arr = upload_img_arr.concat(res.tempFilePaths);
+        vm.uploadImgProcess();
       }
+    })
+  },
+  //进行图片上传
+  uploadImgProcess: function () {
+    if (upload_img_count > 8) {
+      return;
+    }
+    if (upload_img_count >= upload_img_arr.length) {
+      return;
+    }
+    qiniuUploader.upload(upload_img_arr[upload_img_count], (res) => {
+      console.log("res:" + JSON.stringify(res))
+      var picture = util.getImgRealUrl(res.key)
+      var photoIndex = { 'content': picture, 'type': 1 }
+      var files = vm.data.files
+      var Arraydata = vm.data.Arraydata
+      files.push(picture)
+      Arraydata.push(photoIndex)
+      vm.setData({
+        files: files,
+        Arraydata: Arraydata
+      })
+      upload_img_count++;
+      vm.uploadImgProcess();
+
+    }, (error) => {
+      console.error('error: ' + JSON.stringify(error));
+    })
+
+  },
+
+  //文字评论
+  textAreaEventListener: function (e) {
+    console.log("55555" + JSON.stringify(e.detail.value))
+    vm.setData({
+      intro: e.detail.value,
+      // 'intro.content': e.detail.value
     })
   },
 
@@ -118,9 +98,9 @@ Page({
         wx.showLoading({
           title: '正在上传',
         })
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
+        // setTimeout(function () {
+        //   wx.hideLoading()
+        // }, 2000)
         //获取七牛上传token
         util.getQiniuToken({}, function (res) {
           console.log(JSON.stringify(res));
@@ -128,14 +108,15 @@ Page({
             qnToken = res.data.ret;
             console.log("qiniu upload token:" + qnToken)
             initQiniu();
+            wx.showLoading({
+              title: '正在上传',
+            })
             //获取token成功后上传图片
             qiniuUploader.upload(tempFilePath, (res) => {
               console.log("qiniuUploader upload res:" + JSON.stringify(res));
               var picture = util.getImgRealUrl(res.key)
               var dataVideos = vm.data.videos                     //视频数组
               var Arraydata = vm.data.Arraydata
-
-
               var videos = { 'content': picture, 'type': 2 }
               dataVideos.push(picture)//添加用户上传    视频视频
               Arraydata.push(videos)//添加用户上传视频 到 参数数组
@@ -143,6 +124,7 @@ Page({
                 videos: dataVideos,
                 Arraydata: Arraydata,
               })
+              wx.hideLoading()
               console.log("数据数组2" + JSON.stringify(Arraydata))
             }, (error) => {
               console.error('error: ' + JSON.stringify(error));
@@ -214,7 +196,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    initQiniu();
+    //获取七牛上传token
+    util.getQiniuToken({}, function (res) {
+      console.log(JSON.stringify(res));
+      if (res.data.result) {
+        qnToken = res.data.ret;
+        console.log("qiniu upload token:" + qnToken)
 
+      }
+    }, null);
   },
 
   /**

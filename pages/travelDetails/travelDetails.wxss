@@ -29,7 +29,6 @@ page {
 }
 
 /* 底部绝对定位 */
-
 .travel-add {
   width: 100%;
   height: 90rpx;

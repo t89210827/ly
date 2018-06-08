@@ -30,13 +30,14 @@ App({
     if (!util.judgeIsAnyNullStr(e.query.share_user)) {
       share_user = e.query.share_user
       organization_id = e.query.organization_id
+
       console.log("分享人  ---------" + share_user)
       console.log("旅行社id  -------" + organization_id)
     }
 
     if (!util.judgeIsAnyNullStr(e.query.travelid)) {
       travelid = e.query.travelid
-
+      vm.globalData.travelid = travelid
       console.log("旅游线路id  -------" + travelid)
     }
 
@@ -118,8 +119,8 @@ App({
                   console.log("登陆接口参数:" + JSON.stringify(param));
                   console.log("登陆接口返回参数:" + JSON.stringify(ret));
                   if (ret.data.code == "200") {
+                    console.log("跳转到首页" + JSON.stringify(ret.data.ret));
                     vm.storeUserInfo(ret.data.ret)
-                    console.log("跳转到首页");
 
                     if (travelid == null) {
                       wx.switchTab({
@@ -151,6 +152,7 @@ App({
   },
   //存数据到缓存
   storeUserInfo: function (obj) {
+    console.log("storeUserInfo---------------- :");
     console.log("storeUserInfo :" + JSON.stringify(obj));
     wx.setStorage({
       key: "userInfo",
@@ -231,5 +233,6 @@ App({
     baseUrl: 'https://api.it120.cc/jy02149522',
     userInfo: null,
     systemInfo: null,
+    travelid: null
   }
 })

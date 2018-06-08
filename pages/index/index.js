@@ -19,6 +19,8 @@ Page({
     slideRatio: ''
   },
   onLoad: function (options) {
+    console.log("------------" + JSON.stringify(options))
+
     vm = this
     util.showLoading("加载首页")
 
@@ -27,10 +29,13 @@ Page({
     vm.getNewGoods()//获取首页最新产品
     vm.getSpecialGoods()//获取首页特价产品   
     vm.getUserInfo()    //获取当前用户信息 
-
     vm.getBarTitle()
-
   },
+
+  //加载
+  onShow: function () {
+  },
+
   //跳转商品详情页
   jumpTravelDetails: function (e) {
     console.log("旅游详情" + JSON.stringify(e))
@@ -175,9 +180,6 @@ Page({
     this.setData({
       inputVal: e.detail.value
     });
-  },
-  //加载
-  onShow: function () {
   },
   /**
  * 页面相关事件处理函数--监听用户下拉动作
